@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h1 class="my-3">Nuovo Progetto</h1>
+    <h1 class="my-3">Nuovo Prodotto</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -18,19 +18,19 @@
     <div class="row">
         <div class="col-md-6">
            <form
-              action="{{ route('admin.projects.store') }}"
+              action="{{ route('admin.products.store') }}"
               method="POST"
               enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <label for="title" class="form-label">Titolo</label>
+                    <label for="name" class="form-label">Nome</label>
                     <input
-                        name="title"
+                        name="name"
                         type="text"
-                        class="form-control @error('title') is-invalid @enderror"
-                        id="title"
-                        value="{{ old('title') }}">
-                    @error('title')
+                        class="form-control @error('name') is-invalid @enderror"
+                        id="name"
+                        value="{{ old('name') }}">
+                    @error('name')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
@@ -48,56 +48,34 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="language" class="form-label">Lingua</label>
+                    <label for="price" class="form-label">Prezzo</label>
                     <input
-                        name="language"
-                        type="text"
-                        class="form-control @error('language') is-invalid @enderror"
-                        id="language"
-                        value="{{ old('language') }}">
-                    @error('language')
+                        name="price"
+                        type="number"
+                        step="0.01"
+                        class="form-control @error('price') is-invalid @enderror"
+                        id="price"
+                        value="{{ old('price') }}">
+                    @error('price')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Tecnologie:</label>
-                    <div class="btn-group btn-group-sm" role="group">
-                        @foreach ($tecnologies as $tecnology)
-                            <input
-                                name="tecnologies[]"
-                                id="tag_{{ $tecnology->id }}"
-                                class="btn-check"
-                                autocomplete="off"
-                                type="checkbox"
-                                value="{{ $tecnology->id }}"
-                                @if (in_array($tecnology->id, old('tecnolologies', [])))
-                                    checked
-                                @endif
-                            >
-                            <label class="btn btn-outline-primary" for="tag_{{ $tecnology->id }}">{{ $tecnology->title }}</label>
-                        @endforeach
-                    </div>
-                </div>
-
-
-                <div class="mb-3">
                     <label for="image" class="form-label">Immagine</label>
-                 <input
-                   name="image"
-                   type="file"
-                   onchange="showImage(event)"
-                   class="form-control @error('image') is-invalid @enderror"
-                   id="image">
-
-                   <img class="thumb mt-3" id="thumb" src="{{ asset('/image/no-image.jpg') }}" alt="Default Image" style="width: 150; height: auto;">
+                    <input
+                       name="image"
+                       type="file"
+                       onchange="showImage(event)"
+                       class="form-control @error('image') is-invalid @enderror"
+                       id="image">
+                    <img class="thumb mt-3" id="thumb" src="{{ asset('/image/no-image.jpg') }}" alt="Default Image" style="width: 150px; height: auto;">
                 </div>
 
                 <div class="mb-4">
-                    <button class="btn btn-danger" type="submit"> Nuovo Progetto</button>
+                    <button class="btn btn-danger" type="submit"> Nuovo Prodotto</button>
                     <button class="btn btn-warning" type="reset" onclick="resetImage()">Reset</button>
                 </div>
-
             </form>
         </div>
     </div>
@@ -118,5 +96,3 @@
 </script>
 
 @endsection
-
-

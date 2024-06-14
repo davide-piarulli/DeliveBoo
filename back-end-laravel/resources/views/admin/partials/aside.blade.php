@@ -8,13 +8,13 @@
 
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('admin.products.create')}}">
                     <i class="fa-solid fa-chart-simple p-2 me-1 mt-2 "> Nuovo Prodotto</i>
                 </a>
             </li>
 
             <li>
-                <a href="{{route('admin.types.index')}}">
+                <a href="#">
                     <i class="fa-solid fa-signal  p-2 me-1 mt-2"> Tipi Di Prodotto</i>
                 </a>
             </li>
