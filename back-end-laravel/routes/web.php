@@ -1,6 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Guest\PageController;
+use App\Http\Controllers\Admin\DashBoardController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductTypeController;
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +24,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware(['auth', 'verified'])
+                   ->prefix('admin')
+                   ->name('admin.')
+                   ->group(function(){
+                    // qui vengono messe tutte le rotte protette da auth
+                    Route::get('/', [DashBoardController::class, 'index'])->name('home');
+                    Route::resource('products', ProductController::class);
+                    Route::resource('order', OrderController::class);
+                    Route::resource('types', ProductTypeController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+                    Route::get('ProductTypeController', [ProductTypeController::class, 'ProductTypeController'])->name('ProductTypeController');
+
+
+                   });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
