@@ -15,12 +15,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-      $new_user = new User();
-      $new_user->name = 'Alessandro';
-      $new_user->email = 'alessandro@gmail.com';
-      $new_user->password = Hash::make('12341234');
+      $users = ['Alessandro', 'Davide', 'Matteo', 'Sara', 'Oltion'];
 
-      $new_user->save();
+      foreach($users as $user){
+
+        $new_user = new User();
+        $new_user->name = $user;
+        $new_user->email = $user . '@gmail.com';
+        $new_user->password = Hash::make('12341234');
+
+        $new_user->save();
+
+
+        }
 
     }
 }
