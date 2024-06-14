@@ -7,17 +7,17 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        $this->call([
-         // UsersTableSeeder::class,
-          //RestaurantsTableSeeder::class,
-          //TypesTableSeeder::class,
-          ResturantTypesTableSeeder::class,
+  /**
+   * Seed the application's database.
+   */
+  public function run(): void
+  {
+    $this->call([
+      UsersTableSeeder::class,
+      RestaurantsTableSeeder::class,
+      TypesTableSeeder::class,
+      ResturantTypesTableSeeder::class,
 
-        ]);
-    }
+    ]);
+  }
 }

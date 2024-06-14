@@ -14,11 +14,23 @@ class ResturantTypesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i=0; $i < 15; $i++) {
-          $restaurant = Restaurant::inRandomOrder()->first();
+      $assignedCombinations = [];
 
-          $type_id = Type::inRandomOrder()->first()->id;
+      for ($i = 0; $i < 15; $i++) {
+          do {
+              // Seleziona un ristorante e un tipo a caso
+              $restaurant = Restaurant::inRandomOrder()->first();
+              $type_id = Type::inRandomOrder()->first()->id;
+
+              // Crea una chiave unica per la combinazione
+              $combinationKey = $restaurant->id . '-' . $type_id;
+          } while (in_array($combinationKey, $assignedCombinations));
+
+          // Aggiungi la combinazione all'array delle combinazioni assegnate
+          $assignedCombinations[] = $combinationKey;
+
+          // Assegna il tipo al ristorante
           $restaurant->types()->attach($type_id);
-        }
+      }
     }
 }
