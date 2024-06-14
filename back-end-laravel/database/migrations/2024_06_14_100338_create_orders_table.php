@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->smallInteger('amount');
             $table->string('shipment_address');
+            $table->char('phone', 10);
             $table->text('notes');
             $table->timestamps();
         });
