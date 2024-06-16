@@ -4,54 +4,80 @@ namespace Database\Seeders;
 
 use App\Functions\Helper;
 use App\Models\Product;
+use App\Models\ProductType;
 use App\Models\Restaurant;
 use Illuminate\Database\Seeder;
+use Faker\Generator as Faker;
 
 class ProductsTableSeeder extends Seeder
 {
   /**
    * Run the database seeds.
    */
-  public function run(): void
+  public function run(Faker $faker): void
   {
 
-    $products = config('restaurantProducts');
+    $faker = \Faker\Factory::create();
+    $faker->addProvider(new \FakerRestaurant\Provider\it_IT\Restaurant($faker));
 
-    foreach ($products['restaurant'] as $key => $product) {
-      $restaurantId = $key;
-      $restaurant = Restaurant::find($restaurantId);
+    $restaurants = Restaurant::all();
+    $product_types = ProductType::count();
 
+    foreach ($restaurants as $index => $restaurant){
 
-      if ($restaurant) {
-        $types = $restaurant->types;
-        foreach ($types as $type) {
-          // Verifica se il tipo di ristorante è contenuto nei tipi di prodotti
+      for ($i = 0; $i < 20; $i++) {
 
-          foreach ($products['restaurant'] as $index => $product_) {
+        $new_product = new Product();
+        $new_product->restaurant_id = $index + 1;
+        $new_product->product_type_id = rand(1, $product_types);
+        $new_product->name = $faker->foodName();
+        $new_product->slug = Helper::generateSlug($new_product->name, Product::class);
+        $new_product->image = 'https://picsum.photos/id/' . rand(100, 800) . '/200/300';
+        $new_product->description = $faker->sentence(5);
+        $new_product->price = floatval(rand(3, 20) . ',' . rand(10, 99));
+        $new_product->save();
 
-            if ($type->name == $product_['type']) {
-              $new_product = new Product();
-
-              $new_product->name = $product_['name'];
-              $new_product->slug = Helper::generateSlug($new_product->name, Product::class);
-              $new_product->image = $product_['image'];
-              $new_product->description = $product_['description'];
-              $new_product->price = $product_['price'];
-              $new_product->visible = $product_['visible'];
-              $new_product->restaurant_id =  $restaurantId;
-
-              $new_product->save();
-
-              //  dd( $new_product);
-
-
-            } else {
-              dump('errore');
-            }
-          }
-        }
       }
+
     }
+
+    // $products = config('restaurantProducts');
+
+    // foreach ($products['restaurant'] as $key => $product) {
+    //   $restaurantId = $key;
+    //   $restaurant = Restaurant::find($restaurantId);
+
+
+    //   if ($restaurant) {
+    //     $types = $restaurant->types;
+    //     foreach ($types as $type) {
+    //       // Verifica se il tipo di ristorante è contenuto nei tipi di prodotti
+
+    //       foreach ($products['restaurant'] as $index => $product_) {
+
+    //         if ($type->name == $product_['type']) {
+    //           $new_product = new Product();
+
+    //           $new_product->name = $product_['name'];
+    //           $new_product->slug = Helper::generateSlug($new_product->name, Product::class);
+    //           $new_product->image = $product_['image'];
+    //           $new_product->description = $product_['description'];
+    //           $new_product->price = $product_['price'];
+    //           $new_product->visible = $product_['visible'];
+    //           $new_product->restaurant_id =  $restaurantId;
+
+    //           $new_product->save();
+
+    //           //  dd( $new_product);
+
+
+    //         } else {
+    //           dump('errore');
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
 
