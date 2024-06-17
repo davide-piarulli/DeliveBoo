@@ -10,7 +10,7 @@
         <div class="col-md-12 d-flex justify-content-between align-items-center">
             <div class="d-flex">
                 <input type="text" id="search-input" class="form-control" placeholder="Cerca prodotto...">
-                <button id="search-button" class="btn btn-danger ms-2">Cerca</button>
+                <button id="search-button" class="btn btn-primary ms-2">Cerca</button>
             </div>
             <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Crea un nuovo prodotto</a>
         </div>
