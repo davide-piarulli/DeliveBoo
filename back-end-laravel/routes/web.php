@@ -26,8 +26,8 @@ Route::middleware(['auth', 'verified'])
 
     // Resources per prodotti, ordini e tipi di prodotto
     Route::resource('products', ProductController::class);
-    Route::resource('orders', OrderController::class); // Cambiato 'order' in 'orders' per coerenza
     Route::resource('productsType', ProductTypeController::class);
+    Route::resource('types', TypeController::class);
   });
 
 // Rotte per il profilo utente

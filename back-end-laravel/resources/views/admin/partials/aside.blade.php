@@ -23,6 +23,11 @@
           <i class="fa-solid fa-signal  p-2 me-1 mt-2"> Elenco Prodotti per categoria</i>
         </a>
       </li>
+      <li>
+        <a href="{{ route('admin.types.index')}}">
+          <i class="fa-solid fa-signal  p-2 me-1 mt-2"> Tipologia Ristorante </i>
+        </a>
+      </li>
     </ul>
   </nav>
 </aside>

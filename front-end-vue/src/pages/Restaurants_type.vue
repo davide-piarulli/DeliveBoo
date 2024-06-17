@@ -14,7 +14,7 @@
 
     methods:{
       getApi(){
-        axios.get(store.apiUrl)
+        axios.get(store.apiUrl+'type-restaurant')
         .then(result => {
           this.types = result.data;
           console.log(this.types);
