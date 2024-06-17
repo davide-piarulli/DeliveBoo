@@ -1,7 +1,12 @@
 <script>
+
 import {store} from './data/store';
 import axios from 'axios';
+ import Header from './components/Header.vue';
 export default {
+    components: {
+      Header
+    },
   data(){
     return{
       formData: {
@@ -36,9 +41,15 @@ export default {
 
 
 
+</script>
+
+
 <template>
+
   <div>
     <h1 class="text-center">DeliveBoo</h1>
+    <Header/>
+    <router-view></router-view>
     <form @submit.prevent="submitForm()" class="text-center my-3">
       <input type="number" v-model="formData.amount" name="amount" id="amount" class="mx-3">
       <input type="text" v-model="formData.shipment_address" name="shipment_address" id="shipment_address" class="mx-3">
@@ -47,8 +58,8 @@ export default {
       <button type="submit" class="ms-3">Invia</button>
     </form>
   </div>
+  
 </template>
-
 
 
 <style lang="scss" scoped>

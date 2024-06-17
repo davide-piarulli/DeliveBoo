@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\OrderController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TypeController;
 use Illuminate\Http\Request;
 
 /*
@@ -14,5 +15,6 @@ use Illuminate\Http\Request;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+Route::get('/type_restaurant',[TypeController::class, 'index']);
 Route::post('/send-order', [OrderController::class, 'store']);
+
