@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Type;
+use App\Http\Requests\TypeRestaurantRequest;
+use App\Functions\Helper as Help;
 
 class TypeController extends Controller
 {
@@ -13,8 +15,9 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types= Type::all();
-        return response()->json($types);
+
+        $types = Type::paginate(10);
+        return view('admin.types.index', compact('types'));
     }
 
     /**
@@ -22,15 +25,26 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+        return view('admin.type.create', compact ('types'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TypeRestaurantRequest $request)
     {
-        //
+        $form_data= $request->all();
+        $exist = Type::where('name', $form_data['name'])->first();
+        if ($exist) {
+        return redirect()->route('admin.types.index')->with('error', 'Nome del tipo già esiste');
+        } else {
+        $new_type_restaurant = new Type();
+        $form_data['slug'] = Help::generateSlug($form_data['name'], Type::class);
+        $new_type_restaurant->fill($form_data);
+        $new_type_restaurant->save();
+        return redirect()->route('admin.types.index')->with('success', 'Tipo aggiunto correttamente!');
+        }
     }
 
     /**
@@ -52,16 +66,26 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TypeRestaurantRequest $request, Type $type)
     {
-        //
+        $form_data = $request->all();
+
+        if ($form_data['name'] === $type->name) {
+            $form_data['slug'] = $type->slug;
+        } else {
+            $form_data['slug'] = Help::generateSlug($form_data['name'], Type::class);
+        }
+
+        $type->update($form_data);
+        return redirect()->route('admin.types.index', $type);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return redirect()->route('admin.types.index')->with('deleted', 'Il tipo è stato cancellato');
     }
 }

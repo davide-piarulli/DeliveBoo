@@ -36,7 +36,7 @@ class ProductTypeController extends Controller
     $form_data = $request->all();
     $exist = ProductType::where('name', $form_data['name'])->first();
     if ($exist) {
-      return redirect()->route('admin.productsType.create')->with('error', 'Nome del tipo già esiste');
+      return redirect()->route('admin.productsType.index')->with('error', 'Nome del tipo già esiste');
     } else {
       $new_type = new ProductType();
       $form_data['slug'] = Help::generateSlug($form_data['name'], ProductType::class);
