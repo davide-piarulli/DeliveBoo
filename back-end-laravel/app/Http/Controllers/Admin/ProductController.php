@@ -13,8 +13,24 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(8);
-        return view('admin.products.index', compact('products'));
+        $products = Product::all()->sortDesc();
+
+        $dir = 'desc';
+        $col = null;
+
+        return view('admin.products.index', compact('products', 'dir', 'col'));
+    }
+
+    public function orderBy($col, $dir){
+
+      $dir = $dir === 'desc' ? 'asc' : 'desc';
+
+      $products = Product::orderBy($col, $dir)->get();
+
+      $productTypes = ProductType::all();
+
+      return view('admin.products.index', compact('productTypes', 'products', 'dir', 'col'));
+
     }
 
     public function create()

@@ -18,7 +18,7 @@
         </div>
 
         <div class="mb-4">
-          <button class="btn btn-danger" type="submit">Crea Tipo</button>
+          <button class="btn btn-primary" type="submit">Crea Tipo</button>
           <button class="btn btn-warning" type="reset">Reset</button>
         </div>
       </form>
@@ -53,8 +53,8 @@
     <table class="table table-striped table-bordered" id="products-table">
       <thead>
         <tr>
-          <th scope="col">NOME</th>
-          <th scope="col">AZIONI</th>
+          <th scope="col" class="w-100">Nome</th>
+          <th scope="col" class="text-center">Azioni</th>
         </tr>
       </thead>
       <tbody>
@@ -65,16 +65,16 @@
                 id="form-edit-{{ $productType->id }}">
                 @csrf
                 @method('PUT')
-                <input class="w-100" type="text" value="{{ $productType->name }}" name="name">
+                <input class="w-100 bg-transparent" type="text" value="{{ $productType->name }}" name="name">
               </form>
             </td>
             <td class="icons d-flex">
 
-              <button onclick="submitForm({{ $productType->id }})" class="btn btn-warning me-3">
+              <button onclick="submitForm({{ $productType->id }})" class="btn btn-warning ms-3 me-1">
                 <i class="fa-solid fa-pencil"></i>
               </button>
 
-              <form action="{{ route('admin.productsType.destroy', $productType) }}" method="post"
+              <form class="me-3" action="{{ route('admin.productsType.destroy', $productType) }}" method="post"
                 onsubmit="return confirm('Sei sicuro di voler eliminare il tipo?')">
                 @csrf
                 @method('DELETE')
