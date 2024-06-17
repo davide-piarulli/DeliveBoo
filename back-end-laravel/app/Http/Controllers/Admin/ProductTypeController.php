@@ -33,14 +33,12 @@ class ProductTypeController extends Controller
   public function store(ProductTypeRequest $request)
   {
     $form_data = $request->all();
-    // dd($form_data);
     $exist = ProductType::where('name', $form_data['name'])->first();
     if ($exist) {
       return redirect()->route('admin.productsType.create')->with('error', 'Nome del tipo già esiste');
     } else {
       $new_type = new ProductType();
-      // slug commentato, valutare se aggiungerlo nella migration
-      // $form_data['slug'] = Help::generateSlug($form_data['name'], ProductType::class);
+      $form_data['slug'] = Help::generateSlug($form_data['name'], ProductType::class);
       //? Riempio e salvo
       $new_type->fill($form_data);
       $new_type->save();
@@ -71,6 +69,11 @@ class ProductTypeController extends Controller
   public function update(ProductTypeRequest $request, ProductType $productsType)
   {
     $form_data = $request->all();
+    if ($form_data['name'] === $productsType->name) {
+        $form_data['slug'] = $productsType->slug;
+    } else {
+        $form_data['slug'] = Help::generateSlug($form_data['name'], ProductType::class);
+    }
     $productsType->update($form_data);
     return redirect()->route('admin.productsType.index', $productsType);
   }

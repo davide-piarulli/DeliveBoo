@@ -2,7 +2,7 @@
 
 import {store} from './data/store';
 import axios from 'axios';
- import Header from './components/Header.vue';
+import Header from './components/Header.vue';
 export default {
     components: {
       Header
@@ -10,10 +10,10 @@ export default {
   data(){
     return{
       formData: {
-        amount: '2',
-        shipment_address: 'dasdasd',
-        phone: '2',
-        notes: 'dasdasds'
+        amount: '',
+        shipment_address: '',
+        phone: '',
+        notes: ''
       },
       errors: {},
       sending: false,
@@ -41,14 +41,11 @@ export default {
 
 
 
-</script>
-
-
 <template>
 
   <div>
-    <h1 class="text-center">DeliveBoo</h1>
     <Header/>
+    <h1 class="text-center">DeliveBoo</h1>
     <router-view></router-view>
     <form @submit.prevent="submitForm()" class="text-center my-3">
       <input type="number" v-model="formData.amount" name="amount" id="amount" class="mx-3">
