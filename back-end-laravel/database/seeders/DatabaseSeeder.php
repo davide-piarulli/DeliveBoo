@@ -18,6 +18,8 @@ $this->call([
   ResturantTypesTableSeeder::class,
   ProductTypesTableSeeder::class,
   ProductsTableSeeder::class,
+  OrdersTableSeeder::class,
+  OrderProductsTableSeeder::class,
 
 
 ]);
