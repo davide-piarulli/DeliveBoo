@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ProductType extends Model
 {
     use HasFactory;
-    public function products(){
 
-      return $this->hasMany(Product::class);
+    protected $fillable = ['title'];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_type_id');
     }
 }

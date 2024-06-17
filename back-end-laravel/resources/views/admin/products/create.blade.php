@@ -62,6 +62,26 @@
                 </div>
 
                 <div class="mb-3">
+                  <label class="form-label">Tipi di Prodotto:</label>
+                  <div class="btn-group btn-group-sm" role="group">
+                      @foreach ($productTypes as $productType)
+                          <input
+                              name="product_type_id"
+                              id="product_type_{{ $productType->id }}"
+                              class="btn-check"
+                              autocomplete="off"
+                              type="radio"
+                              value="{{ $productType->id }}"
+                              @if (old('product_type_id') == $productType->id)
+                                  checked
+                              @endif
+                          >
+                          <label class="btn btn-outline-primary" for="product_type_{{ $productType->id }}">{{ $productType->title }}</label>
+                      @endforeach
+                  </div>
+              </div>
+
+                <div class="mb-3">
                     <label for="image" class="form-label">Immagine</label>
                     <input
                        name="image"
@@ -72,8 +92,10 @@
                     <img class="thumb mt-3" id="thumb" src="{{ asset('/image/no-image.jpg') }}" alt="Default Image" style="width: 150px; height: auto;">
                 </div>
 
+
+
                 <div class="mb-4">
-                    <button class="btn btn-danger" type="submit"> Nuovo Prodotto</button>
+                    <button class="btn btn-danger" type="submit">Nuovo Prodotto</button>
                     <button class="btn btn-warning" type="reset" onclick="resetImage()">Reset</button>
                 </div>
             </form>
