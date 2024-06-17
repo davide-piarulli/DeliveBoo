@@ -8,6 +8,9 @@ use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Functions\Helper;
+use App\Http\Requests\ProductRequest;
+
+
 
 class ProductController extends Controller
 {
@@ -35,11 +38,12 @@ class ProductController extends Controller
 
     public function create()
     {
+
         $productTypes = ProductType::all();
         return view('admin.products.create', compact('productTypes'));
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $form_data = $request->all();
 
@@ -76,9 +80,9 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'productTypes'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $form_data = $request->except('_token');
+        $form_data = $request->all();
 
         if(array_key_exists('image', $form_data) && $form_data['isUploaded'] == 'true'){
 
