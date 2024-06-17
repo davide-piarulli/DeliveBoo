@@ -9,21 +9,29 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function orders(){
+    protected $fillable = [
+        'restaurant_id',
+        'product_type_id',
+        'name',
+        'slug',
+        'image',
+        'description',
+        'price',
+        'visible'
+    ];
 
-      return $this->belongsToMany(Order::class);
-
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
     }
 
-    public function productTypes(){
-
-      return $this->hasMany(ProductType::class);
-
+    public function productType()
+    {
+        return $this->belongsTo(ProductType::class);
     }
 
-    public function restaurants(){
-
-      return $this->belongsTo(Restaurant::class);
-
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
     }
 }
