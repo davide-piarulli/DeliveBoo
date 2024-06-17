@@ -6,11 +6,6 @@
     components: {
       Header
     },
-    data(){
-      return{
-        massage: 'yo'
-      }
-    },
   }
 
 
