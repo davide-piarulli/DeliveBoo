@@ -76,7 +76,7 @@
                                   checked
                               @endif
                           >
-                          <label class="btn btn-outline-primary" for="product_type_{{ $productType->id }}">{{ $productType->title }}</label>
+                          <label class="btn btn-outline-primary" for="product_type_{{ $productType->id }}">{{ $productType->name }}</label>
                       @endforeach
                   </div>
               </div>
@@ -89,13 +89,13 @@
                        onchange="showImage(event)"
                        class="form-control @error('image') is-invalid @enderror"
                        id="image">
-                    <img class="thumb mt-3" id="thumb" src="{{ asset('/image/no-image.jpg') }}" alt="Default Image" style="width: 150px; height: auto;">
+                    <img class="thumb mt-3" id="thumb" src="{{asset('img/no-image.jpg')}}" alt="Default Image" style="width: 150px; height: auto;">
                 </div>
 
 
 
                 <div class="mb-4">
-                    <button class="btn btn-danger" type="submit">Nuovo Prodotto</button>
+                    <button class="btn btn-primary" type="submit">Nuovo Prodotto</button>
                     <button class="btn btn-warning" type="reset" onclick="resetImage()">Reset</button>
                 </div>
             </form>
@@ -113,7 +113,7 @@
 
     function resetImage() {
         const thumb = document.getElementById('thumb');
-        thumb.src = "{{ asset('/image/no-image.jpg') }}";
+        thumb.src = "{{ asset('img/no-image.jpg') }}";
     }
 </script>
 

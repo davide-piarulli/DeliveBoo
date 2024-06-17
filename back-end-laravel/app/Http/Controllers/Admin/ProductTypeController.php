@@ -24,7 +24,8 @@ class ProductTypeController extends Controller
    */
   public function create()
   {
-    return view('admin.productsType.create');
+    $productTypes = ProductType::all();
+    return view('admin.productsType.create', compact('productTypes'));
   }
 
   /**

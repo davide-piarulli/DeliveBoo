@@ -62,12 +62,14 @@
                 <div class="mb-3">
                     <label for="image" class="form-label">Immagine</label>
                     <input
+                       id="thumb-value"
                        name="image"
                        type="file"
+                       value="{{ old('image', $product->image) }}"
                        onchange="showImage(event)"
                        class="form-control @error('image') is-invalid @enderror"
                        id="image">
-                    <img class="thumb mt-3" id="thumb" src="{{ asset('storage/' . $product->image) }}" onerror="this.src='{{ asset('/image/no-image.jpg') }}'" alt="Product Image" style="width: 150px; height: auto;">
+                    <img class="thumb mt-3" id="thumb" src="{{isset($product->image) ? asset('storage/' . $product->image) : asset('img/no-image.jpg')}}" alt="Product Image" style="width: 150px; height: auto;">
                 </div>
 
                 <div class="mb-4">
@@ -89,7 +91,10 @@
 
     function resetImage() {
         const thumb = document.getElementById('thumb');
-        thumb.src = "{{ asset('storage/' . $product->image) }}";
+        const thumbValue = document.getElementById('thumb-value');
+        thumb.src = "{{asset('img/no-image.jpg')}}";
+        thumbValue.value = null;
+        console.log(thumbValue);
     }
 </script>
 
