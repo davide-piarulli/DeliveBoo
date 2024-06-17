@@ -41,11 +41,19 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $form_data = $request->except('_token');
+        $form_data = $request->all();
 
-        if ($request->hasFile('image')) {
-            $image_path = Storage::put('uploads', $request->file('image'));
-            $form_data['image'] = $image_path;
+        if(array_key_exists('image', $form_data)){
+
+          $file = Storage::disk('public')->put('uploads', $form_data['image']);
+          $original_name = $request->file('image')->getClientOriginalName();
+
+          $form_data['image'] = $file;
+          $form_data['image_original_name'] = $original_name;
+
+        } else {
+          $form_data['image'] = null;
+          $form_data['image_original_name'] = null;
         }
 
         if (empty($form_data['slug'])) {
@@ -72,16 +80,24 @@ class ProductController extends Controller
     {
         $form_data = $request->except('_token');
 
-        if ($request->hasFile('image')) {
-            if ($product->image) {
-                Storage::delete($product->image);
-            }
-            $image_path = Storage::put('uploads', $request->file('image'));
-            $form_data['image'] = $image_path;
-        }
+        if(array_key_exists('image', $form_data) && $form_data['isUploaded'] == 'true'){
 
-        if (empty($form_data['slug'])) {
-            $form_data['slug'] = Helper::generateSlug($form_data['name'], Product::class);
+          $file = Storage::disk('public')->put('uploads', $form_data['image']);
+          $original_name = $request->file('image')->getClientOriginalName();
+
+          $form_data['image'] = $file;
+          $form_data['image_original_name'] = $original_name;
+
+        } elseif (!array_key_exists('image', $form_data) && $form_data['isUploaded'] == 'true') {
+
+          $form_data['image'] = $product->image;
+          $form_data['image_original_name'] = $product->image_original_name;
+
+        } else {
+
+          $form_data['image'] = null;
+          $form_data['image_original_name'] = null;
+
         }
 
         $product->update($form_data);

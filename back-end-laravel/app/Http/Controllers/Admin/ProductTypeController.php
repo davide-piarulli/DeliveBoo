@@ -70,11 +70,13 @@ class ProductTypeController extends Controller
   public function update(ProductTypeRequest $request, ProductType $productsType)
   {
     $form_data = $request->all();
+
     if ($form_data['name'] === $productsType->name) {
         $form_data['slug'] = $productsType->slug;
     } else {
         $form_data['slug'] = Help::generateSlug($form_data['name'], ProductType::class);
     }
+
     $productsType->update($form_data);
     return redirect()->route('admin.productsType.index', $productsType);
   }

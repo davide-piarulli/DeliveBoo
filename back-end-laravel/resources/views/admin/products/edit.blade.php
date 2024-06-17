@@ -60,20 +60,25 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="image" class="form-label">Immagine</label>
-                    <input
-                       id="thumb-value"
-                       name="image"
-                       type="file"
-                       value="{{ old('image', $product->image) }}"
-                       onchange="showImage(event)"
-                       class="form-control @error('image') is-invalid @enderror"
-                       id="image">
-                    <img class="thumb mt-3" id="thumb" src="{{isset($product->image) ? asset('storage/' . $product->image) : asset('img/no-image.jpg')}}" alt="Product Image" style="width: 150px; height: auto;">
+                  <label for="image" class="form-label">Immagine</label>
+                  <input type="hidden" name="isUploaded" value="true" id="isUploaded">
+                  <div class="d-flex">
+                    <div id="uploaded-file" class="w-100 overflow-auto d-flex align-items-center rounded-2 px-2 {{old('image', $product?->image) ? 'd-block' : 'd-none'}}"><span>{{$product?->image_original_name}}</span></div>
+                    <input name="image" type="file" class="form-control {{old('image', $product?->image) ? 'd-none' : 'd-inline-block'}} @error('image') is-invalid @enderror" id="image"
+                      placeholder="Carica immagine" value="{{old('image', $product?->image)}}" onchange="addFile(); showImage(event)">
+                  </div>
+                  @error('image')
+                  <div class="text-danger my-1" style="font-size: .8rem">{{$message}}</div>
+                  @enderror
+                </div>
+
+                <div class="mb-3">
+                  <img class="thumb mt-3" id="thumb" src="{{isset($product->image) ? asset('storage/' . $product->image) : asset('img/no-image.jpg')}}" alt="Product Image" style="width: 150px; height: auto;">
+                  <button class="btn btn btn-outline-danger {{old('image', $product?->image) ? 'd-inline-block' : 'd-none'}}" id="file-remover" onclick="event.preventDefault(); resetFile()">Rimuovi file</button>
                 </div>
 
                 <div class="mb-4">
-                    <button class="btn btn-danger" type="submit">Aggiorna Prodotto</button>
+                    <button class="btn btn-primary" type="submit">Aggiorna Prodotto</button>
                     <button class="btn btn-warning" type="reset" onclick="resetImage()">Reset</button>
                 </div>
             </form>
@@ -81,21 +86,37 @@
     </div>
 </div>
 
-<script>
-    function showImage(event){
-        const thumb = document.getElementById('thumb');
-        if (event.target.files.length > 0) {
-            thumb.src = URL.createObjectURL(event.target.files[0]);
-        }
-    }
 
-    function resetImage() {
-        const thumb = document.getElementById('thumb');
-        const thumbValue = document.getElementById('thumb-value');
-        thumb.src = "{{asset('img/no-image.jpg')}}";
-        thumbValue.value = null;
-        console.log(thumbValue);
+<script>
+
+  isUploaded = document.getElementById('isUploaded');
+  uploadedFile = document.getElementById('uploaded-file');
+  fileRemover = document.getElementById('file-remover');
+  image = document.getElementById('image');
+  thumb = document.getElementById('thumb');
+
+  function resetFile(){
+    isUploaded.value = false;
+    image.value = '';
+    uploadedFile.classList.add('d-none');
+    fileRemover.classList.add('d-none');
+    image.classList.remove('d-none');
+    image.classList.add('d-inline-block');
+    thumb.src = '{{ asset("img/no-image.jpg") }}';
+  }
+
+  function addFile(){
+    isUploaded.value = true;
+    fileRemover.classList.remove('d-none');
+    fileRemover.classList.add('d-inline-block');
+  }
+
+  function showImage(event){
+    if (event.target.files.length > 0) {
+      thumb.src = URL.createObjectURL(event.target.files[0]);
     }
+  }
+
 </script>
 
 @endsection
