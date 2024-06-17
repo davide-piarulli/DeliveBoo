@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\ProductType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Functions\Helper;
 
 class ProductTypesTableSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class ProductTypesTableSeeder extends Seeder
         foreach($product_types as $product_type){
           $new = new ProductType();
           $new->name = $product_type;
+          $new->slug = Helper::generateSlug($new->name, ProductType::class);
           $new->save();
         }
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug', 60)->unique();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price', 5,2, true);
+            $table->decimal('price', 5, 2, true);
             $table->boolean('visible')->default(true);
             $table->timestamps();
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->nullOnDelete();
