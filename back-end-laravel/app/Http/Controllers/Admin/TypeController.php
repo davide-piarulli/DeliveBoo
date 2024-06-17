@@ -12,7 +12,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        //ciao belli
     }
 
     /**
