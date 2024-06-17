@@ -10,7 +10,7 @@
                         <a class="nav-link" href="{{ route('admin.home')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="{{route('admin.home')}}">Vai al sito pubblico</a>
+                        <a class="nav-link" target="_blank" href="http://localhost:5174">Vai al sito pubblico</a>
                     </li>
                 </ul>
 

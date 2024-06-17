@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductTypeController;
+use App\Http\Controllers\Admin\TypeController;
 
 
 
@@ -17,17 +18,17 @@ Route::get('/', function () {
 
 // Rotte protette da autenticazione e verifica email
 Route::middleware(['auth', 'verified'])
-   ->prefix('admin')
-   ->name('admin.')
-   ->group(function() {
-      // Dashboard
-      Route::get('/', [DashBoardController::class, 'index'])->name('home');
+  ->prefix('admin')
+  ->name('admin.')
+  ->group(function () {
+    // Dashboard
+    Route::get('/', [DashBoardController::class, 'index'])->name('home');
 
-      // Resources per prodotti, ordini e tipi di prodotto
-      Route::resource('products', ProductController::class);
-      Route::resource('orders', OrderController::class); // Cambiato 'order' in 'orders' per coerenza
-      Route::resource('types', ProductTypeController::class);
-   });
+    // Resources per prodotti, ordini e tipi di prodotto
+    Route::resource('products', ProductController::class);
+    Route::resource('orders', OrderController::class); // Cambiato 'order' in 'orders' per coerenza
+    Route::resource('productsType', ProductTypeController::class);
+  });
 
 // Rotte per il profilo utente
 Route::middleware('auth')->group(function () {
@@ -36,4 +37,4 @@ Route::middleware('auth')->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
