@@ -14,4 +14,12 @@ class Order extends Model
       return $this->belongsToMany(Product::class);
 
     }
+
+    protected $fillable = [
+      'amount',
+      'shipment_address',
+      'phone',
+      'notes'
+    ];
+
 }
