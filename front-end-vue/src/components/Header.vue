@@ -5,15 +5,18 @@
 </script>
 
 <template>
-  <nav class="container justify-content-center">
-    <ul class="d-flex justify-content-around">
-      <li>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Deliveboo</a>
+      <ul class="d-flex justify-content-around">
+      <li class="mx-4 link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
         <router-link :to="{name: 'home'}">Home</router-link>
       </li>
-      <li>
+      <li class="me-4 link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
         <router-link :to="{name: 'type_restaurant'}">Tipologia di ristoranti</router-link>
       </li>
     </ul>
+    </div>
   </nav>
 </template>
 
