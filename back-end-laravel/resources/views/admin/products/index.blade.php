@@ -9,23 +9,21 @@
     <div class="row mb-3">
         <div class="col-md-12 d-flex justify-content-between align-items-center">
             <div class="d-flex">
-                <input type="text" id="search-input" class="form-control" placeholder="Cerca progetti...">
+                <input type="text" id="search-input" class="form-control" placeholder="Cerca prodotto...">
                 <button id="search-button" class="btn btn-danger ms-2">Cerca</button>
             </div>
-            <a href="{{ route('admin.products.create') }}" class="btn btn-danger">Crea un nuovo progetto</a>
+            <a href="{{ route('admin.products.create') }}" class="btn btn-danger">Crea un nuovo prodotto</a>
         </div>
     </div>
 
     <table class="table table-striped table-bordered" id="products-table">
         <thead>
             <tr>
-                <th scope="col">TITOLO</th>
-                <th scope="col">CATEGORIA</th>
+                <th scope="col">NAME</th>
+                <th scope="col">CATEGORIE</th>
                 <th scope="col">DESCRIZIONE</th>
-                <th scope="col">TECNOLOGIE</th>
-                <th scope="col">LINGUAGGIO</th>
+                <th scope="col">PRICE</th>
                 <th scope="col">IMG</th>
-                <th scope="col">AZIONI</th>
             </tr>
         </thead>
         <tbody>

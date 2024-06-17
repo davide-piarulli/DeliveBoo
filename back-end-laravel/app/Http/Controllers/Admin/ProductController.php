@@ -5,63 +5,89 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-      $products = Product::all();
-      return view('admin.products.index', compact('products'));
-    }
+  public function index()
+  {
+    $products = Product::paginate(8);
+    return view('admin.products.index', compact('products'));
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  /**
+   * Show the form for creating a new resource.
+   */
+  public function create()
+  {
+      return view('admin.products.create');
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(Request $request)
+  {
+      $form_data = $request->all();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+      if ($request->hasFile('image')) {
+          $image_path = Storage::put('uploads', $form_data['image']);
+          $form_data['image'] = $image_path;
+      }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+      $new_product = Product::create($form_data);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+      return redirect()->route('admin.products.show', $new_product);
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   */
+  public function show(Product $product)
+  {
+      return view('admin.products.show', compact('product'));
+  }
+
+  /**
+   * Show the form for editing the specified resource.
+   */
+  public function edit(Product $product)
+  {
+      return view('admin.products.edit', compact('product'));
+  }
+
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(Request $request, Product $product)
+  {
+      $form_data = $request->all();
+
+      if ($request->hasFile('image')) {
+          if ($product->image) {
+              Storage::delete($product->image);
+          }
+          $image_path = Storage::put('uploads', $form_data['image']);
+          $form_data['image'] = $image_path;
+      }
+
+      $product->update($form_data);
+
+      return redirect()->route('admin.products.show', $product);
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(Product $product)
+  {
+      if ($product->image) {
+          Storage::delete($product->image);
+      }
+
+      $product->delete();
+
+      return redirect()->route('admin.products.index');
+  }
+
 }
