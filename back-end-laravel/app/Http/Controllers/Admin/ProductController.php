@@ -4,90 +4,83 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Functions\Helper;
 
 class ProductController extends Controller
 {
-  public function index()
-  {
-    $products = Product::paginate(8);
-    return view('admin.products.index', compact('products'));
-  }
+    public function index()
+    {
+        $products = Product::paginate(8);
+        return view('admin.products.index', compact('products'));
+    }
 
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
-  {
-      return view('admin.products.create');
-  }
+    public function create()
+    {
+        $productTypes = ProductType::all();
+        return view('admin.products.create', compact('productTypes'));
+    }
 
-  /**
-   * Store a newly created resource in storage.
-   */
-  public function store(Request $request)
-  {
-      $form_data = $request->all();
+    public function store(Request $request)
+    {
+        $form_data = $request->except('_token');
 
-      if ($request->hasFile('image')) {
-          $image_path = Storage::put('uploads', $form_data['image']);
-          $form_data['image'] = $image_path;
-      }
+        if ($request->hasFile('image')) {
+            $image_path = Storage::put('uploads', $request->file('image'));
+            $form_data['image'] = $image_path;
+        }
 
-      $new_product = Product::create($form_data);
+        if (empty($form_data['slug'])) {
+            $form_data['slug'] = Helper::generateSlug($form_data['name'], Product::class);
+        }
 
-      return redirect()->route('admin.products.show', $new_product);
-  }
+        $new_product = Product::create($form_data);
 
-  /**
-   * Display the specified resource.
-   */
-  public function show(Product $product)
-  {
-      return view('admin.products.show', compact('product'));
-  }
+        return redirect()->route('admin.products.show', $new_product);
+    }
 
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Product $product)
-  {
-      return view('admin.products.edit', compact('product'));
-  }
+    public function show(Product $product)
+    {
+        return view('admin.products.show', compact('product'));
+    }
 
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $request, Product $product)
-  {
-      $form_data = $request->all();
+    public function edit(Product $product)
+    {
+        $productTypes = ProductType::all();
+        return view('admin.products.edit', compact('product', 'productTypes'));
+    }
 
-      if ($request->hasFile('image')) {
-          if ($product->image) {
-              Storage::delete($product->image);
-          }
-          $image_path = Storage::put('uploads', $form_data['image']);
-          $form_data['image'] = $image_path;
-      }
+    public function update(Request $request, Product $product)
+    {
+        $form_data = $request->except('_token');
 
-      $product->update($form_data);
+        if ($request->hasFile('image')) {
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
+            $image_path = Storage::put('uploads', $request->file('image'));
+            $form_data['image'] = $image_path;
+        }
 
-      return redirect()->route('admin.products.show', $product);
-  }
+        if (empty($form_data['slug'])) {
+            $form_data['slug'] = Helper::generateSlug($form_data['name'], Product::class);
+        }
 
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(Product $product)
-  {
-      if ($product->image) {
-          Storage::delete($product->image);
-      }
+        $product->update($form_data);
 
-      $product->delete();
+        return redirect()->route('admin.products.show', $product);
+    }
 
-      return redirect()->route('admin.products.index');
-  }
+    public function destroy(Product $product)
+    {
+        if ($product->image) {
+            Storage::delete($product->image);
+        }
 
+        $product->delete();
+
+        return redirect()->route('admin.products.index');
+    }
 }
