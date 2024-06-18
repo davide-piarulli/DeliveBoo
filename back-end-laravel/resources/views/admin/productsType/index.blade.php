@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+{{-- @extends('layouts.admin')
 
 @section('content')
   <div class="container">
@@ -26,7 +26,7 @@
     </div>
 
     {{-- stampo box con errori relativi ai campi --}}
-    @if ($errors->any())
+{{-- @if ($errors->any())
       <div class="alert alert-danger" role="alert">
         <ul>
           @foreach ($errors->all() as $error)
@@ -96,5 +96,5 @@
       const form = document.getElementById(`form-edit-${id}`);
       form.submit();
     }
-  </script>
-@endsection
+  </script> --}}
+{{-- @endsection --}}
