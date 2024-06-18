@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-  return view('welcome');
+  return view('home');
 });
 
 // Rotte protette da autenticazione e verifica email
