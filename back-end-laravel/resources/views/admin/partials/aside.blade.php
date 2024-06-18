@@ -26,12 +26,6 @@
         </a>
       </li>
 
-      <li>
-        <a href="#">
-          <i class="fa-solid fa-signal  p-2 me-1 mt-2"> Elenco Prodotti per categoria</i>
-        </a>
-      </li>
-
     </ul>
   </nav>
 </aside>
