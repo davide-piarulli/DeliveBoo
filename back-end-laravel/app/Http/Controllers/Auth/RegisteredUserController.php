@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Functions\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\User;
@@ -56,6 +57,7 @@ class RegisteredUserController extends Controller
     $new_restaurant = new Restaurant();
 
     $new_restaurant->name = $request->r_name;
+    $new_restaurant->slug = Helper::generateSlug($new_restaurant->name, Restaurant::class);
     $new_restaurant->address = $request->r_address;
     $new_restaurant->phone = $request->r_phone;
     $new_restaurant->logo = $request->r_logo;
