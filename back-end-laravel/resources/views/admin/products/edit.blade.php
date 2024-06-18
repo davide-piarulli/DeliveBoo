@@ -57,20 +57,18 @@
           @enderror
         </div>
 
-        {{-- <div class="mb-3">
+        <div class="mb-3">
           <label class="form-label">Tipi di Prodotto:</label>
           <div class="btn-group btn-group-sm" role="group">
             @foreach ($productTypes as $productType)
             <input name="product_type_id" id="product_type_{{ $productType->id }}" class="btn-check" autocomplete="off"
-              type="radio" value="{{ $productType->id }}" @if (old('product_type_id', $productType->id)==$productType->id)
-            checked
-            @endif
+              type="radio" value="{{ $productType->id }}" @if (old('product_type_id', $product?->productType?->id)==$productType->id) checked @endif
             >
             <label class="btn btn-outline-primary" for="product_type_{{ $productType->id }}">{{ $productType->name
               }}</label>
             @endforeach
           </div>
-        </div> --}}
+        </div>
 
         <div class="mb-3">
           <label for="image" class="form-label">Immagine</label>

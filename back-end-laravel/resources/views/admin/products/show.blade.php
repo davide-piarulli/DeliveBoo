@@ -32,7 +32,7 @@
       <p class="mt-3">{{ $product->description }}</p>
       <div class="col my-3">
         <h3>Prezzo</h3>
-        <p class="pe-2">&euro; {{ $product->price }}</p>
+        <p class="pe-2">&euro; {{ str_replace('.', ',', $product->price) }}</p>
       </div>
 
       <div class="my-5">
