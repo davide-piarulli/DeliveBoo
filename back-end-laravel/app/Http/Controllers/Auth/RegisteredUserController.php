@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Restaurant;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -15,37 +16,55 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
-    public function create(): View
-    {
-        return view('auth.register');
-    }
+  /**
+   * Display the registration view.
+   */
+  public function create(): View
+  {
+    return view('auth.register');
+  }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+  /**
+   * Handle an incoming registration request.
+   *
+   * @throws \Illuminate\Validation\ValidationException
+   */
+  public function store(Request $request): RedirectResponse
+  {
+    $request->validate([
+      'name' => ['required', 'string', 'max:255'],
+      'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+      'password' => ['required', 'confirmed', Rules\Password::defaults()],
+      'r_name' => ['required', 'min:3', 'max:50'],
+      'r_address' => ['required', 'min:3', 'max:255'],
+      'r_phone' => ['required', 'numeric', 'digits:10'],
+      'r_vat_number' => ['required', 'digits:11', 'numeric'],
+      'r_logo' => ['image', 'mimes:png,jpg', 'max:20480'],
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    ]);
 
-        event(new Registered($user));
+    $user = User::create([
+      'name' => $request->name,
+      'email' => $request->email,
+      'password' => Hash::make($request->password),
+    ]);
 
-        Auth::login($user);
+    event(new Registered($user));
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+    Auth::login($user);
+
+    $new_restaurant = new Restaurant();
+
+    $new_restaurant->name = $request->r_name;
+    $new_restaurant->address = $request->r_address;
+    $new_restaurant->phone = $request->r_phone;
+    $new_restaurant->logo = $request->r_logo;
+    $new_restaurant->vat_number = $request->r_vat_number;
+    $new_restaurant->user_id = Auth::user()->id;
+
+    $new_restaurant->save();
+
+
+    return redirect(RouteServiceProvider::HOME);
+  }
 }
