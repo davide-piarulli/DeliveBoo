@@ -17,6 +17,8 @@ return new class extends Migration
 
            $table->unsignedBigInteger('product_id');
            $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
+
+           $table->tinyInteger('quantity', false, true)->default(1);
         });
     }
 
