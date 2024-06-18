@@ -12,7 +12,7 @@
             @csrf
 
             <div class="mb-4 row">
-              <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+              <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
 
               <div class="col-md-6">
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
@@ -27,7 +27,7 @@
             </div>
 
             <div class="mb-5 row">
-              <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail ') }}</label>
+              <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail *') }}</label>
 
               <div class="col-md-6">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
@@ -41,7 +41,7 @@
             </div>
 
             <div class="mb-4 row">
-              <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+              <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
 
               <div class="col-md-6">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
@@ -57,7 +57,7 @@
             </div>
 
             <div class="mb-4 row">
-              <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password')
+              <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *')
                 }}</label>
 
               <div class="col-md-6">
@@ -74,7 +74,7 @@
             {{-- Nome del ristorante --}}
 
             <div class="mb-4 row">
-              <label for="r_name" class="col-md-4 col-form-label text-md-right">{{ __('Nome Attività') }}</label>
+              <label for="r_name" class="col-md-4 col-form-label text-md-right">{{ __('Nome Attività *') }}</label>
 
 
               <div class="col-md-6">
@@ -93,7 +93,7 @@
             {{-- Address del ristorante --}}
 
             <div class="mb-4 row">
-              <label for="r_address" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}</label>
+              <label for="r_address" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo *') }}</label>
 
               <div class="col-md-6">
                 <input id="r_address" type="text" class="form-control @error('r_address') is-invalid @enderror"
@@ -111,7 +111,7 @@
             {{-- phone del ristornate --}}
 
             <div class="mb-4 row">
-              <label for="r_phone" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+              <label for="r_phone" class="col-md-4 col-form-label text-md-right">{{ __('Telefono *') }}</label>
 
               <div class="col-md-6">
                 <input id="r_phone" type="number" class="form-control @error('r_phone') is-invalid @enderror"
@@ -128,7 +128,7 @@
             {{-- vat_number del ristorante --}}
 
             <div class="mb-4 row">
-              <label for="r_vat_number" class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA') }}</label>
+              <label for="r_vat_number" class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA *') }}</label>
 
               <div class="col-md-6">
                 <input id="r_vat_number" type="number" class="form-control @error('r_vat_number') is-invalid @enderror"
