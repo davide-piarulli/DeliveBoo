@@ -14,17 +14,17 @@
         </a>
       </li>
 
-      <li>
+      {{-- <li>
         <a href="{{ route('admin.productsType.index') }}">
           <i class="fa-solid fa-signal  p-2 me-1 mt-2"> Tipi Di Prodotto</i>
         </a>
-      </li>
+      </li> --}}
 
-      <li>
+      {{-- <li>
         <a href="{{ route('admin.types.index')}}">
           <i class="fa-solid fa-signal  p-2 me-1 mt-2"> Tipologia Ristorante </i>
         </a>
-      </li>
+      </li> --}}
 
     </ul>
   </nav>
