@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50);
-            $table->string('slug', 60);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('products', function (Blueprint $table) {
+          $table->softDeletes(); // Aggiunge la colonna deleted_at
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_types');
+        Schema::table('products', function (Blueprint $table) {
+          $table->dropSoftDeletes(); // Rimuove la colonna deleted_at
+        });
     }
 };
