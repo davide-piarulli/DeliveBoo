@@ -90,7 +90,34 @@
               </div>
             </div>
 
-            {{-- Address del ristorante --}}
+            {{-- Tipologia di ristorante --}}
+
+            <div class="mb-5 row">
+              <label for="r_type" class="col-md-4 col-form-label text-md-right">{{ __('Tipo di Attività *') }}</label>
+
+
+              <div class="col-md-6">
+
+                <div class="btn-group btn-group-sm d-flex flex-wrap" role="group">
+
+                  @foreach ($types as $type)
+                    <input name="types[]" value="{{$type->id}}" type="checkbox" class="btn-check" id="btncheck{{$type->id}}" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck{{$type->id}}">{{$type->name}}</label>
+                  @endforeach
+
+                </div>
+
+                <span id="rNameError" class="error" class="invalid-feedback" role="alert"></span><br>
+
+                @error('r_name')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
+            </div>
+
+            {{-- Indirizzo del ristorante --}}
 
             <div class="mb-4 row">
               <label for="r_address" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo *') }}</label>
@@ -108,7 +135,7 @@
               </div>
             </div>
 
-            {{-- phone del ristornate --}}
+            {{-- Telefono del ristornate --}}
 
             <div class="mb-4 row">
               <label for="r_phone" class="col-md-4 col-form-label text-md-right">{{ __('Telefono *') }}</label>
@@ -125,7 +152,7 @@
               </div>
             </div>
 
-            {{-- vat_number del ristorante --}}
+            {{-- Partita IVA del ristorante --}}
 
             <div class="mb-4 row">
               <label for="r_vat_number" class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA *') }}</label>
@@ -210,9 +237,8 @@
           }
 
           if (isFormValid) {
-            console.log('porcoddio');
-            form.submit();
-        }
+              form.submit();
+          }
       }
 </script>
 
