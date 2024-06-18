@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])
     // Resources per prodotti, ordini e tipi di prodotto
     Route::resource('products', ProductController::class);
     Route::resource('productsType', ProductTypeController::class);
-    Route::resource('types', TypeController::class);
+    Route::resource('type', TypeController::class);
 
     // Rotte CRUD custom
     Route::get('/order-by/{col}/{dir}', [ProductController::class, 'orderBy'])->name('order-by');

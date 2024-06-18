@@ -17,7 +17,7 @@ class TypeController extends Controller
     {
 
         $types = Type::paginate(10);
-        return view('admin.types.index', compact('types'));
+        return response()->json($types);;
     }
 
     /**
