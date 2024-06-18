@@ -4,7 +4,7 @@
       <li class="nav-item">
         <a href="{{ route('admin.products.index') }}" class="nav-link text-white">
           <i class="fa-solid fa-house"></i>
-          <span class="d-none d-lg-inline-block">Elenco Prodotto</span>
+          <span class="d-none d-lg-inline-block">Elenco Prodotti</span>
         </a>
       </li>
       <li class="nav-item">
