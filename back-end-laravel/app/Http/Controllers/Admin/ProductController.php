@@ -9,14 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Functions\Helper;
 use App\Http\Requests\ProductRequest;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all()->sortDesc();
+        $products = Product::where('restaurant_id', Auth::user()->id)->orderBy('id', 'Desc')->paginate(10);
 
         $dir = 'desc';
         $col = null;
@@ -28,7 +27,7 @@ class ProductController extends Controller
 
       $dir = $dir === 'desc' ? 'asc' : 'desc';
 
-      $products = Product::orderBy($col, $dir)->get();
+      $products = Product::where('restaurant_id', Auth::user()->id)->orderBy($col, $dir)->paginate(10);
 
       $productTypes = ProductType::all();
 
@@ -63,6 +62,8 @@ class ProductController extends Controller
         if (empty($form_data['slug'])) {
             $form_data['slug'] = Helper::generateSlug($form_data['name'], Product::class);
         }
+
+        $form_data['restaurant_id'] = Auth::user()->id;
 
         $new_product = Product::create($form_data);
 

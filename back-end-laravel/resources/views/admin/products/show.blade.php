@@ -23,7 +23,6 @@
       <img class="img-fluid bg-dark w-25"
         src="{{isset($product->image) ? asset('storage/' . $product->image) : asset('img/no-image.jpg')}}"
         alt="Product Image">
-      <h5>{{$product->image_original_name}}</h5>
     </div>
 
     <div class="col m-4">
