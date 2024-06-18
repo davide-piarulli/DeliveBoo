@@ -16,7 +16,7 @@
         <form id="productForm" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="mb-3">
-            <label for="name" class="form-label">Nome</label>
+            <label for="name" class="form-label">Nome *</label>
             <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name"
               value="{{ old('name') }}">
             <small id="nameError" class="text-danger"></small>
@@ -33,7 +33,7 @@
             @enderror
           </div>
           <div class="mb-3">
-            <label for="price" class="form-label">Prezzo</label>
+            <label for="price" class="form-label">Prezzo *</label>
             <input name="price" type="number" step="0.01" class="form-control @error('price') is-invalid @enderror"
               id="price" value="{{ old('price') }}">
             <small id="priceError" class="text-danger"></small>
@@ -42,7 +42,7 @@
             @enderror
           </div>
           <div class="mb-3">
-            <label class="form-label">Tipi di Prodotto:</label>
+            <label class="form-label">Tipi di Prodotto: *</label>
             <div class="btn-group btn-group-sm" role="group">
               @foreach ($productTypes as $productType)
                 <input name="product_type_id" id="product_type_{{ $productType->id }}" class="btn-check"
@@ -69,7 +69,7 @@
             @enderror
           </div>
           <div class="mb-4">
-            <button class="btn btn-primary" type="submit">Nuovo Prodotto</button>
+            <button class="btn btn-primary" type="submit">Aggiungi</button>
             <button class="btn btn-warning" type="reset" onclick="resetImage()">Reset</button>
           </div>
         </form>
