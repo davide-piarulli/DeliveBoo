@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Accedi') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form onsubmit="submitForm(event)" id="form" method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="mb-4 row">
@@ -16,7 +16,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                                <span id="emailError" class="error" class="invalid-feedback" role="alert"></span><br>
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -70,4 +70,36 @@
         </div>
     </div>
 </div>
+
+<script>
+
+  function validateEmail(email) {
+      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return re.test(String(email).toLowerCase());
+  }
+
+  function submitForm(event) {
+
+    event.preventDefault();
+    document.getElementById('emailError').textContent = '';
+
+    const form = document.getElementById('form');
+    const email = document.getElementById('email').value.trim();
+
+    isFormValid = true;
+
+    if (!validateEmail(email)){
+      document.getElementById('emailError').textContent = 'Email non valida!';
+      isFormValid = false;
+    }
+
+    if (isFormValid) {
+        form.submit();
+    }
+
+  }
+
+</script>
+
+
 @endsection
