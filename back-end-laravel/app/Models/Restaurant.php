@@ -26,4 +26,20 @@ class Restaurant extends Model
       return $this->hasOne(User::class);
 
     }
+
+    protected $fillable = [
+
+
+        'user_id',
+        'name',
+        'slug',
+        'address',
+        'phone',
+        'logo',
+        'vat_number',
+
+    ];
+
+
+
 }

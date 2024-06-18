@@ -30,7 +30,7 @@ class RestaurantsTableSeeder extends Seeder
       $new_restaurant->user_id = $index + 1;
       $new_restaurant->slug = Helper::generateSlug($new_restaurant->name, Restaurant::class);
       $new_restaurant->address = $restaurant['address'];
-      $new_restaurant->phone = $restaurant['phone'];
+      $new_restaurant->phone = floatval(rand(3, 20) . '.' . rand(10, 99));;
       $new_restaurant->logo = $restaurant['logo'];
       $new_restaurant->vat_number = $restaurant['vat_number'];
 

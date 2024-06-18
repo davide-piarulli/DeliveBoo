@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('slug', 60)->unique();
             $table->string('address');
             $table->char('phone', 10);
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->char('vat_number', 11);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
