@@ -81,7 +81,7 @@
               <input name="image" type="file"
                 class="form-control {{ old('image', $product->image) ? 'd-none' : 'd-inline-block' }} @error('image') is-invalid @enderror"
                 id="image" placeholder="Carica immagine" value="{{ old('image', $product->image) }}"
-                onchange="addFile(); showImage(event)">
+                onchange="showImage(event); addFile()">
             </div>
             @error('image')
               <div class="text-danger my-1" style="font-size: .8rem">{{ $message }}</div>

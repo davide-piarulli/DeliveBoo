@@ -26,12 +26,10 @@
     </div>
 
     <div class="col m-4">
-      <h3 class="fs-2">Categoria: {{ $product->productType->name }}</h3>
-      <span class="fs-2">Descrizione</span>
+      <h4 class="fs-2">Categoria: {{ $product->productType->name }}</h4>
       <p class="mt-3">{{ $product->description }}</p>
       <div class="col my-3">
-        <h3>Prezzo</h3>
-        <p class="pe-2">&euro; {{ str_replace('.', ',', $product->price) }}</p>
+        <h5>&euro; {{ str_replace('.', ',', $product->price) }}</h5>
       </div>
 
       <div class="my-5">
