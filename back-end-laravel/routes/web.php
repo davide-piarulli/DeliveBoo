@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Guest\PageController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
@@ -22,7 +22,8 @@ Route::middleware(['auth', 'verified'])
   ->name('admin.')
   ->group(function () {
     // Dashboard
-    Route::get('/', [DashBoardController::class, 'index'])->name('home');
+    Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
     // Resources per prodotti, ordini e tipi di prodotto
     Route::resource('products', ProductController::class);
