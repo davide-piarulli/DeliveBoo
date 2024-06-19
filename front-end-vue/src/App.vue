@@ -2,9 +2,16 @@
 import { store } from "./data/store";
 import axios from "axios";
 import Header from "./components/Header.vue";
+import Jumbotron from "./components/Jumbotron.vue";
+import Footer from "./components/Footer.vue";
+import BottomMenu from "./components/BottomMenu.vue";
+
 export default {
   components: {
     Header,
+    Jumbotron,
+    Footer,
+    BottomMenu,
   },
   data() {
     return {
