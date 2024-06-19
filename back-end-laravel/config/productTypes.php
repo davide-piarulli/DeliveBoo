@@ -6,5 +6,16 @@ return [
     'Pasta',
     'Carne',
     'Bevanda',
-    'Digestivo'
+    'Digestivo',
+    'Dolce',
+    "Antipasto",
+    "Contorno",
+    "Formaggio",
+    "Pesce",
+    "Zuppa",
+    "Pane",
+    "Salse e condimenti",
+    "Frutta",
+    "Gelato",
+    "Snack"
 ];

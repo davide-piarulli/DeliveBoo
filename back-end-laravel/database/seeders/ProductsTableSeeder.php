@@ -33,7 +33,7 @@ class ProductsTableSeeder extends Seeder
         $new_product->name = $faker->foodName();
         $new_product->slug = Helper::generateSlug($new_product->name, Product::class);
         $new_product->image = null;
-        $new_product->description = $faker->sentence(5);
+        $new_product->description = $new_product->name . ' fa parte della categoria ' . $new_product->productType->name . ' ed è uno dei nostri migliori prodotti';
         $new_product->price = floatval(rand(3, 20) . '.' . rand(10, 99));
         $new_product->save();
 
