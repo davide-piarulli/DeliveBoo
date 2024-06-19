@@ -34,19 +34,14 @@ export default {
 @use '../assets/scss/main.scss' as*;
 
 header {
-  position: relative;
-  height: 100px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  top: 0;
   nav{
     background-color: $color-1;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
     li{
       color: $color-10 !important;
-      i{
-        z-index: 999;
-      }
     }
   }
 }
