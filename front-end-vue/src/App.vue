@@ -64,4 +64,11 @@ export default {
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  main{
+    height: calc(100vh - 100px - 50px);
+    overflow: auto;
+  }
+
+</style>

@@ -31,11 +31,11 @@ export default {
 </script>
 
 <template>
-  <div class="container d.flex justify-content-center">
+  <div class="container d-flex justify-content-center">
     <h1 class="my-4">Tipi di ristorante:</h1>
     <div>
       <ul>
-        <li v-for="type in types" :key="type.id">
+        <li v-for="(type) in types" :key="type.id">
           {{ type.id }} --- {{ type.name }}
         </li>
       </ul>

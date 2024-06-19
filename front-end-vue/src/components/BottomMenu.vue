@@ -6,11 +6,16 @@ export default {
 </script>
 
 <template>
-<div>
-
-</div>
+  <div class="bottom-menu">
+    
+  </div>
 </template> 
 
 <style lang="scss" scoped>
+
+  .bottom-menu{
+    height: 50px;
+    background-color: black;
+  }
 
 </style>
