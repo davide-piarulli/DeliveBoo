@@ -49,6 +49,7 @@ export default {
 <template>
   <div>
     <Header />
+    <Jumbotron/>
     <main>
       <router-view></router-view>
     </main>
