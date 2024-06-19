@@ -1,7 +1,17 @@
 @extends('layouts.admin')
 @section('content')
   <div class="container">
-    <h1 class="my-3">Modifica Prodotto</h1>
+    <div class="d-flex align-items-center">
+      <h1>Modifica Prodotto</h1>
+      <form class="ms-3" action="{{ route('admin.products.destroy', $product->id) }}" method="POST"
+        onsubmit="return confirm('Sei sicuro di voler eliminare {{ $product->name }}?')">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </form>
+    </div>
     @if ($errors->any())
       <div class="alert alert-danger" role="alert">
         <ul class="list-unstyled">
