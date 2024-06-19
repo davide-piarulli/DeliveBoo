@@ -7,7 +7,12 @@
 <template>
   <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Deliveboo</a>
+      <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="/logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+        DELIVEBOO
+      </a>
+    </div>
       <ul class="d-flex justify-content-around">
       <li class="mx-4 link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
         <router-link :to="{name: 'home'}">Home</router-link>
