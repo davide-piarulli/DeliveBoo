@@ -1,8 +1,9 @@
 <script>
 import { store } from "../data/store";
 import axios from "axios";
-import ButtonVue from "../components/partials/Button.vue";
-import RestaurantCard from "@/components/partials/RestaurantCard.vue";
+import Jumbotron from "../components/Jumbotron.vue";
+import Button from "../components/partials/Button.vue";
+import RestaurantCard from "../components/partials/RestaurantCard.vue";
 
 export default {
   name: "Home",
@@ -10,14 +11,14 @@ export default {
   data() {
     return {
       types: [],
-
       activeButton: false,
-    };
+    }
   },
 
   components: {
-    ButtonVue,
-    RestaurantCard
+    Button,
+    RestaurantCard,
+    Jumbotron
   },
 
   methods: {
@@ -46,39 +47,43 @@ export default {
 </script>
 
 <template>
-  <section
-    id="restaurants"
-    class="container d-flex flex-column justify-content-center"
-  >
-    <div class="title d-flex justify-content-center">
-      <h1 class="my-4">Tipi di ristorante:</h1>
-    </div>
-    <div
-      class="table_c d-flex justify-content-center row row-cols-3 row-cols-md-auto p-1"
+  <div>
+    <Jumbotron/>
+    <section
+      id="restaurants"
+      class="container d-flex flex-column justify-content-center py-5"
     >
-      <ButtonVue
-        v-for="(type, index) in types"
-        :key="index"
-        :class="type.active === true ? 'active' : ''"
-        @click="type.active = !type.active"
-        :text="type.name"
-        class="m-2"
-      />
-    </div>
-
-    <div
-      class="mt-5 d-flex justify-content-center restaurants row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4"
-    >
-      <!-- INSERIRE LA CARD SOTTO -->
-      <div
-      v-for = "(item, index) in 20"
-      :key="index"
-        class="col mb-4 d-flex justify-content-center"
-      >
-        <RestaurantCard />
+      <div class="title d-flex justify-content-center">
+        <h1 class="mb-4">Tipi di ristorante:</h1>
       </div>
-    </div>
-  </section>
+      <div
+        class="table_c d-flex justify-content-center row row-cols-3 row-cols-md-auto"
+      >
+        <Button
+          v-for="(type, index) in types"
+          :key="index"
+          class="m-2"
+          :class="type.active === true ? 'active' : ''"
+          :text="type.name"
+          @click="type.active = !type.active"
+        />
+      </div>
+
+      <div
+        class="mt-5 d-flex justify-content-center restaurants row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4"
+      >
+        <!-- Cards -->
+        <div
+        v-for = "(item, index) in 8"
+        :key="index"
+          class="col mb-4 d-flex justify-content-center"
+        >
+          <RestaurantCard />
+        </div>
+
+      </div>
+    </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>

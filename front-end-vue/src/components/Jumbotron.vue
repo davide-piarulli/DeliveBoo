@@ -20,11 +20,11 @@ export default {};
 <style lang="scss" scoped>
 @use "../assets/scss/main.scss" as *;
 .jumbotron {
-  background-image: url("../../public/img/jumbotron-image.png");
+  background-image: url("/img/jumbotron-image.png");
   background-size: cover;
   background-position: center;
   color: white;
-  height: 100vh;
+  height: 700px;
   display: flex;
   align-items: center;
   justify-content: center;

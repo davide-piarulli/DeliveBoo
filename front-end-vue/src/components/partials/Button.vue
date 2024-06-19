@@ -1,4 +1,3 @@
-<!-- qui lavora oltion -->
 <script>
 export default {
 
@@ -34,10 +33,10 @@ export default {
 /* CSS */
 .button-48 {
   appearance: none;
-  background-color: #ffffff;
+  background-color: white;
   border-width: 0;
   box-sizing: border-box;
-  color: #000000;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-family: Clarkson, Helvetica, sans-serif;
@@ -95,7 +94,7 @@ export default {
   }
 
 .button-48:after {
-  background-color: #ffffff;
+  background-color: white;
 }
 
 .button-48 span {

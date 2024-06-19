@@ -1,107 +1,125 @@
-<!-- qui lavora matteo -->
 <script>
-export default {
-  
-}
+  export default {
+
+  }
 </script>
 
 <template>
-<footer class="footer bg-dark">
-    <div class="container ">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="footer-logo">
-                    <div class="logo">
-                        <img src="/logo.png" alt="logo" width="50" height="50" class="d-inline-block align-text-top ">
-                    </div>
-                </div>
-
-              
-
-                <div class="footer-icon">
-                    <div class="icon">
-                        <a href="" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
+  <footer class="footer bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="footer-logo">
+            <div class="logo">
+              <img src="/logo.png" alt="logo" width="50" height="50" class="d-inline-block align-text-top ">
             </div>
+          </div>
 
-            <div class="col-lg-8">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="quick-line-item">
-                            <div class="quick-line-item-head">
-                                <h3>Quick Links</h3>
-                            </div>
 
-                            <div class="quick-line-menu">
-                                <ul>
-                                    <li><a href="">My Profile</a></li>
-                                    <li><a href="">About Us</a></li>
-                                    <li><a href="">Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-3">
-                        <div class="quick-line-item">
-                            <div class="quick-line-item-head">
-                                <h3>Terms & Privacy</h3>
-                            </div>
-
-                            <div class="quick-line-menu">
-                                <ul>
-                                    <li><a href="">Privacy & Policy</a></li>
-                                    <li><a href="">Terms of Service</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6">
-                        <div class="quick-line-item">
-                            <div class="quick-line-item-head">
-                                <h3>Subscribe to our Newsletter</h3>
-                            </div>
-                            <form action="" method="POST">
-                                <input type="hidden" name="_token" value="">
-                                <div class="quick-line-btn">
-                                    <input type="email" name="email" class="form-control" id="" placeholder="Email">
-                                    <button class="btn btn-primary" type="submit">Subscribe</button>
-                                </div>
-                            </form>
-
-                            <div class="quick-line-btn-text">
-                                <h6>We accept Payment methods:</h6>
-                            </div>
-
-                            <div class="quick-line-btn-img">
-                                <a href="#"><img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png" alt="Payment method"></a>
-                                <a href="#"><img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png" alt="Payment method"></a>
-                                <a href="#"><img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-29-6264.png" alt="Payment method"></a>
-                                <a href="#"><img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png" alt="Payment method"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="footer-icon">
+            <div class="icon">
+              <a href="" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
             </div>
+          </div>
         </div>
+
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="quick-line-item">
+                <div class="quick-line-item-head">
+                  <h3>Quick Links</h3>
+                </div>
+
+                <div class="quick-line-menu">
+                  <ul>
+                    <li><a href="">My Profile</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Contact Us</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3">
+              <div class="quick-line-item">
+                <div class="quick-line-item-head">
+                  <h3>Terms & Privacy</h3>
+                </div>
+
+                <div class="quick-line-menu">
+                  <ul>
+                    <li><a href="">Privacy & Policy</a></li>
+                    <li><a href="">Terms of Service</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="quick-line-item">
+                <div class="quick-line-item-head">
+                  <h3>Subscribe to our Newsletter</h3>
+                </div>
+                <form action="" method="POST">
+                  <input type="hidden" name="_token" value="">
+                  <div class="quick-line-btn">
+                    <input type="email" name="email" class="form-control" id="" placeholder="Email">
+                    <button class="btn btn-primary" type="submit">Subscribe</button>
+                  </div>
+                </form>
+
+                <div class="quick-line-btn-text">
+                  <h6>We accept Payment methods:</h6>
+                </div>
+
+                <div class="quick-line-btn-img">
+                  <a href="#"><img
+                      src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png"
+                      alt="Payment method"></a>
+                  <a href="#"><img
+                      src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png"
+                      alt="Payment method"></a>
+                  <a href="#"><img
+                      src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-29-6264.png"
+                      alt="Payment method"></a>
+                  <a href="#"><img
+                      src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png"
+                      alt="Payment method"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</footer>
+  </footer>
 
 
-</template> 
+</template>
 
 <style lang="scss" scoped>
- .footer a {
-    text-decoration: none; /* Rimuove il sottolineato */
-    color: white; /* Usa il colore del testo predefinito */
+
+  footer {
+    height: 460px;
+    padding: 50px;
   }
 
-  /* Opzionale: modifica il colore del testo quando passi sopra col mouse */
-  .footer a:hover {
-    color: #3D5064; /* Colore specificato */
+  footer a {
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: #3D5064;
+    }
+  }
+
+  @media screen and (max-width: 568px) {
+    footer{
+      margin-bottom: 70px;
+    }
   }
 </style>

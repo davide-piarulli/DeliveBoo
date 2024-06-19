@@ -1,6 +1,7 @@
 @import 'bootstrap/scss/bootstrap';
-@import './partials/variables';
 
-li{
-  list-style: none;
-}
+@import './partials/variables';
+@import './partials/general';
+@import './partials/utility';
+@import './partials/typography';
+
