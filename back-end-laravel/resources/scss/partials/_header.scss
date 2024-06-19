@@ -7,7 +7,7 @@ header{
     }
 
     .dropdown{
-      a:active{
+      a:active, button:active{
         background-color: white !important;
       }
     }

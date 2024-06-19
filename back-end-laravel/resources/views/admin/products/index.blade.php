@@ -11,7 +11,7 @@
           <input type="text" id="search-input" class="form-control" placeholder="Cerca prodotto...">
           <button id="search-button" class="btn btn-primary ms-2">Cerca</button>
         </div>
-        <a href="{{ route('admin.products.create') }}" class="btn btn-primary">Crea un nuovo prodotto</a>
+        <a href="{{ route('admin.products.create') }}" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i></a>
       </div>
     </div>
 
