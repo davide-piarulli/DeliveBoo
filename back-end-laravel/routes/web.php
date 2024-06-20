@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductTypeController;
+use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\TypeController;
 
 
@@ -28,6 +29,8 @@ Route::middleware(['auth', 'verified'])
 
     // Rotte CRUD prodotti
     Route::resource('products', ProductController::class);
+
+    Route::resource('restaurants', RestaurantController::class);
 
     // Rotte CRUD custom
     Route::get('/order-by/{col}/{dir}', [ProductController::class, 'orderBy'])->name('order-by');
