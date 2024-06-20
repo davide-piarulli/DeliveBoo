@@ -12,14 +12,21 @@ class ApiController extends Controller
 {
   public function index()
   {
-      $restaurants = Restaurant::with('products.productType', 'types')->get();
-      return response()->json($restaurants);
+    $restaurants = Restaurant::with('products.productType', 'types')->get();
+    return response()->json($restaurants);
   }
 
   public function getRestaurantTypes()
   {
     $types = Type::all();
     return response()->json($types);
+  }
+
+  public function getRestaurantsByTypes(object $types)
+  {
+    // dd($types);
+    $restaurants = Restaurant::where();
+    return response()->json(compact('restaurants', 'types'));
   }
 
   // public function getRestaurantsByName($name)
