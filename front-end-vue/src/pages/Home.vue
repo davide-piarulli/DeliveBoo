@@ -11,9 +11,9 @@ export default {
   data() {
     return {
       types: [],
+      restaurants: [],
       filters: [],
       activeButton: false,
-      restaurants: [],
 
     };
   },
@@ -25,15 +25,25 @@ export default {
   },
 
   methods: {
-    filterRestaurants(typeId) {
-      this.filters.push(typeId);
-      console.log(this.filters);
-      this.getApi(store.apiUrl, "filter-restaurants");
+    
+    filterRestaurants(type) {
+
+      !this.filters.includes(type) 
+      ? this.filters.push(type)
+      : this.filters.splice(this.filters.indexOf(type), 1);
+
+      if(this.filters.length > 0){
+        this.getApi(store.apiUrl, "filter");
+      } else {
+        this.getApi(store.apiUrl, "restaurants");
+      }
     },
     getApi(apiUrl, endpoint = "") {
       axios
         .get(apiUrl + endpoint, {
-          params: { filters: this.filters },
+          params: { 
+            filters: this.filters
+          },
         })
         .then((result) => {
           if (endpoint == "types" || endpoint == "") {
@@ -46,10 +56,13 @@ export default {
             });
           } else if (endpoint == "restaurants") {
             this.restaurants = result.data;
+            // console.log(this.restaurants);
+          } else if (endpoint == 'filter') {
+            this.restaurants = result.data;
             console.log(this.restaurants);
           }
 
-          console.log(this.types);
+          // console.log(this.types);
         })
         .catch((error) => {
           console.log(error.message);
@@ -84,7 +97,7 @@ export default {
           :text="type.name"
           @click="
             type.active = !type.active;
-            filterRestaurants(type.id);
+            filterRestaurants(type);
           "
         />
       </div>

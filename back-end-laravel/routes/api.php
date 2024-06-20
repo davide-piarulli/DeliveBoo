@@ -19,5 +19,5 @@ use Illuminate\Http\Request;
 Route::get('/restaurants', [ApiController::class, 'index']);
 Route::get('/types', [ApiController::class, 'getRestaurantTypes']);
 Route::post('/send-order', [OrderController::class, 'store']);
-Route::get('/filter-restaurants/{params}', [ApiController::class, 'getRestaurantsByTypes']);
+Route::get('/filter', [ApiController::class, 'getRestaurantsByTypes']);
 // Route::get('/search-restaurants/{name}',[ApiController::class, 'getRestaurantsByName']);
