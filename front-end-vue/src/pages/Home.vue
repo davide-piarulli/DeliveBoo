@@ -12,27 +12,34 @@ export default {
     return {
       types: [],
       activeButton: false,
-    }
+      restaurants : []
+    };
   },
 
   components: {
     Button,
     RestaurantCard,
-    Jumbotron
+    Jumbotron,
   },
 
   methods: {
-    getApi() {
+    getApi(getApi, type = "") {
       axios
-        .get(store.apiUrl + "type_restaurant")
+        .get(getApi + type)
         .then((result) => {
-          //this.types = result.data.data;
-          this.types = result.data.data.map((item) => {
-            return {
-              ...item,
-              active: false,
-            };
-          });
+          if (type == "types" || type == "") {
+            //this.types = result.data.data;
+            this.types = result.data.map((item) => {
+              return {
+                ...item,
+                active: false,
+              };
+            });
+          }else if (type == "restaurants") {
+            this.restaurants = result.data
+            console.log(this.restaurants);
+          }
+
           console.log(this.types);
         })
         .catch((error) => {
@@ -41,14 +48,15 @@ export default {
     },
   },
   mounted() {
-    this.getApi();
+    this.getApi(store.apiUrl, "types");
+    this.getApi(store.apiUrl, "restaurants");
   },
 };
 </script>
 
 <template>
   <div>
-    <Jumbotron/>
+    <Jumbotron />
     <section
       id="restaurants"
       class="container d-flex flex-column justify-content-center py-5"
@@ -74,13 +82,12 @@ export default {
       >
         <!-- Cards -->
         <div
-        v-for = "(item, index) in 8"
-        :key="index"
+          v-for="(item, index) in 8"
+          :key="index"
           class="col mb-4 d-flex justify-content-center"
         >
           <RestaurantCard />
         </div>
-
       </div>
     </section>
   </div>
@@ -90,7 +97,7 @@ export default {
 @use "../assets/scss/main.scss" as *;
 
 .table_c {
-  border: 1px solid rgba($button-color,  .2 );
+  border: 1px solid rgba($button-color, 0.2);
   border-radius: 10px;
 }
 
