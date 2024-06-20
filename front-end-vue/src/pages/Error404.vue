@@ -1,7 +1,7 @@
 
 <script>
   export default {
-    name: 'error404'
+    name: 'error404',
   }
 </script>
 
@@ -20,7 +20,7 @@
 @use "../assets/scss/main.scss" as *;
 
   .error{
-   height: calc(100vh - 100px - 460px);
+   height: calc(100vh - 100px);
   }
 
 </style>

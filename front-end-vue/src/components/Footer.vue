@@ -104,7 +104,6 @@
 <style lang="scss" scoped>
 
   footer {
-    height: 460px;
     padding: 50px;
   }
 
