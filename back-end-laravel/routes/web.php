@@ -21,14 +21,13 @@ Route::middleware(['auth', 'verified'])
   ->prefix('admin')
   ->name('admin.')
   ->group(function () {
-    // Dashboard
+
+    // Dashboard e profilo
     Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
-    // Resources per prodotti, ordini e tipi di prodotto
+    // Rotte CRUD prodotti
     Route::resource('products', ProductController::class);
-    Route::resource('productsType', ProductTypeController::class);
-    Route::resource('type', TypeController::class);
 
     // Rotte CRUD custom
     Route::get('/order-by/{col}/{dir}', [ProductController::class, 'orderBy'])->name('order-by');

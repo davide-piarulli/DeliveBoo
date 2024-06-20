@@ -31,7 +31,7 @@
           </th>
           <th scope="col">Categoria</th>
           <th scope="col">Descrizione</th>
-          <th scope="col">
+          <th scope="col" class="w-10">
             <a class="text-black text-decoration-none hov-underline"
               href="{{ route('admin.order-by', ['col' => 'price', 'dir' => $dir]) }}">Prezzo
               @if ($dir === 'desc' && $col === 'price')
