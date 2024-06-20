@@ -12,7 +12,7 @@ export default {
     return {
       types: [],
       activeButton: false,
-      restaurants : []
+      restaurants: []
     };
   },
 
@@ -28,15 +28,14 @@ export default {
         .get(getApi + type)
         .then((result) => {
           if (type == "types" || type == "") {
-            //this.types = result.data.data;
             this.types = result.data.map((item) => {
               return {
                 ...item,
                 active: false,
               };
             });
-          }else if (type == "restaurants") {
-            this.restaurants = result.data
+          } else if (type == "restaurants") {
+            this.restaurants = result.data;
             console.log(this.restaurants);
           }
 
@@ -82,11 +81,17 @@ export default {
       >
         <!-- Cards -->
         <div
-          v-for="(item, index) in 8"
+          v-for="(restaurant, index) in restaurants"
           :key="index"
           class="col mb-4 d-flex justify-content-center"
         >
-          <RestaurantCard />
+          <RestaurantCard
+            :name="restaurant.name"
+            :slug="restaurant.slug"
+            :address="restaurant.address"
+            :phone="restaurant.phone"
+            :logo="restaurant.logo"
+          />
         </div>
       </div>
     </section>
