@@ -14,6 +14,7 @@ export default {
       filters: [],
       activeButton: false,
       restaurants: [],
+
     };
   },
 
@@ -93,11 +94,17 @@ export default {
       >
         <!-- Cards -->
         <div
-          v-for="(item, index) in 8"
+          v-for="(restaurant, index) in restaurants"
           :key="index"
           class="col mb-4 d-flex justify-content-center"
         >
-          <RestaurantCard />
+          <RestaurantCard
+            :name="restaurant.name"
+            :slug="restaurant.slug"
+            :address="restaurant.address"
+            :phone="restaurant.phone"
+            :logo="restaurant.logo"
+          />
         </div>
       </div>
     </section>
