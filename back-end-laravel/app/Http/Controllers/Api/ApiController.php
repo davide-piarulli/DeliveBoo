@@ -22,4 +22,10 @@ class ApiController extends Controller
     return response()->json($types);
   }
 
+  public function getRestaurantsByName($name)
+  {
+    $restaurants = Restaurant::where('name', 'like','%' . $name . '%')->with('products.productType', 'types')->get();
+    return response()->json($restaurants);
+  }
+
 }
