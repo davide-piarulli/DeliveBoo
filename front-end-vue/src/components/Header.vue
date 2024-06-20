@@ -39,7 +39,7 @@
           <li class="mx-4 link-info link-offset-2 d-none d-md-inline-block fs-5">
             <router-link class="text-white text-decoration-none" to="#">Ristoranti</router-link>
           </li>
-          <li class="d-none d-md-inline-block fs-4">
+          <li class="d-none d-md-inline-block fs-4 cart">
             <i class="fa-solid fa-cart-shopping"></i>
           </li>
 
@@ -94,6 +94,11 @@ header {
     }
     .b_menu_active {
       right: 0 !important;
+    }
+    .cart{
+      padding: 5px 10px;
+      border-radius: 25px;
+      border: 1px solid whitesmoke;
     }
   }
 }
