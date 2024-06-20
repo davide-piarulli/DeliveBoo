@@ -22,7 +22,7 @@ class ApiController extends Controller
     return response()->json($types);
   }
 
-  public function getRestaurantsByTypes(Request $request)
+  public function getFilteredRestaurants(Request $request)
   {
 
     // presi tutti i filtri li cicliamo per pushare soltanto gli id, utili per la query
@@ -30,8 +30,12 @@ class ApiController extends Controller
       $typesIds[] = $filter['id'];
     };
 
+    // if (!$request->searched) {
+    //   $request->searched = '';
+    // }
+
     // Prendiamo tutti i tipi di ogni ristorante
-    $restaurants = Restaurant::whereHas('types', function ($query) use ($typesIds) {
+    $restaurants = Restaurant::where('name', 'like','%' . $request->searched . '%')->whereHas('types', function ($query) use ($typesIds) {
         // Filtra tutti i tipi di ristorante in base all'id
         $query->whereIn('types.id', $typesIds);
     // Assicura che il numero di tipi corrispondenti sia esattamente uguale al numero di tipi selezionati
@@ -39,15 +43,9 @@ class ApiController extends Controller
         // Conta i tipi corrispondenti per ogni ristorante
         $query->whereIn('types.id', $typesIds);
     // Filtra per includere solo i ristoranti che hanno esattamente il numero di tipi selezionati
-    }])->having('types_count', '=', count($typesIds))->get();
+    }])->having('types_count', '=', count($typesIds))->with('products.productType', 'types')->get();
 
     return response()->json($restaurants);
   }
-
-  // public function getRestaurantsByName($name)
-  // {
-  //   $restaurants = Restaurant::where('name', 'like','%' . $name . '%')->with('products.productType', 'types')->get();
-  //   return response()->json($restaurants);
-  // }
 
 }
