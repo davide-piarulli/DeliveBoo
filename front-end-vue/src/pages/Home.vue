@@ -33,36 +33,33 @@ export default {
       : this.filters.splice(this.filters.indexOf(type), 1);
 
       if(this.filters.length > 0){
-        this.getApi(store.apiUrl, "filter");
+        this.getApi(store.apiUrl, 'filter');
       } else {
-        this.getApi(store.apiUrl, "restaurants");
+        this.getApi(store.apiUrl, 'restaurants');
       }
     },
-    getApi(apiUrl, endpoint = "") {
+    getApi(apiUrl, endpoint = '') {
       axios
         .get(apiUrl + endpoint, {
           params: { 
+            // searched: store.restaurantToSearch === '' ? null : store.restaurantToSearch,
             filters: this.filters
           },
         })
         .then((result) => {
-          if (endpoint == "types" || endpoint == "") {
-            //this.types = result.data.data;
+          console.log(store.restaurantToSearch);
+          if (endpoint == 'types' || endpoint == '') {
             this.types = result.data.map((item) => {
               return {
                 ...item,
                 active: false,
               };
             });
-          } else if (endpoint == "restaurants") {
+          } else if (endpoint == 'restaurants') {
             this.restaurants = result.data;
-            // console.log(this.restaurants);
           } else if (endpoint == 'filter') {
             this.restaurants = result.data;
-            console.log(this.restaurants);
           }
-
-          // console.log(this.types);
         })
         .catch((error) => {
           console.log(error.message);
@@ -70,8 +67,8 @@ export default {
     },
   },
   mounted() {
-    this.getApi(store.apiUrl, "types");
-    this.getApi(store.apiUrl, "restaurants");
+    this.getApi(store.apiUrl, 'types');
+    this.getApi(store.apiUrl, 'restaurants');
   },
 };
 </script>
