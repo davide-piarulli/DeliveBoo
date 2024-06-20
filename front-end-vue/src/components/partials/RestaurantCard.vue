@@ -1,21 +1,59 @@
+<script>
+export default {
+  name: "RestaurantCard",
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    logo: {
+      type: String,
+      required: true,
+      default: "default-logo.png",
+      validator: (value) => /\.(jpg|jpeg|png|gif|svg)$/.test(value),
+    },
+  },
+  data() {
+    return {
+      isHovered: false,
+    };
+  },
+};
+</script>
 <template>
   <div class="container mt-5">
     <div class="card">
-      <div class="card-img-container position-relative overflow-hidden">
+      <div class="card-img-container">
         <img
           :src="logo"
-          alt="Immagine Articolo in Evidenza"
+          :alt="name + ' logo'"
           class="card-img-top my-img"
-          :class="{ 'zoomed': isHovered }"
+          :class="{ zoomed: isHovered }"
           @mouseover="isHovered = true"
           @mouseleave="isHovered = false"
-        >
+        />
         <div class="overlay" v-if="isHovered"></div>
       </div>
       <div class="card-body">
         <h5 class="card-title">{{ name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
-          <a :href="'https://reservq.minionionbd.com/menu/' + slug" class="text-decoration-none text-dark">{{ name }}</a>
+          <a
+            :href="`https://reservq.minionionbd.com/menu/${slug}`"
+            class="text-decoration-none text-dark"
+            >{{ name }}</a
+          >
         </h6>
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex align-items-center">
@@ -27,44 +65,10 @@
             <span>{{ phone }}</span>
           </li>
         </ul>
-
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "RestaurantCard",
-  props: {
-    name: {
-      type: String,
-      required: true
-    },
-    slug: {
-      type: String,
-      required: true
-    },
-    address: {
-      type: String,
-      required: true
-    },
-    phone: {
-      type: String,
-      required: true
-    },
-    logo: {
-      type: String,
-      required: true
-    }
-  },
-  data() {
-    return {
-      isHovered: false,
-    };
-  },
-};
-</script>
 
 <style scoped>
 .card-img-container {
@@ -88,10 +92,6 @@ export default {
   background-color: rgba(255, 255, 255, 0.1);
   transition: opacity 0.3s ease-out;
   pointer-events: none;
-}
-
-.overlay:hover {
-  opacity: 0.5;
 }
 
 .zoomed {
