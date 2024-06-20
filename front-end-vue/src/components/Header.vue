@@ -17,7 +17,7 @@
         }
       },
       handleMenuClick() {
-        this.isMenuClicked = true;
+        this.isMenuClicked= false;
         this.toggleMenu();
       }
     }
@@ -54,12 +54,12 @@
           <div class="b_menu d-flex flex-column d-md-none text-end" :class="{ 'b_menu_active': isOpen }">
             <div>
               <span @click="toggleMenu" class="text-white d-inline-block p-2">
-                <i class="fa-solid fa-xmark"></i>
+                <i class="fa-solid fa-xmark fs-1"></i>
               </span>
             </div>
-            <div class="searchbar my-auto d-flex flex-column px-3 py-5 justify-content-around">
-              <router-link class="text-white text-decoration-none fs-5" :to="{ name: 'home' }">Home</router-link>
-              <router-link class="text-white text-decoration-none fs-5" to="#">Ristoranti</router-link>
+            <div class="searchbar my-3 d-flex flex-column px-3 justify-content-around justify-content-center align-items-center">
+              <router-link class="text-white text-decoration-none fs-1" :to="{ name: 'home' }">Home</router-link>
+              <router-link class="text-white text-decoration-none fs-1" to="#">Ristoranti</router-link>
             </div>
           </div>
         </ul>
@@ -88,12 +88,15 @@ header {
       top: 0;
       right: -100%; 
       transition: right 0.5s;
-      background-color: rgba($color-1, 0.85);
+      background-color: $color-1;
       color: $color-10 !important;
       overflow: hidden; 
     }
     .b_menu_active {
       right: 0 !important;
+      i{
+        border: 1px solid white;
+      }
     }
     .cart{
       padding: 5px 10px;
