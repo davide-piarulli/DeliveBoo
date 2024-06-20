@@ -51,6 +51,7 @@ export default {};
 
 .jumbotron-content .logo {
   width: 50%;
+  border-radius: 50%;
 }
 
 .jumbotron-content .arrow {
