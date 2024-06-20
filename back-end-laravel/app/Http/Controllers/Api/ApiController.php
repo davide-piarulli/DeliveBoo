@@ -22,11 +22,26 @@ class ApiController extends Controller
     return response()->json($types);
   }
 
-  public function getRestaurantsByTypes(object $types)
+  public function getRestaurantsByTypes(Request $request)
   {
-    // dd($types);
-    $restaurants = Restaurant::where();
-    return response()->json(compact('restaurants', 'types'));
+
+    // presi tutti i filtri li cicliamo per pushare soltanto gli id, utili per la query
+    foreach($request->filters as $filter){
+      $typesIds[] = $filter['id'];
+    };
+
+    // Prendiamo tutti i tipi di ogni ristorante
+    $restaurants = Restaurant::whereHas('types', function ($query) use ($typesIds) {
+        // Filtra tutti i tipi di ristorante in base all'id
+        $query->whereIn('types.id', $typesIds);
+    // Assicura che il numero di tipi corrispondenti sia esattamente uguale al numero di tipi selezionati
+    }, '=', count($typesIds))->withCount(['types' => function ($query) use ($typesIds) {
+        // Conta i tipi corrispondenti per ogni ristorante
+        $query->whereIn('types.id', $typesIds);
+    // Filtra per includere solo i ristoranti che hanno esattamente il numero di tipi selezionati
+    }])->having('types_count', '=', count($typesIds))->get();
+
+    return response()->json($restaurants);
   }
 
   // public function getRestaurantsByName($name)
