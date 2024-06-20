@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="footer-logo">
-            <div class="logo">
+            <div class="logo mb-3">
               <img src="/logo.png" alt="logo" width="50" height="50" class="d-inline-block align-text-top ">
             </div>
           </div>
@@ -19,9 +19,9 @@
 
           <div class="footer-icon">
             <div class="icon">
-              <a href="" target="_blank"><i class="fab fa-facebook-f"></i></a>
-              <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
-              <a href="" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a href="" target="_blank"><i class="fab fa-facebook-f fs-4 pe-3 "></i></a>
+              <a href="" target="_blank"><i class="fab fa-twitter fs-4  p=3"></i></a>
+              <a href="" target="_blank"><i class="fab fa-linkedin fs-4 p-3"></i></a>
             </div>
           </div>
         </div>
@@ -30,12 +30,10 @@
           <div class="row">
             <div class="col-lg-3">
               <div class="quick-line-item">
-                <div class="quick-line-item-head">
-                  <h3>Quick Links</h3>
-                </div>
 
                 <div class="quick-line-menu">
                   <ul>
+                    <h3 class="text-white mb-3">Quick Links</h3>
                     <li><a href="">My Profile</a></li>
                     <li><a href="">About Us</a></li>
                     <li><a href="">Contact Us</a></li>
@@ -46,12 +44,11 @@
 
             <div class="col-lg-3">
               <div class="quick-line-item">
-                <div class="quick-line-item-head">
-                  <h3>Terms & Privacy</h3>
-                </div>
-
+            
                 <div class="quick-line-menu">
+                  
                   <ul>
+                    <h3 class="text-white mb-3">Terms & Privacy</h3>
                     <li><a href="">Privacy & Policy</a></li>
                     <li><a href="">Terms of Service</a></li>
                   </ul>
@@ -62,7 +59,7 @@
             <div class="col-lg-6">
               <div class="quick-line-item">
                 <div class="quick-line-item-head">
-                  <h3>Subscribe to our Newsletter</h3>
+                  <h3 class="text-white mb-3">Subscribe to our Newsletter</h3>
                 </div>
                 <form action="" method="POST">
                   <input type="hidden" name="_token" value="">
@@ -73,7 +70,7 @@
                 </form>
 
                 <div class="quick-line-btn-text">
-                  <h6>We accept Payment methods:</h6>
+                  <h6 class="text-white mt-3">We accept Payment methods:</h6>
                 </div>
 
                 <div class="quick-line-btn-img">
