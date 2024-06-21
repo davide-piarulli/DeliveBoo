@@ -81,6 +81,8 @@
               class="form-control @error('image') is-invalid @enderror" id="image">
             <img class="thumb mt-3" id="thumb" src="{{ asset('img/no-image.jpg') }}" alt="Default Image"
               style="width: 150px; height: auto;">
+            <button class="btn btn-outline-danger ms-3"
+              id="file-remover" onclick="event.preventDefault(); image.value = ''; resetImage()">Rimuovi immagine</button>
             @error('image')
               <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -139,6 +141,8 @@
         event.preventDefault(); // Impedisce l'invio del form
       }
     });
+
+    const image = document.getElementById('image');
 
     function showImage(event) {
       const thumb = document.getElementById('thumb');
