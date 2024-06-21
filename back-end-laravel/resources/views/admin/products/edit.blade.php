@@ -104,16 +104,16 @@
               <div class="text-danger my-1" style="font-size: .8rem">{{ $message }}</div>
             @enderror
           </div>
+
           <div class="mb-3">
             <img class="thumb mt-3" id="thumb"
               src="{{ isset($product->image) ? asset('storage/' . $product->image) : asset('img/no-image.jpg') }}"
               alt="Product Image" style="width: 150px; height: auto;">
             <button class="btn btn-outline-danger {{ old('image', $product->image) ? 'd-inline-block' : 'd-none' }}"
-              id="file-remover" onclick="event.preventDefault(); resetFile()">Rimuovi file</button>
+              id="file-remover" onclick="event.preventDefault(); resetImage(); resetFile();">Rimuovi immagine</button>
           </div>
           <div class="mb-4">
             <button class="btn btn-primary" type="submit">Modifica Prodotto</button>
-            <button class="btn btn-warning" type="reset" onclick="resetImage()">Reset</button>
           </div>
           <p class="fw-bold text-danger">* Campi Obbligatori</p>
         </form>
@@ -166,6 +166,11 @@
         event.preventDefault(); // Impedisce l'invio del form
       }
     });
+
+    isUploaded = document.getElementById('isUploaded');
+    uploadedFile = document.getElementById('uploaded-file');
+    fileRemover = document.getElementById('file-remover');
+    image = document.getElementById('image');
 
     function addFile() {
       isUploaded.value = true;
