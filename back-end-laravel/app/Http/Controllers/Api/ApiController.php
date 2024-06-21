@@ -18,7 +18,7 @@ class ApiController extends Controller
 
   public function getRestaurantTypes()
   {
-    $types = Type::all();
+    $types = Type::orderBy('name', 'asc')->get();
     return response()->json($types);
   }
 
