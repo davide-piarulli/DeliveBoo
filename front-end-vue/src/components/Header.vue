@@ -1,4 +1,5 @@
 <script>
+import Cart from './Cart.vue';
 export default {
   name: "Header",
   data() {
@@ -21,6 +22,12 @@ export default {
       this.toggleMenu();
     },
   },
+
+  components:{
+
+    Cart
+
+  }
 };
 </script>
 
@@ -38,9 +45,9 @@ export default {
           />
         </router-link>
 
-        <ul class="m-0 p-0">
+        <ul class="m-0 p-0 d-flex align-items-center">
           <li
-            class="mx-4 link-info link-offset-2 d-none d-md-inline-block fs-5"
+            class="mx-4 link-info link-offset-2 d-none d-lg-inline-block fs-5"
           >
             <router-link
               class="text-white text-decoration-none"
@@ -49,17 +56,14 @@ export default {
             >
           </li>
           <li
-            class="mx-4 link-info link-offset-2 d-none d-md-inline-block fs-5"
+            class="mx-4 link-info link-offset-2 d-none d-lg-inline-block fs-5"
           >
             <router-link class="text-white text-decoration-none" to="#"
               >Ristoranti</router-link
             >
           </li>
-          <li class="d-none d-md-inline-block fs-4 cart">
-            <i class="fa-solid fa-cart-shopping"></i>
-          </li>
 
-          <li :class="{ 'd-none': isMenuClicked, 'me-4 fs-2 d-md-none': true }">
+          <li :class="{ 'd-none': isMenuClicked, 'me-4 fs-2 d-lg-none': true }">
             <a
               @click="handleMenuClick"
               class="d-flex text-white text-decoration-none cp"
@@ -70,8 +74,12 @@ export default {
             </a>
           </li>
 
+          <li class="d-none d-sm-inline-block fs-4">
+            <Cart />
+          </li>
+
           <div
-            class="b_menu d-flex flex-column d-md-none text-end"
+            class="b_menu d-flex flex-column d-lg-none text-end"
             :class="{ b_menu_active: isOpen }"
           >
             <div>
@@ -131,10 +139,23 @@ header {
         margin: 20px;
       }
     }
+
     .cart {
-      padding: 5px 10px;
-      border-radius: 25px;
-      border: 1px solid whitesmoke;
+      background-color: transparent;
+      border: none;
+      color: $color-10;
+    }
+
+    @media screen and (min-width: 576px) {
+      .offcanvas {
+        width: 75% !important;
+      }
+    }
+
+    @media screen and (min-width: 992px) {
+      .offcanvas {
+        width: 50% !important;
+      }
     }
   }
 }
