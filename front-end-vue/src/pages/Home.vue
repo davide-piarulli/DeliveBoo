@@ -47,7 +47,7 @@ export default {
           },
         })
         .then((result) => {
-          console.log(store.restaurantToSearch);
+          
           if (endpoint == 'types' || endpoint == '') {
             this.types = result.data.map((item) => {
               return {
@@ -60,6 +60,7 @@ export default {
           } else if (endpoint == 'filter') {
             this.restaurants = result.data;
           }
+ 
         })
         .catch((error) => {
           console.log(error.message);
