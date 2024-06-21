@@ -34,7 +34,7 @@ export default {
 </script>
 <template>
   <div class="container mt-5">
-    <div class="card">
+    <div class="card card-size">
       <div class="card-img-container">
         <img
           :src="logo === null ? '../../../public/default-logo.png' : logo"
@@ -46,7 +46,7 @@ export default {
         />
         <div class="overlay" v-if="isHovered"></div>
       </div>
-      <div class="card-body">
+      <div class="card-body card_body_h">
         <h5 class="card-title">{{ name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
           <a
@@ -96,5 +96,31 @@ export default {
 
 .zoomed {
   transform: scale(1.1);
+}
+.card-size{
+  max-height: 450px !important;
+  min-height: 450px !important;
+}
+.card_body_h{
+  max-height: 170px;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track { 
+  box-shadow: inset 0 0 5px #FFFFFF; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #95ADCD; 
+  border-radius: 10px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3D5064; 
 }
 </style>
