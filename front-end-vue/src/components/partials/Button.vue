@@ -35,6 +35,8 @@ export default {
   appearance: none;
   background-color: white;
   border-width: 0;
+  border: 0.3px solid grey;
+  border-radius: 10px;
   box-sizing: border-box;
   color: black;
   cursor: pointer;
