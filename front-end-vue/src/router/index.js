@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "../pages/Home.vue";
 import Error404 from "../pages/Error404.vue";
-import RestaurantDetail from "@/pages/RestaurantDetail.vue";
+import RestaurantDetail from "../pages/RestaurantDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,8 +13,8 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: "/restaurant-detail",
-      name: "RestaurantDetail",
+      path: "/restaurant-detail/:slug",
+      name: "restaurantDetail",
       component: RestaurantDetail,
     },
     // Questa rotta è sempre l'ultima

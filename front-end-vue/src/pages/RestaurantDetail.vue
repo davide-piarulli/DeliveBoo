@@ -1,33 +1,37 @@
 <script>
+import {store} from '../data/store';
+import axios from 'axios';
 export default {
-  name: "RestaurantDetail",
-  props: {
-    restaurant: {
-      type: Object,
-      required: true,
-      default: () => ({}),
-    },
-  },
+  name: "restaurantDetail",
   data() {
-    return {};
+    return {
+      restaurant: {}
+    }
   },
+  methods:{
+    getApi(apiUrl, slug){
+      axios
+        .get(apiUrl + 'restaurant-detail/' + slug)
+        .then(res => {
+          this.restaurant = res.data;
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err.message);
+        })
+    }
+  },
+  mounted(){
+    this.getApi(store.apiUrl, this.$route.params.slug);
+  }
 };
 </script>
 
 <template>
   <div>
-    <div class="jumbotron">
-      <img src="/default-logo.png" alt="" />
-    </div>
-
-    <div class="informzioni" v-if="restaurant.name">
-      <h3>{{ restaurant.name }}</h3>
-      <span>via</span>
-      <span>te</span>
-    </div>
-    <div v-else>
-      <h3>Ristorante non trovato</h3>
-    </div>
+    <!-- <div class="restaurant-image">
+      <img v-for="product in restaurant.products" :key="product.id" :src="'http://127.0.0.1:8000/storage/' + product.image" alt="">
+    </div> -->
   </div>
 </template>
 
