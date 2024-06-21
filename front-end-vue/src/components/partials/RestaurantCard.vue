@@ -2,28 +2,7 @@
 export default {
   name: "RestaurantCard",
   props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    slug: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
-    logo: {
-      type: String,
-      required: true,
-      default: "default-logo.png",
-      validator: (value) => /\.(jpg|jpeg|png|gif|svg)$/.test(value),
-    },
+    restaurant: Object
   },
   data() {
     return {
@@ -32,45 +11,45 @@ export default {
   },
 };
 </script>
+
+
+
 <template>
   <div class="container mt-5">
-    <div class="card card-size">
-      <div class="card-img-container">
-        <img
-          :src="logo === null ? '../../../public/default-logo.png' : logo"
-          :alt="name + ' logo'"
-          class="card-img-top my-img"
-          :class="{ zoomed: isHovered }"
-          @mouseover="isHovered = true"
-          @mouseleave="isHovered = false"
-        />
-        <div class="overlay" v-if="isHovered"></div>
+    <router-link class="text-decoration-none">
+      <div class="card card-size rounded-4 overflow-hidden">
+        <div class="card-img-container">
+          <img
+            :src="restaurant.logo === null ? '/default-logo.png' : restaurant.logo"
+            :alt="restaurant.name + ' logo'"
+            class="card-img-top my-img"
+            :class="{ zoomed: isHovered }"
+            @mouseover="isHovered = true"
+            @mouseleave="isHovered = false"
+          />
+          <div class="overlay" v-if="isHovered"></div>
+        </div>
+        <div class="card-body card_body_h p-0">
+          <h4 class="card-title text-center p-2">{{ restaurant.name }}</h4>
+          <div class="container-fluid">
+            <div class="row row-cols-2">
+              <div class="col" v-for="(type) in restaurant.types" :key="type.id">
+                <h5 class="d-inline-block m-2"><span class="badge-type badge rounded-2">{{type.name}}</span></h5>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body card_body_h">
-        <h5 class="card-title">{{ name }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
-          <a
-            :href="`https://reservq.minionionbd.com/menu/${slug}`"
-            class="text-decoration-none text-dark"
-            >{{ name }}</a
-          >
-        </h6>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item d-flex align-items-center">
-            <i class="bi bi-check-circle-fill text-warning me-2"></i>
-            <span>{{ address }}</span>
-          </li>
-          <li class="list-group-item d-flex align-items-center">
-            <i class="bi bi-check-circle-fill text-warning me-2"></i>
-            <span>{{ phone }}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
-<style scoped>
+
+
+<style lang="scss" scoped>
+
+@use "../../assets/scss/main.scss" as *;
+
 .card-img-container {
   position: relative;
   overflow: hidden;
@@ -78,7 +57,7 @@ export default {
 
 .my-img {
   transition: transform 0.3s ease-out;
-  height: 100%;
+  height: 250px;
   width: 100%;
   object-fit: cover;
 }
@@ -97,13 +76,22 @@ export default {
 .zoomed {
   transform: scale(1.1);
 }
+
 .card-size{
-  max-height: 450px !important;
-  min-height: 450px !important;
+  height: 450px;
+  box-shadow: 0 0 10px 2px $color-9;
 }
+
 .card_body_h{
-  max-height: 170px;
+  height: 200px;
+  background-color: $color-4;
   overflow-y: auto;
+}
+
+.card-title{
+  font-weight: bold;
+  background-color: $color-6;
+  color: $color-2;
 }
 
 ::-webkit-scrollbar {
@@ -123,4 +111,10 @@ export default {
 ::-webkit-scrollbar-thumb:hover {
   background: #3D5064; 
 }
+
+.badge-type{
+  color:  $color-1 !important;
+  background-color: $color-9;
+}
+
 </style>

@@ -3,13 +3,11 @@ import { store } from "./data/store";
 import axios from "axios";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
-import BottomMenu from "./components/BottomMenu.vue";
 
 export default {
   components: {
     Header,
     Footer,
-    BottomMenu,
   },
   data() {
     return {
@@ -54,9 +52,7 @@ export default {
     </main>
 
     <Footer />
-    
-    <BottomMenu />
-    
+        
   </div>
 </template>
 

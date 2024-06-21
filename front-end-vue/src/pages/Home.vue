@@ -4,6 +4,7 @@ import axios from "axios";
 import Jumbotron from "../components/Jumbotron.vue";
 import Button from "../components/partials/Button.vue";
 import RestaurantCard from "../components/partials/RestaurantCard.vue";
+import BottomMenu from "../components/partials/BottomMenu.vue";
 
 export default {
   name: "Home",
@@ -22,6 +23,7 @@ export default {
     Button,
     RestaurantCard,
     Jumbotron,
+    BottomMenu
   },
 
   methods: {
@@ -110,15 +112,13 @@ export default {
           class="col mb-4 d-flex justify-content-center"
         >
           <RestaurantCard
-            :name="restaurant.name"
-            :slug="restaurant.slug"
-            :address="restaurant.address"
-            :phone="restaurant.phone"
-            :logo="restaurant.logo"
+            :restaurant="restaurant"
           />
         </div>
       </div>
     </section>
+    <BottomMenu />
+
   </div>
 </template>
 
