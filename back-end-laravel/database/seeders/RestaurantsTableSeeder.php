@@ -26,7 +26,10 @@ class RestaurantsTableSeeder extends Seeder
       $new_restaurant->name = $restaurant['name'];
       $new_restaurant->user_id = $index + 1;
       $new_restaurant->slug = Helper::generateSlug($new_restaurant->name, Restaurant::class);
-      $new_restaurant->address = $restaurant['address'];
+      
+      $address_parts = explode(',', $restaurant['address']);
+      $filtered_address = implode(',', array_slice($address_parts, 0, count($address_parts) - 2));
+      $new_restaurant->address = $filtered_address;
 
 
       $new_restaurant->phone = $faker->numerify('34########');;
