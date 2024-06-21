@@ -37,7 +37,7 @@ export default {
     <div class="card">
       <div class="card-img-container">
         <img
-          :src="logo"
+          :src="logo === null ? '../../../public/default-logo.png' : logo"
           :alt="name + ' logo'"
           class="card-img-top my-img"
           :class="{ zoomed: isHovered }"
