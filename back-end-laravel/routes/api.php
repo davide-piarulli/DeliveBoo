@@ -20,4 +20,4 @@ Route::get('/restaurants', [ApiController::class, 'index']);
 Route::get('/types', [ApiController::class, 'getRestaurantTypes']);
 Route::post('/send-order', [OrderController::class, 'store']);
 Route::get('/filter', [ApiController::class, 'getRestaurantsByTypes']);
-Route::get('/detail/{slug}', [ApiController::class, 'getReustarantDetail']);
+Route::get('/restaurant-detail/{slug}', [ApiController::class, 'getReustarantDetail']);
