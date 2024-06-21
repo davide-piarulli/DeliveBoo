@@ -16,7 +16,7 @@ export default {
 
 <template>
   <div class="container mt-5">
-    <router-link class="text-decoration-none">
+    <router-link to="/RestaurantDetail" class="text-decoration-none">
       <div class="card card-size rounded-4 overflow-hidden">
         <div class="card-img-container">
           <img
