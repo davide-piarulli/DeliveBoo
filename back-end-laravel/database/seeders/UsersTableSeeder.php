@@ -15,7 +15,28 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-      $users = ['Alessandro', 'Davide', 'Matteo', 'Sara', 'Oltion'];
+      $users = [
+        'Alessandro',
+        'Davide',
+        'Matteo',
+        'Sara',
+        'Oltion',
+        'Giulia',
+        'Francesca',
+        'Marco',
+        'Luca',
+        'Giovanni',
+        'Martina',
+        'Giorgia',
+        'Simone',
+        'Federico',
+        'Chiara',
+        'Valentina',
+        'Riccardo',
+        'Elena',
+        'Nicola',
+        'Roberto'
+    ];
 
       foreach($users as $user){
 

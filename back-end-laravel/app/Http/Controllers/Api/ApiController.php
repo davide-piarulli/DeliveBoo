@@ -22,7 +22,7 @@ class ApiController extends Controller
     return response()->json($types);
   }
 
-  public function getFilteredRestaurants(Request $request)
+  public function getRestaurantsByTypes(Request $request)
   {
 
     // presi tutti i filtri li cicliamo per pushare soltanto gli id, utili per la query
@@ -35,6 +35,7 @@ class ApiController extends Controller
     // }
 
     // Prendiamo tutti i tipi di ogni ristorante
+    // where('name', 'like','%' . $request->searched . '%')->
     $restaurants = Restaurant::where('name', 'like','%' . $request->searched . '%')->whereHas('types', function ($query) use ($typesIds) {
         // Filtra tutti i tipi di ristorante in base all'id
         $query->whereIn('types.id', $typesIds);
