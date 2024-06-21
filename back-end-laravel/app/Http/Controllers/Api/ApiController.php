@@ -48,4 +48,15 @@ class ApiController extends Controller
     return response()->json($restaurants);
   }
 
+  public function getReustarantDetail($identifier)
+{
+    // Cerca un singolo ristorante per id o slug
+    $restaurant = Restaurant::with('products.productType', 'types')
+        ->where('id', $identifier)
+        ->orWhere('slug', $identifier)
+        ->firstOrFail();
+
+    return response()->json($restaurant);
+}
+
 }
