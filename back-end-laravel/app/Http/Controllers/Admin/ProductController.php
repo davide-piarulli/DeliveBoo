@@ -39,7 +39,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $productTypes = ProductType::all();
+        $productTypes = ProductType::orderBy('name', 'asc')->get();
         return view('admin.products.create', compact('productTypes'));
     }
 
@@ -76,7 +76,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $productTypes = ProductType::all();
+        $productTypes = ProductType::orderBy('name', 'asc')->get();
         return view('admin.products.edit', compact('product', 'productTypes'));
     }
 
