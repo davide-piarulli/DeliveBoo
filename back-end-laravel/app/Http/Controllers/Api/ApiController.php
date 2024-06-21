@@ -12,7 +12,7 @@ class ApiController extends Controller
 {
   public function index()
   {
-    $restaurants = Restaurant::with('products.productType', 'types')->get();
+    $restaurants = Restaurant::with('products.productType', 'types')->orderBy('name', 'asc')->get();
     return response()->json($restaurants);
   }
 
@@ -44,7 +44,7 @@ class ApiController extends Controller
         // Conta i tipi corrispondenti per ogni ristorante
         $query->whereIn('types.id', $typesIds);
     // Filtra per includere solo i ristoranti che hanno esattamente il numero di tipi selezionati
-    }])->having('types_count', '=', count($typesIds))->with('products.productType', 'types')->get();
+    }])->having('types_count', '=', count($typesIds))->with('products.productType', 'types')->orderBy('name', 'asc')->get();
 
     return response()->json($restaurants);
   }
