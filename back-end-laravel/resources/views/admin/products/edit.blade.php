@@ -70,7 +70,7 @@
                     <div class="btn-group btn-group-sm w-100" role="group">
                       <input name="product_type_id" id="product_type_{{ $productType->id }}" class="btn-check"
                         autocomplete="off" type="radio" value="{{ $productType->id }}"
-                        @if (old('product_type_id') == $productType->id) checked @endif>
+                        {{ old('product_type_id', $product->productType->id) == $productType->id ? 'checked' : '' }}>
                       <label class="btn w-100"
                         for="product_type_{{ $productType->id }}">{{ $productType->name }}</label>
                     </div>
