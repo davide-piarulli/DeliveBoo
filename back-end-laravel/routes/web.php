@@ -1,13 +1,9 @@
 <?php
 
-use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\DashBoardController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ProductTypeController;
 use App\Http\Controllers\Admin\RestaurantController;
-use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\DashBoardController;
 
 
 
@@ -24,12 +20,13 @@ Route::middleware(['auth', 'verified'])
   ->group(function () {
 
     // Dashboard e profilo
-    Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+    // Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');         // commentata per mostrare direttamente i prodotti
+    Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');   // rimuovere e decommentare la prima rotta per mostrare la dashboard come homepage
+    Route::get('/', [ProductController::class, 'index']);
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
     // Rotte CRUD prodotti
     Route::resource('products', ProductController::class);
-
     Route::resource('restaurants', RestaurantController::class);
 
     // Rotte CRUD custom
