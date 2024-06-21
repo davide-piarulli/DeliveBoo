@@ -11,7 +11,7 @@
             <form onsubmit="submitForm(event)" id="form" method="POST" action="{{ route('register') }}">
               @csrf
 
-              <div class="mb-4 row">
+              <div class="my-4 row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}<span
                     class="mandatory text-danger fw-bold"> *</span></label>
 
@@ -97,7 +97,7 @@
 
               {{-- Tipologia di ristorante --}}
 
-              <div class="mb-5 row">
+              <div class="mb-2 row">
                 <label for="r_type" class="col-md-4 col-form-label text-md-right">{{ __('Tipo di Attività') }}<span
                     class="mandatory text-danger fw-bold"> *</span></label>
 
@@ -112,13 +112,16 @@
                         @foreach ($types as $type)
                           <div class="col">
                             <input name="types[]" value="{{ $type->id }}" type="checkbox" class="btn-check w-100"
-                              id="btncheck{{ $type->id }}" autocomplete="off">
+                              id="btncheck{{ $type->id }}" autocomplete="off"
+                            >
                             <label class="btn btn-outline-dark w-100 mb-2"
                               for="btncheck{{ $type->id }}">{{ $type->name }}</label>
                           </div>
                         @endforeach
 
                       </div>
+
+                      <span id="rTypeError" class="error" class="invalid-feedback" role="alert"></span><br>
 
                     </div>
 
@@ -215,6 +218,7 @@
       document.getElementById('rAddressError').textContent = '';
       document.getElementById('rPhoneError').textContent = '';
       document.getElementById('rVatNumberError').textContent = '';
+      document.getElementById('rTypeError').textContent = '';
 
       const form = document.getElementById('form');
       const name = document.getElementById('name').value.trim();
@@ -224,8 +228,27 @@
       const r_vat_number = document.getElementById('r_vat_number').value.trim();
       const password = document.getElementById('password').value.trim();
       const passwordConfirm = document.getElementById('password-confirm').value.trim();
+      const r_types = document.getElementsByName('types[]');
+
+      // console.log(r_types);
 
       isFormValid = true;
+
+      const checkedTypes = [];
+
+      r_types.forEach(type => {
+        if(type.checked){
+          checkedTypes.push(type);
+        }
+      });
+
+      console.log(checkedTypes);
+
+      if (checkedTypes.length === 0) {
+        document.getElementById('rTypeError').textContent = 'Selezionare almeno un tipo di attività';
+        isFormValid = false;
+      }
+
 
       if (password !== passwordConfirm) {
         document.getElementById('confirmPasswordError').textContent = 'Le password non corrispondono';
