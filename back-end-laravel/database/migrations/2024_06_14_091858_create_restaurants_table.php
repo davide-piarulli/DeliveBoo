@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('slug', 60)->unique();
             $table->string('address');
-            $table->char('phone', 20);
+            $table->char('phone', 10);
             $table->string('logo')->nullable();
-            $table->char('vat_number', 20);
+            $table->char('vat_number', 11);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
         });
