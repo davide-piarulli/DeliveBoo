@@ -12,7 +12,8 @@
               @csrf
 
               <div class="mb-4 row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome *') }}</label>
+                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
                   <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
@@ -27,7 +28,8 @@
               </div>
 
               <div class="mb-5 row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail *') }}</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -41,7 +43,8 @@
               </div>
 
               <div class="mb-4 row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
+                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
                   <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
@@ -58,7 +61,8 @@
 
               <div class="mb-4 row">
                 <label for="password-confirm"
-                  class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
+                  class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
                   <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
@@ -74,7 +78,8 @@
               {{-- Nome del ristorante --}}
 
               <div class="mb-4 row">
-                <label for="r_name" class="col-md-4 col-form-label text-md-right">{{ __('Nome Attività *') }}</label>
+                <label for="r_name" class="col-md-4 col-form-label text-md-right">{{ __('Nome Attività') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
 
                 <div class="col-md-6">
@@ -93,8 +98,8 @@
               {{-- Tipologia di ristorante --}}
 
               <div class="mb-5 row">
-                <label for="r_type"
-                  class="col-md-4 col-form-label text-md-right">{{ __('Tipo di Attività *') }}</label>
+                <label for="r_type" class="col-md-4 col-form-label text-md-right">{{ __('Tipo di Attività') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
 
@@ -132,7 +137,8 @@
               {{-- Indirizzo del ristorante --}}
 
               <div class="mb-4 row">
-                <label for="r_address" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo *') }}</label>
+                <label for="r_address" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
                   <input value="{{ old('r_address') }}" id="r_address" type="text"
@@ -150,7 +156,8 @@
               {{-- Telefono del ristornate --}}
 
               <div class="mb-4 row">
-                <label for="r_phone" class="col-md-4 col-form-label text-md-right">{{ __('Telefono *') }}</label>
+                <label for="r_phone" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
                   <input value="{{ old('r_phone') }}" id="r_phone" type="number"
@@ -167,8 +174,8 @@
               {{-- Partita IVA del ristorante --}}
 
               <div class="mb-4 row">
-                <label for="r_vat_number"
-                  class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA *') }}</label>
+                <label for="r_vat_number" class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA') }}<span
+                    class="mandatory text-danger fw-bold"> *</span></label>
 
                 <div class="col-md-6">
                   <input value="{{ old('r_vat_number') }}" id="r_vat_number" type="number"
@@ -188,6 +195,7 @@
                   <button type="submit" class="btn btn-primary">
                     {{ __('Registrati') }}
                   </button>
+                  <p class="mandatory text-danger fw-bold mt-2"> * Campi obbligatori</p>
                 </div>
               </div>
             </form>
