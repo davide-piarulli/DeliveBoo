@@ -27,8 +27,10 @@
           enctype="multipart/form-data">
           @csrf
           @method('PUT')
+
+          {{-- Nome Prodotto --}}
           <div class="mb-3">
-            <label for="name" class="form-label">Nome *</label>
+            <label for="name" class="form-label">Nome<span class="fw-bold text-danger"> *</span></label>
             <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name"
               value="{{ old('name', $product->name) }}">
             <small id="nameError" class="text-danger"></small>
@@ -36,6 +38,8 @@
               <small class="text-danger">{{ $message }}</small>
             @enderror
           </div>
+
+          {{-- Descrizione Prodotto --}}
           <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
             <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description"
@@ -44,8 +48,10 @@
               <small class="text-danger">{{ $message }}</small>
             @enderror
           </div>
+
+          {{-- Prezzo Prodotto --}}
           <div class="mb-3">
-            <label for="price" class="form-label">Prezzo *</label>
+            <label for="price" class="form-label">Prezzo<span class="fw-bold text-danger"> *</span></label>
             <input name="price" type="number" step="0.01" class="form-control @error('price') is-invalid @enderror"
               id="price" value="{{ old('price', $product->price) }}">
             <small id="priceError" class="text-danger"></small>
@@ -53,23 +59,34 @@
               <small class="text-danger">{{ $message }}</small>
             @enderror
           </div>
+
+          {{-- Tipo di Prodotto --}}
           <div class="mb-3">
-            <label class="form-label">Tipi di Prodotto: *</label>
-            <div class="btn-group btn-group-sm" role="group">
-              @foreach ($productTypes as $productType)
-                <input name="product_type_id" id="product_type_{{ $productType->id }}" class="btn-check"
-                  autocomplete="off" type="radio" value="{{ $productType->id }}"
-                  {{ old('product_type_id', $product->productType->id) == $productType->id ? 'checked' : '' }}>
-                <label class="btn btn-outline-primary"
-                  for="product_type_{{ $productType->id }}">{{ $productType->name }}</label>
-              @endforeach
+            <label class="form-label">Tipi di Prodotto:<span class="fw-bold text-danger"> *</span></label>
+            <div class="container-fluid">
+              <div class="row row-cols-2 row-cols-lg-4">
+                @foreach ($productTypes as $productType)
+                  <div class="col mb-3">
+                    <div class="btn-group btn-group-sm w-100" role="group">
+                      <input name="product_type_id" id="product_type_{{ $productType->id }}" class="btn-check"
+                        autocomplete="off" type="radio" value="{{ $productType->id }}"
+                        @if (old('product_type_id') == $productType->id) checked @endif>
+                      <label class="btn w-100"
+                        for="product_type_{{ $productType->id }}">{{ $productType->name }}</label>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
             </div>
+
             <small id="productTypeValidation" class="text-danger"></small>
             @error('product_type_id')
               <br>
               <small class="text-danger">{{ $message }}</small>
             @enderror
           </div>
+
+          {{-- Immagine del Prodotto --}}
           <div class="mb-3">
             <label for="image" class="form-label">Immagine</label>
             <input type="hidden" name="isUploaded" value="true" id="isUploaded">
@@ -98,6 +115,7 @@
             <button class="btn btn-primary" type="submit">Modifica Prodotto</button>
             <button class="btn btn-warning" type="reset" onclick="resetImage()">Reset</button>
           </div>
+          <p class="fw-bold text-danger">* Campi Obbligatori</p>
         </form>
       </div>
     </div>
