@@ -50,7 +50,7 @@ class ApiController extends Controller
 
   public function getReustarantDetail($slug)
 {
-    $restaurant = Restaurant::with('products.productType', 'types')->where('slug', $slug)->first();
+    $restaurant = Restaurant::where('slug', $slug)->with('products.productType', 'types')->first();
 
     return response()->json($restaurant);
 }
