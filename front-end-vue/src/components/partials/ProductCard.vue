@@ -26,7 +26,8 @@ export default {
       <article class="recipe">
         <div class="pizza-box">
           <img
-            src="https://brotokoll.com/wp-content/uploads/2019/12/xPSX_20190928_134709.jpg.pagespeed.ic.qsjw5ilFw5.jpg"
+
+            :src="product.image == null ? '/default-logo.png' : 'http://127.0.0.1:8000/storage/' + product.image"
             width="1500"
             height="1368"
             alt=""
@@ -34,36 +35,23 @@ export default {
         </div>
         <div class="recipe-content">
           <p class="recipe-tags">
-            <span class="recipe-tag">Gluten Free</span>
-            <span class="recipe-tag">Main dish</span>
+
+            <span class="recipe-tag">{{ product.product_type.name }}</span>
+
           </p>
 
           <h1 class="recipe-title"><a href="#">{{product.name}}</a></h1>
 
           <p class="recipe-metadata">
-            <span class="recipe-rating">★★★★<span>☆</span></span>
-            <span class="recipe-votes">(12 votes)</span>
           </p>
 
           <p class="recipe-desc">
-            It really is possible to make excellent gluten free pizza at home in
-            your own oven with our recipes and techniques.
+            {{product.description}}
           </p>
 
           <button class="recipe-save" type="button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="#000000"
-            >
-              <path
-                d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z"
-                fill="currentColor"
-              />
-            </svg>
-            Save
+            <i class="fa-solid fa-plus mx-2 text-danger"></i>
+            Aggiungi al Carrello
           </button>
         </div>
       </article>
@@ -115,7 +103,7 @@ export default {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.02em;
-    color: var(--primary);
+    color: #E05D26;
   }
 
   &-title {
@@ -154,7 +142,7 @@ export default {
     align-items: center;
     padding: 6px 14px 6px 12px;
     border-radius: 4px;
-    border: 2px solid currentColor;
+    border: 2px solid #E05D26;
     color: var(--primary);
     background: none;
     cursor: pointer;
