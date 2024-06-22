@@ -27,7 +27,7 @@ export default {
         <div class="pizza-box">
           <img
 
-            :src="product.image == null ? '/default-logo.png' : 'http://127.0.0.1:8000/storage/' + product.image"
+            :src="product.image == null ? '/no-food.jpg' : 'http://127.0.0.1:8000/storage/' + product.image"
             width="1500"
             height="1368"
             alt=""
