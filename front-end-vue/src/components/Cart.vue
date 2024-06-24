@@ -1,7 +1,61 @@
 
 
 <script>
-export default {};
+import { store } from "@/data/store";
+export default {
+  data() {
+    return {
+      store,
+    };
+  },
+
+  methods: {
+    showCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      store.cart = cart;
+    },
+
+    decreaseQuantity(productId) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let existingProduct = cart.find((item) => item.id === productId);
+
+      if (existingProduct && existingProduct.quantity > 1) {
+        existingProduct.quantity -= 1;
+      } else {
+        // If the quantity is 1 or less, remove the product from the cart
+        cart = cart.filter((item) => item.id !== productId);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      this.showCart();
+      store.cart = JSON.parse(localStorage.getItem("cart"));
+    },
+
+    // Function to increase the quantity of a product in the cart
+    increaseQuantity(productId) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let existingProduct = cart.find((item) => item.id === productId);
+
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      this.showCart();
+      store.cart = JSON.parse(localStorage.getItem("cart"));
+    },
+
+    deleteItem(item){
+
+
+    }
+  },
+
+  mounted() {
+    console.log(JSON.parse(localStorage.getItem("cart")));
+   // localStorage.removeItem('cart')
+  },
+};
 </script>
 
 <template>
@@ -33,115 +87,84 @@ export default {};
       </div>
       <div class="offcanvas-body">
         <!-- inizio vero carelo -->
-
-        <div class="card">
+        <div class="container-fluid">
           <div class="row">
-            <div class="col-md-8 cart">
-              <div class="title">
-                <div class="row">
-                  <div class="col">
-                    <h4><b>Shopping Cart</b></h4>
+            <div class="col-12 col-xl-8">
+              <div class="square container-fluid p-4">
+                <div v-for="item in store.cart" :key="item.id" class="row d-flex justify-content-center position-relative">
+                  <div class="col-4 mb-4 mb-lg-0">
+                    <!-- Image -->
+                    <div
+                      class="bg-image w-75 text-center item-image hover-overlay hover-zoom ripple rounded"
+                      data-mdb-ripple-color="light"
+                    >
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
+                        class="w-100 mx-auto"
+                        alt="Blue Jeans Jacket"
+                      />
+                      <a href="#!">
+                        <div
+                          class="mask"
+                          style="background-color: rgba(251, 251, 251, 0.2)"
+                        ></div>
+                      </a>
+                    </div>
+                    <!-- Image -->
                   </div>
-                  <div class="col align-self-center text-right text-muted">
-                    3 items
-                  </div>
-                </div>
-              </div>
-              <div class="row border-top border-bottom">
-                <div class="row main align-items-center">
-                  <div class="col-2">
-                    <img
-                      class="img-fluid"
-                      src="https://i.imgur.com/1GrakTl.jpg"
-                    />
-                  </div>
-                  <div class="col">
-                    <div class="row text-muted">Shirt</div>
-                    <div class="row">Cotton T-shirt</div>
-                  </div>
-                  <div class="col">
-                    <a href="#">-</a><a href="#" class="border">1</a
-                    ><a href="#">+</a>
-                  </div>
-                  <div class="col">
-                    &euro; 44.00 <span class="close">&#10005;</span>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="row main align-items-center">
-                  <div class="col-2">
-                    <img
-                      class="img-fluid"
-                      src="https://i.imgur.com/ba3tvGm.jpg"
-                    />
-                  </div>
-                  <div class="col">
-                    <div class="row text-muted">Shirt</div>
-                    <div class="row">Cotton T-shirt</div>
-                  </div>
-                  <div class="col">
-                    <a href="#">-</a><a href="#" class="border">1</a
-                    ><a href="#">+</a>
-                  </div>
-                  <div class="col">
-                    &euro; 44.00 <span class="close">&#10005;</span>
-                  </div>
-                </div>
-              </div>
-              <div class="row border-top border-bottom">
-                <div class="row main align-items-center">
-                  <div class="col-2">
-                    <img
-                      class="img-fluid"
-                      src="https://i.imgur.com/pHQ3xT3.jpg"
-                    />
-                  </div>
-                  <div class="col">
-                    <div class="row text-muted">Shirt</div>
-                    <div class="row">Cotton T-shirt</div>
-                  </div>
-                  <div class="col">
-                    <a href="#">-</a><a href="#" class="border">1</a
-                    ><a href="#">+</a>
-                  </div>
-                  <div class="col">
-                    &euro; 44.00 <span class="close">&#10005;</span>
+
+                  <div class="col-8 mb-4 mb-lg-0">
+                    <!-- Data -->
+                    <p><strong>{{item.name}}</strong></p>
+                    <p class="text-start">
+                      <strong>${{item.price}}</strong>
+                    </p>
+                    <button
+                      type="button"
+                      data-mdb-button-init
+                      data-mdb-ripple-init
+                      class="btn btn-danger me-1 mb-2 position-absolute top-0 end-0"
+                      data-mdb-tooltip-init
+                      title="Remove item"
+                      @click="deleteItem(item.id)"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+
+                    <div class="d-flex mb-4" style="max-width: 300px">
+                      <button
+                        data-mdb-button-init
+                        data-mdb-ripple-init
+                        class="btn btn-primary px-3 me-2"
+                       @click="decreaseQuantity(item.id)"
+                      >
+                        <i class="fas fa-minus"></i>
+                      </button>
+
+                      <span>{{item.quantity}}</span>
+                      
+                      <button
+                        data-mdb-button-init
+                        data-mdb-ripple-init
+                        class="btn btn-primary px-3 ms-2"
+                        @click="increaseQuantity(item.id)"
+                      >
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                    
+                    <!-- Data -->
                   </div>
                 </div>
-              </div>
-              <div class="back-to-shop">
-                <a href="#">&leftarrow;</a
-                ><span class="text-muted">Back to shop</span>
               </div>
             </div>
-            <div class="col-md-4 summary">
-              <div>
-                <h5><b>Summary</b></h5>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="col" style="padding-left: 0">ITEMS 3</div>
-                <div class="col text-right">&euro; 132.00</div>
-              </div>
-              <form>
-                <p>SHIPPING</p>
-                <select>
-                  <option class="text-muted">
-                    Standard-Delivery- &euro;5.00
-                  </option>
-                </select>
-                <p>GIVE CODE</p>
-                <input id="code" placeholder="Enter your code" />
-              </form>
-              <div
-                class="row"
-                style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0"
-              >
-                <div class="col">TOTAL PRICE</div>
-                <div class="col text-right">&euro; 137.00</div>
-              </div>
-              <button class="btn">CHECKOUT</button>
+
+            <div class="col-12 col-xl-4">
+              <div class="square"></div>
+            </div>
+
+            <div class="col-12">
+              <div class="square"></div>
             </div>
           </div>
         </div>
@@ -153,175 +176,28 @@ export default {};
 </template>
 
 <style lang="scss" scoped>
+@use "../assets/scss/main.scss" as *;
 
-@use '../assets/scss/main.scss' as *;
-
-body{
-    background: #ddd;
-    min-height: 100vh;
-    vertical-align: middle;
-    display: flex;
-    font-family: sans-serif;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-.title{
-    margin-bottom: 5vh;
-}
-.card{
-    margin: auto;
-    max-width: 950px;
-    width: 90%;
-    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 1rem;
-    border: transparent;
-}
-@media(max-width:767px){
-    .card{
-        margin: 3vh auto;
-    }
-}
-.cart{
-    background-color: #fff;
-    padding: 4vh 5vh;
-    border-bottom-left-radius: 1rem;
-    border-top-left-radius: 1rem;
-}
-@media(max-width:767px){
-    .cart{
-        padding: 4vh;
-        border-bottom-left-radius: unset;
-        border-top-right-radius: 1rem;
-    }
-}
-.summary{
-    background-color: #ddd;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    padding: 4vh;
-    color: rgb(65, 65, 65);
-}
-@media(max-width:767px){
-    .summary{
-    border-top-right-radius: unset;
-    border-bottom-left-radius: 1rem;
-    }
-}
-.summary .col-2{
-    padding: 0;
-}
-.summary .col-10
-{
-    padding: 0;
-}.row{
-    margin: 0;
-}
-.title b{
-    font-size: 1.5rem;
-}
-.main{
-    margin: 0;
-    padding: 2vh 0;
-    width: 100%;
-}
-.col-2, .col{
-    padding: 0 1vh;
-}
-a{
-    padding: 0 1vh;
-}
-.close{
-    margin-left: auto;
-    font-size: 0.7rem;
-}
-img{
-    width: 3.5rem;
-}
-.back-to-shop{
-    margin-top: 4.5rem;
-}
-h5{
-    margin-top: 4vh;
-}
-hr{
-    margin-top: 1.25rem;
-}
-form{
-    padding: 2vh 0;
-}
-select{
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1.5vh 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
-}
-input{
-    border: 1px solid rgba(0, 0, 0, 0.137);
-    padding: 1vh;
-    margin-bottom: 4vh;
-    outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
-}
-input:focus::-webkit-input-placeholder
-{
-      color:transparent;
-}
-.btn{
-    background-color: #000;
-    border-color: #000;
-    color: white;
-    width: 100%;
-    font-size: 0.7rem;
-    margin-top: 4vh;
-    padding: 1vh;
-    border-radius: 0;
-}
-.btn:focus{
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none; 
-}
-.btn:hover{
-    color: white;
-}
-a{
-    color: black; 
-}
-a:hover{
-    color: black;
-    text-decoration: none;
-}
- #code{
-    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
-    background-repeat: no-repeat;
-    background-position-x: 95%;
-    background-position-y: center;
+.square {
+  border: 1px solid black;
 }
 
 .cart {
-      background-color: transparent;
-      border: none;
-      color: $color-10;
-    }
+  background-color: transparent;
+  border: none;
+  color: $color-10;
+}
 
-    @media screen and (min-width: 576px) {
-      .offcanvas {
-        width: 75% !important;
-      }
-    }
+@media screen and (min-width: 992px) {
+  .item-image{
+  
+    width: 100%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .offcanvas {
+    width: 1200px !important;
 
-    @media screen and (min-width: 992px) {
-      .offcanvas {
-        width: 50% !important;
-      }
-    }
-
-
+  }
+}
 </style>
