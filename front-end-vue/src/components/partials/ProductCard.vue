@@ -92,7 +92,7 @@ export default {
           </p>
 
           <button @click="addToCart(product)" class="recipe-save" type="button">
-            <i class="fa-solid fa-plus mx-2 text-danger"></i>
+            <i class="fa-solid fa-plus mx-2"></i>
             Aggiungi al Carrello
           </button>
         </div>
@@ -102,7 +102,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
+@use "../../assets/scss/main.scss" as *;
 .recipe,
 .pizza-box {
   display: flex;
@@ -146,7 +146,7 @@ export default {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.02em;
-    color: #e05d26;
+    color: $color-6;
   }
 
   &-title {
@@ -185,12 +185,19 @@ export default {
     align-items: center;
     padding: 6px 14px 6px 12px;
     border-radius: 4px;
-    border: 2px solid #e05d26;
+    border: 2px solid $color-2;
     color: var(--primary);
     background: none;
     cursor: pointer;
     font-weight: bold;
 
+    &:hover {
+      background-color: $color-2;
+      color: white;
+    }
+    i {
+      color: $color-6;
+    }
     svg {
       margin-right: 6px;
     }
