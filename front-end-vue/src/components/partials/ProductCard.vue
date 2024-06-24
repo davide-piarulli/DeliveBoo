@@ -1,33 +1,71 @@
 
 
 <script>
+import { store } from '@/data/store';
 export default {
-  data(){
-    
-    return{
-
-    }
-
+  data() {
+    return {};
   },
 
-  props:{
+  props: {
+    product: Object,
+  },
 
-    product:Object,
+  methods: {
+    addToCart(product) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+      console.log(cart);
+
+      if (
+        cart.length === 0 ||
+        product.restaurant_id === cart[0]?.restaurant_id
+      ) {
+        let existingProduct = cart.find((item) => item.id === product.id);
+
+        if (existingProduct) {
+          // Se il prodotto è già nel carrello, incrementa la quantità
+          existingProduct.quantity += 1;
+        } else {
+          // Se il prodotto non è nel carrello, aggiungilo
+          product.quantity = 1;
+          cart.push(product);
+        }
+
+        // Salva il carrello aggiornato nel localStorage
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        console.log("Prodotto aggiunto al carrello:", product);
+      }else{
+        alert('Non puoi aggiungere un prodotto da un altro ristorante')
+      }
+
+      store.cart = JSON.parse(localStorage.getItem("cart"));
+    },
+
+    showCart(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      store.cart = cart
+    }
+  },
+
+  mounted(){
+    this.showCart();
   }
-  
 };
 </script>
 
 <template>
   <div>
-
     <div class="small">
       <article class="recipe">
         <div class="pizza-box">
           <img
-
-            :src="product.image == null ? '/no-food.jpg' : 'http://127.0.0.1:8000/storage/' + product.image"
+            :src="
+              product.image == null
+                ? '/no-food.jpg'
+                : 'http://127.0.0.1:8000/storage/' + product.image
+            "
             width="1500"
             height="1368"
             alt=""
@@ -35,21 +73,20 @@ export default {
         </div>
         <div class="recipe-content">
           <p class="recipe-tags">
-
             <span class="recipe-tag">{{ product.product_type.name }}</span>
-
           </p>
 
-          <h1 class="recipe-title"><a href="#">{{product.name}}</a></h1>
+          <h1 class="recipe-title">
+            <a href="#">{{ product.name }}</a>
+          </h1>
 
-          <p class="recipe-metadata">
-          </p>
+          <p class="recipe-metadata"></p>
 
           <p class="recipe-desc">
-            {{product.description}}
+            {{ product.description }}
           </p>
 
-          <button class="recipe-save" type="button">
+          <button @click="addToCart(product)" class="recipe-save" type="button">
             <i class="fa-solid fa-plus mx-2 text-danger"></i>
             Aggiungi al Carrello
           </button>
@@ -103,7 +140,7 @@ export default {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.02em;
-    color: #E05D26;
+    color: #e05d26;
   }
 
   &-title {
@@ -142,7 +179,7 @@ export default {
     align-items: center;
     padding: 6px 14px 6px 12px;
     border-radius: 4px;
-    border: 2px solid #E05D26;
+    border: 2px solid #e05d26;
     color: var(--primary);
     background: none;
     cursor: pointer;
