@@ -40,9 +40,9 @@ export default {
     </div> -->
     <!-- è solo una prova -->
     <div class="container">
-      <div class=" d-flex row row-cols-3">
+      <div class=" d-flex row  ">
     
-         <ProductCard v-for="product in restaurant.products" :key ="product.id" :product = product />
+         <ProductCard class="col-lg-4 col-md-6 col-xs-12" v-for="product in restaurant.products" :key ="product.id" :product = product />
     
      
     </div>

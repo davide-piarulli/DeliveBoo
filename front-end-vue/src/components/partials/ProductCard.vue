@@ -57,7 +57,7 @@ export default {
 
 <template>
   <div>
-    <div class="small">
+    <div class="my-card small">
       <article class="recipe">
         <div class="pizza-box">
           <img
@@ -97,6 +97,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 .recipe,
 .pizza-box {
   display: flex;
