@@ -74,7 +74,7 @@ export default {
             </a>
           </li>
 
-          <li class="d-none d-sm-inline-block fs-4">
+          <li class=" fs-4">
             <Cart />
           </li>
 
