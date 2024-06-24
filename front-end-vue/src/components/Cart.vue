@@ -39,7 +39,6 @@ export default {
 
       localStorage.setItem("cart", JSON.stringify(cart));
       this.showCart();
-      // store.cart = JSON.parse(localStorage.getItem("cart"));
       this.updatePrice();
     },
 
@@ -54,7 +53,6 @@ export default {
 
       localStorage.setItem("cart", JSON.stringify(cart));
       this.showCart();
-      // store.cart = JSON.parse(localStorage.getItem("cart"));
       this.updatePrice();
     },
 
@@ -69,9 +67,8 @@ export default {
   },
 
   mounted() {
-    console.log(JSON.parse(localStorage.getItem("cart")));
-    // localStorage.removeItem('cart')
     this.updatePrice();
+    // localStorage.removeItem('cart')
   },
 };
 </script>
@@ -108,7 +105,8 @@ export default {
         <div class="container-fluid">
           <div class="row">
             <div class="col-12 col-xl-8">
-              <div class="square container-fluid p-4">
+              <div class="square container-fluid p-4 mb-3">
+                <div v-if="store.cart.length === 0">Non ci sono prodotti nel carrello</div>
                 <div
                   v-for="item in store.cart"
                   :key="item.id"
@@ -188,7 +186,7 @@ export default {
             </div>
 
             <div class="col-12 col-xl-4">
-              <div class="square">
+              <div class="square mb-3">
                 <h5>Riepilogo ordine</h5>
                 <div v-if="store.subtotal != 0">
                   <h6>Prodotti: € {{ store.subtotal }}</h6>
@@ -202,7 +200,7 @@ export default {
             </div>
 
             <div class="col-12">
-              <div class="square"></div>
+              <div class="square mb-3"></div>
             </div>
           </div>
         </div>
@@ -216,6 +214,7 @@ export default {
 @use "../assets/scss/main.scss" as *;
 
 .square {
+  min-height: 300px;
   border: 1px solid black;
 }
 
