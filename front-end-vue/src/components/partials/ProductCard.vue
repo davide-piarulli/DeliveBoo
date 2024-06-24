@@ -1,7 +1,5 @@
-
-
 <script>
-import { store } from '@/data/store';
+import { store } from "@/data/store";
 export default {
   data() {
     return {};
@@ -12,11 +10,19 @@ export default {
   },
 
   methods: {
+    updatePrice() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let subtotalPrice = 0;
+      cart.forEach((product) => {
+        subtotalPrice =
+          subtotalPrice + parseFloat(product.price) * product.quantity;
+      });
+      store.subtotal = subtotalPrice.toFixed(2);
+      let totalPrice = parseFloat(store.subtotal) + parseFloat(store.shipping);
+      store.total = totalPrice.toFixed(2);
+    },
     addToCart(product) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      console.log(cart);
-
       if (
         cart.length === 0 ||
         product.restaurant_id === cart[0]?.restaurant_id
@@ -31,27 +37,26 @@ export default {
           product.quantity = 1;
           cart.push(product);
         }
-
         // Salva il carrello aggiornato nel localStorage
         localStorage.setItem("cart", JSON.stringify(cart));
-
-        console.log("Prodotto aggiunto al carrello:", product);
-      }else{
-        alert('Non puoi aggiungere un prodotto da un altro ristorante')
+        this.showCart();
+        this.updatePrice();
+      } else {
+        alert("Non puoi aggiungere un prodotto da un altro ristorante");
       }
 
       store.cart = JSON.parse(localStorage.getItem("cart"));
     },
 
-    showCart(){
+    showCart() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      store.cart = cart
-    }
+      store.cart = cart;
+    },
   },
 
-  mounted(){
+  mounted() {
     this.showCart();
-  }
+  },
 };
 </script>
 
