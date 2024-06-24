@@ -19,10 +19,6 @@
         enctype="multipart/form-data">
         @csrf
         @method('PUT')
-
-
-
-
         <div class="mb-3">
           <label for="logo" class="form-label">Immagine</label>
           <input type="hidden" name="isUploaded" value="true" id="isUploaded">

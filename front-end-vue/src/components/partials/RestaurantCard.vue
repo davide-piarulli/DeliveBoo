@@ -20,7 +20,7 @@ export default {
       <div class="card card-size rounded-4 overflow-hidden">
         <div class="card-img-container">
           <img
-            :src="restaurant.logo === null ? '/default-logo.png' : restaurant.logo"
+            :src="restaurant.logo === null ? '/default-logo.png' :'http://127.0.0.1:8000/storage/' +  restaurant.logo"
             :alt="restaurant.name + ' logo'"
             class="card-img-top my-img"
             :class="{ zoomed: isHovered }"
