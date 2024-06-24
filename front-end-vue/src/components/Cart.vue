@@ -1,5 +1,3 @@
-
-
 <script>
 import { store } from "@/data/store";
 export default {
@@ -10,11 +8,24 @@ export default {
   },
 
   methods: {
+    updatePrice() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let subtotalPrice = 0;
+      cart.forEach((product) => {
+        subtotalPrice =
+          subtotalPrice + parseFloat(product.price) * product.quantity;
+      });
+      store.subtotal = subtotalPrice.toFixed(2);
+      let totalPrice = parseFloat(store.subtotal) + parseFloat(store.shipping);
+      store.total = totalPrice.toFixed(2);
+    },
+
     showCart() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       store.cart = cart;
     },
 
+    // diminuisco quantità
     decreaseQuantity(productId) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       let existingProduct = cart.find((item) => item.id === productId);
@@ -22,16 +33,17 @@ export default {
       if (existingProduct && existingProduct.quantity > 1) {
         existingProduct.quantity -= 1;
       } else {
-        // If the quantity is 1 or less, remove the product from the cart
+        // Se la quantità è 1 o minore, rimuovo il prodotto
         cart = cart.filter((item) => item.id !== productId);
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
       this.showCart();
-      store.cart = JSON.parse(localStorage.getItem("cart"));
+      // store.cart = JSON.parse(localStorage.getItem("cart"));
+      this.updatePrice();
     },
 
-    // Function to increase the quantity of a product in the cart
+    // aumento quantità
     increaseQuantity(productId) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       let existingProduct = cart.find((item) => item.id === productId);
@@ -42,18 +54,24 @@ export default {
 
       localStorage.setItem("cart", JSON.stringify(cart));
       this.showCart();
-      store.cart = JSON.parse(localStorage.getItem("cart"));
+      // store.cart = JSON.parse(localStorage.getItem("cart"));
+      this.updatePrice();
     },
 
-    deleteItem(item){
-
-
-    }
+    // elimino prodotto
+    deleteItem(productId) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = cart.filter((item) => item.id !== productId);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      store.cart = cart;
+      this.updatePrice();
+    },
   },
 
   mounted() {
     console.log(JSON.parse(localStorage.getItem("cart")));
-   // localStorage.removeItem('cart')
+    // localStorage.removeItem('cart')
+    this.updatePrice();
   },
 };
 </script>
@@ -77,7 +95,7 @@ export default {
       aria-labelledby="offcanvasRightLabel"
     >
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Carelo</h5>
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrello</h5>
         <button
           type="button"
           class="btn-close"
@@ -86,22 +104,30 @@ export default {
         ></button>
       </div>
       <div class="offcanvas-body">
-        <!-- inizio vero carelo -->
+        <!-- inizio vero carrello -->
         <div class="container-fluid">
           <div class="row">
             <div class="col-12 col-xl-8">
               <div class="square container-fluid p-4">
-                <div v-for="item in store.cart" :key="item.id" class="row d-flex justify-content-center position-relative">
+                <div
+                  v-for="item in store.cart"
+                  :key="item.id"
+                  class="row d-flex justify-content-center position-relative mb-2"
+                >
                   <div class="col-4 mb-4 mb-lg-0">
-                    <!-- Image -->
+                    <!-- immagine -->
                     <div
                       class="bg-image w-75 text-center item-image hover-overlay hover-zoom ripple rounded"
                       data-mdb-ripple-color="light"
                     >
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
+                        :src="
+                          item.image == null
+                            ? '/no-food.jpg'
+                            : 'http://127.0.0.1:8000/storage/' + item.image
+                        "
                         class="w-100 mx-auto"
-                        alt="Blue Jeans Jacket"
+                        :alt="item.name"
                       />
                       <a href="#!">
                         <div
@@ -110,14 +136,16 @@ export default {
                         ></div>
                       </a>
                     </div>
-                    <!-- Image -->
+                    <!-- immagine -->
                   </div>
 
                   <div class="col-8 mb-4 mb-lg-0">
-                    <!-- Data -->
-                    <p><strong>{{item.name}}</strong></p>
+                    <!-- Dati -->
+                    <p>
+                      <strong>{{ item.name }}</strong>
+                    </p>
                     <p class="text-start">
-                      <strong>${{item.price}}</strong>
+                      <strong>${{ item.price }}</strong>
                     </p>
                     <button
                       type="button"
@@ -136,13 +164,13 @@ export default {
                         data-mdb-button-init
                         data-mdb-ripple-init
                         class="btn btn-primary px-3 me-2"
-                       @click="decreaseQuantity(item.id)"
+                        @click="decreaseQuantity(item.id)"
                       >
                         <i class="fas fa-minus"></i>
                       </button>
 
-                      <span>{{item.quantity}}</span>
-                      
+                      <span>{{ item.quantity }}</span>
+
                       <button
                         data-mdb-button-init
                         data-mdb-ripple-init
@@ -152,15 +180,25 @@ export default {
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
-                    
-                    <!-- Data -->
+
+                    <!-- Dati -->
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="col-12 col-xl-4">
-              <div class="square"></div>
+              <div class="square">
+                <h5>Riepilogo ordine</h5>
+                <div v-if="store.subtotal != 0">
+                  <h6>Prodotti: € {{ store.subtotal }}</h6>
+                  <h6>Consegna: € {{ store.shipping }}</h6>
+                  <h6>
+                    Totale ordine: €
+                    {{ store.total }}
+                  </h6>
+                </div>
+              </div>
             </div>
 
             <div class="col-12">
@@ -168,10 +206,9 @@ export default {
             </div>
           </div>
         </div>
-        <!-- fine vero carelo  -->
+        <!-- fine vero carrello  -->
       </div>
     </div>
-    <!-- fine carelo -->
   </div>
 </template>
 
@@ -189,15 +226,13 @@ export default {
 }
 
 @media screen and (min-width: 992px) {
-  .item-image{
-  
+  .item-image {
     width: 100%;
   }
 }
 @media screen and (min-width: 1200px) {
   .offcanvas {
     width: 1200px !important;
-
   }
 }
 </style>
