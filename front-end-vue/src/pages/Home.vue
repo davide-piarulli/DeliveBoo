@@ -4,7 +4,7 @@ import axios from "axios";
 import Jumbotron from "../components/Jumbotron.vue";
 import Button from "../components/partials/Button.vue";
 import RestaurantCard from "../components/partials/RestaurantCard.vue";
-// import BottomMenu from "../components/partials/BottomMenu.vue";
+import Loader from '../components/partials/Loader.vue';
 
 export default {
   name: "Home",
@@ -15,7 +15,7 @@ export default {
       restaurants: [],
       filters: [],
       activeButton: false,
-
+      isLoading: true
     };
   },
 
@@ -23,7 +23,7 @@ export default {
     Button,
     RestaurantCard,
     Jumbotron,
-    // BottomMenu
+    Loader
   },
 
   methods: {
@@ -49,7 +49,7 @@ export default {
           },
         })
         .then((result) => {
-          
+          this.isLoading = false;
           if (endpoint == 'types' || endpoint == '') {
             this.types = result.data.map((item) => {
               return {
@@ -79,7 +79,9 @@ export default {
 <template>
   <div>
     <Jumbotron />
+    <Loader v-if="isLoading"/>
     <section
+      v-else
       id="restaurants"
       class="container d-flex flex-column justify-content-center py-5"
     >
