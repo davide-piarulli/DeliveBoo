@@ -11,10 +11,12 @@
   "dependencies": {
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "braintree-web-drop-in": "^1.42.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@types/braintree-web-drop-in": "^1.39.3",
     "@vitejs/plugin-vue": "^5.0.4",
     "sass": "^1.77.5",
     "vite": "^5.2.8"

@@ -44,7 +44,6 @@ export default {
 
 <template>
   <div>
-
     <Header />
 
     <main>
@@ -52,16 +51,13 @@ export default {
     </main>
 
     <Footer />
-        
   </div>
 </template>
 
 <style lang="scss" scoped>
-
-  main{
-    padding-top: 100px;
-  }
-
+main {
+  padding-top: 100px;
+}
 </style>
 
 <!-- <form @submit.prevent="submitForm()" class="text-center my-3">

@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 
 Route::get('/restaurants', [ApiController::class, 'index']);
 Route::get('/types', [ApiController::class, 'getRestaurantTypes']);
-Route::post('/send-order', [OrderController::class, 'store']);
 Route::get('/filter', [ApiController::class, 'getRestaurantsByTypes']);
 Route::get('/restaurant-detail/{slug}', [ApiController::class, 'getReustarantDetail']);
+
+Route::get('orders/generate', [OrderController::class, 'generate']);
+Route::post('orders/save', [OrderController::class, 'store']);

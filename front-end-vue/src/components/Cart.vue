@@ -1,9 +1,26 @@
 <script>
 import { store } from "@/data/store";
+import dropin from "braintree-web-drop-in";
+import axios from "axios";
 export default {
   data() {
     return {
       store,
+      dropinInstance: null,
+      formData: {
+        name: "",
+        lastname: "",
+        amount: store.total,
+        shipment_address: "",
+        city: "",
+        state: "",
+        cap: "",
+        phone: "",
+        notes: "",
+      },
+      errors: {},
+      sending: false,
+      sent: false,
     };
   },
 
@@ -65,21 +82,81 @@ export default {
       store.cart = cart;
       this.updatePrice();
     },
+
+    initializeBraintree() {
+      axios
+        .get(store.apiUrl + "orders/generate")
+        .then((response) => {
+          const clientToken = response.data.token;
+
+          dropin.create(
+            {
+              authorization: clientToken,
+              container: "#dropin-container",
+            },
+            (err, instance) => {
+              if (err) {
+                console.error(err);
+                return;
+              }
+              this.dropinInstance = instance;
+            }
+          );
+        })
+        .catch((error) => {
+          console.error("Errore durante la generazione del token:", error);
+        });
+    },
+    requestPaymentMethod() {
+      this.dropinInstance.requestPaymentMethod((err, payload) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        axios
+          .post(store.apiUrl + "orders/save", {
+            payment_method_nonce: payload.nonce,
+          })
+          .then((response) => {
+            const data = response.data;
+            console.log(data);
+            if (data.success) {
+              alert("Pagamento avvenuto con successo!");
+            } else {
+              alert("Pagamento fallito: " + data.message);
+            }
+          })
+          .catch((error) => {
+            console.error(
+              "Errore durante l'elaborazione del pagamento:",
+              error
+            );
+          });
+      });
+    },
+
+    submitForm() {
+      this.sending = true;
+      axios
+        .post(store.apiUrl + "orders/save", this.formData)
+        .then((res) => {
+          console.log(res.data);
+          this.sending = false;
+          this.sent = res.data.success;
+          this.errors = res.data.errors;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.sending = false;
+        });
+    },
   },
-  computed: {
-    // itemQuantity() {
-    //   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    //   let quantity = 0;
-    //   cart.forEach((item) => {
-    //     quantity = quantity + parseInt(item.quantity);
-    //     console.log(quantity);
-    //   });
-    //   return quantity;
-    // },
-  },
+
   mounted() {
     this.updatePrice();
     // localStorage.removeItem('cart')
+    this.initializeBraintree();
   },
 };
 </script>
@@ -226,12 +303,19 @@ export default {
               <div class="square mb-3 p-4">
                 <form class="row g-3">
                   <h4>Dettagli per la consegna</h4>
+                  <input
+                    type="hidden"
+                    name="amount"
+                    v-model="formData.amount"
+                  />
                   <div class="col-md-6">
                     <label for="name" class="form-label">Nome</label>
                     <input
                       type="text"
                       class="form-control"
                       id="name"
+                      name="name"
+                      v-model="formData.name"
                       placeholder="Inserisci il tuo nome"
                     />
                   </div>
@@ -241,6 +325,8 @@ export default {
                       type="text"
                       class="form-control"
                       id="lastName"
+                      name="lastname"
+                      v-model="formData.lastname"
                       placeholder="Inserisci il tuo cognome"
                     />
                   </div>
@@ -252,6 +338,8 @@ export default {
                       type="text"
                       class="form-control"
                       id="inputAddress"
+                      name="shipment_address"
+                      v-model="formData.shipment_address"
                       placeholder="Via Roma 14..."
                     />
                   </div>
@@ -261,12 +349,19 @@ export default {
                       type="text"
                       class="form-control"
                       id="inputCity"
+                      name="city"
+                      v-model="formData.city"
                       placeholder="Inserisci la città"
                     />
                   </div>
                   <div class="col-md-4">
                     <label for="inputState" class="form-label">Provincia</label>
-                    <select id="inputState" class="form-select">
+                    <select
+                      id="inputState"
+                      class="form-select"
+                      name="state"
+                      v-model="formData.state"
+                    >
                       <option selected>Scegli...</option>
                       <option value="AG">Agrigento</option>
                       <option value="AL">Alessandria</option>
@@ -386,6 +481,8 @@ export default {
                       type="text"
                       class="form-control"
                       id="inputCap"
+                      name="cap"
+                      v-model="formData.cap"
                       placeholder="Inserisci il CAP"
                     />
                   </div>
@@ -394,9 +491,11 @@ export default {
                       >Numero di telefono</label
                     >
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       id="inputTelephone"
+                      name="phone"
+                      v-model="formData.phone"
                       placeholder="Inserisci il telefono"
                     />
                   </div>
@@ -404,7 +503,7 @@ export default {
                     <label for="note" class="form-label"
                       >Note sull'ordine</label
                     >
-                    <textarea name="note" class="form-control"></textarea>
+                    <textarea class="form-control" name="notes"></textarea>
                   </div>
                 </form>
               </div>
@@ -416,48 +515,36 @@ export default {
             <div class="col-12">
               <!-- square -->
               <div class="square mb-3 p-4">
-                <form class="row g-3">
-                  <h4>Dettagli per il pagamento</h4>
-                  <div class="col-12">
-                    <label for="card" class="form-label"
-                      >Numero della carta</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="card"
-                      placeholder="Inserisci il numero della tua carta"
-                    />
+                <form>
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-4"
+                  >
+                    <h4>Pagamento</h4>
+                    <div class="d-flex flex-column align-items-end">
+                      <div>
+                        <i class="fa-brands fa-cc-visa mx-1"></i>
+                        <i class="fa-brands fa-cc-mastercard mx-1"></i>
+                        <i class="fa-brands fa-cc-amex mx-1"></i>
+                        <i class="fa-brands fa-cc-paypal mx-1"></i>
+                      </div>
+                      <small class="text-muted"
+                        >Pagamenti sicuri con Braintree</small
+                      >
+                    </div>
                   </div>
-
-                  <div class="col-md-6">
-                    <label for="expireDate" class="form-label">Scadenza</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="expireDate"
-                      placeholder="Inserisci la data di scadenza della tua carta"
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="cvv" class="form-label">CVV</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="cvv"
-                      placeholder="Inserisci il codice segreto della tua carta"
-                    />
-                  </div>
-
-                  <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
-                      Procedi all'ordine
-                    </button>
-                  </div>
+                  <div id="dropin-container"></div>
                 </form>
               </div>
               <!-- /square -->
+              <button
+                @click="
+                  requestPaymentMethod();
+                  submitForm();
+                "
+                class="btn btn-primary"
+              >
+                Invia ordine
+              </button>
             </div>
             <!-- /pagamento -->
           </div>
