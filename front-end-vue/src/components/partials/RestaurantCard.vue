@@ -31,12 +31,8 @@ export default {
         </div>
         <div class="card-body card_body_h p-0">
           <h4 class="card-title text-center p-2">{{ restaurant.name }}</h4>
-          <div class="container-fluid">
-            <div class="row row-cols-2">
-              <div class="col" v-for="(type) in restaurant.types" :key="type.id">
-                <h5 class="d-inline-block m-2"><span class="badge-type badge rounded-2">{{type.name}}</span></h5>
-              </div>
-            </div>
+          <div class="d-flex flex-wrap">
+            <h5 class="d-inline-block m-2" v-for="(type) in restaurant.types" :key="type.id"><span class="badge-type badge rounded-2">{{type.name}}</span></h5>
           </div>
         </div>
       </div>
