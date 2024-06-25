@@ -18,6 +18,7 @@ export default {
       store.subtotal = subtotalPrice.toFixed(2);
       let totalPrice = parseFloat(store.subtotal) + parseFloat(store.shipping);
       store.total = totalPrice.toFixed(2);
+      store.counter = cart.length;
     },
 
     showCart() {
@@ -65,7 +66,21 @@ export default {
       this.updatePrice();
     },
   },
-
+  computed: {
+    hasItemsInCart() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      return cart.length > 0;
+    },
+    itemQuantity() {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let quantity = 0;
+      cart.forEach((item) => {
+        quantity = quantity + parseInt(item.quantity);
+        console.log(quantity);
+      });
+      return quantity;
+    },
+  },
   mounted() {
     this.updatePrice();
     // localStorage.removeItem('cart')
@@ -76,13 +91,16 @@ export default {
 <template>
   <div>
     <button
-      class="cart"
+      class="cart position-relative"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#offcanvasRight"
       aria-controls="offcanvasRight"
     >
       <i class="fa-solid fa-cart-shopping"></i>
+      <span v-if="hasItemsInCart" class="cart-badge">{{
+        store.cart.length * itemQuantity
+      }}</span>
     </button>
 
     <div
@@ -405,6 +423,16 @@ export default {
   background-color: transparent;
   border: none;
   color: $color-10;
+  .cart-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 10px;
+  }
 }
 
 @media screen and (min-width: 992px) {
