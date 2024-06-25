@@ -2,7 +2,9 @@
 import { store } from "@/data/store";
 export default {
   data() {
-    return {};
+    return {
+      isClicked: false
+    };
   },
 
   props: {
@@ -52,6 +54,12 @@ export default {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       store.cart = cart;
     },
+    clickTimer(){
+      this.isClicked = true;
+      setTimeout(() => {
+        this.isClicked = false;
+      }, 1000)
+    }
   },
 
   mounted() {
@@ -61,11 +69,12 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="col-lg-4 col-md-6 col-xs-12 d-flex justify-content-center">
     <div class="my-card small">
-      <article class="recipe">
-        <div class="pizza-box">
+      <article class="recipe h-100">
+        <div class="overflow-hidden">
           <img
+            class="w-100 h-100 object-fit-cover"
             :src="
               product.image == null
                 ? '/no-food.jpg'
@@ -73,10 +82,10 @@ export default {
             "
             width="1500"
             height="1368"
-            alt=""
+            :alt="product.name"
           />
         </div>
-        <div class="recipe-content">
+        <div class="recipe-content h-100">
           <p class="recipe-tags">
             <span class="recipe-tag">{{ product.product_type.name }}</span>
           </p>
@@ -85,13 +94,11 @@ export default {
             <a href="#">{{ product.name }}</a>
           </h1>
 
-          <p class="recipe-metadata"></p>
-
           <p class="recipe-desc">
             {{ product.description }}
           </p>
 
-          <button @click="addToCart(product)" class="recipe-save" type="button">
+          <button @click="addToCart(product); clickTimer()" class="recipe-save" :class="{'active' : isClicked}" type="button" id="add-to-cart" :disabled="isClicked">
             <i class="fa-solid fa-plus mx-2"></i>
             Aggiungi al Carrello
           </button>
@@ -108,21 +115,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.pizza-box {
-  flex: 3 1 30ch;
-  height: calc(282px + 5vw);
-  overflow: hidden;
-
-  img {
-    max-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: cover;
-    object-position: 50% 50%;
-  }
 }
 
 .recipe {
@@ -160,10 +152,6 @@ export default {
     }
   }
 
-  &-metadata {
-    margin: 0;
-  }
-
   &-rating {
     font-size: 1.2em;
     letter-spacing: 0.05em;
@@ -190,8 +178,10 @@ export default {
     background: none;
     cursor: pointer;
     font-weight: bold;
-
-    &:hover {
+    &.active{
+      scale: .95;
+    }
+    &:hover, &.active{
       background-color: $color-2;
       color: white;
     }
@@ -202,24 +192,6 @@ export default {
       margin-right: 6px;
     }
   }
-}
-
-/* Body Layout */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  --primary: #e05d26;
-  --grey: #454545;
-  --lightgrey: #666;
-
-  color: var(--grey);
-  line-height: 1.55;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
 .big {

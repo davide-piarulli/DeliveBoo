@@ -52,14 +52,14 @@ export default {
             <router-link
               class="text-white text-decoration-none"
               :to="{ name: 'home' }"
-              >Home</router-link
+              ><i class="fa-solid fa-house"></i> Home</router-link
             >
           </li>
           <li
             class="mx-4 link-info link-offset-2 d-none d-lg-inline-block fs-5"
           >
             <router-link class="text-white text-decoration-none" to="#"
-              >Ristoranti</router-link
+              ><i class="fa-solid fa-utensils"></i> Ristoranti</router-link
             >
           </li>
 
@@ -93,10 +93,10 @@ export default {
               <router-link
                 class="text-white text-decoration-none"
                 :to="{ name: 'home' }"
-                >Home</router-link
+                ><i class="fa-solid fa-house"></i> Home</router-link
               >
               <router-link class="text-white text-decoration-none" to="#"
-                >Ristoranti</router-link
+                ><i class="fa-solid fa-utensils"></i> Ristoranti</router-link
               >
             </div>
           </div>
@@ -133,11 +133,6 @@ header {
     .b_menu_active {
       right: 0 !important;
       font-size: 2.5rem;
-      i {
-        border: 1px solid white;
-        padding: 10px;
-        margin: 20px;
-      }
     }
 
     .cart {
