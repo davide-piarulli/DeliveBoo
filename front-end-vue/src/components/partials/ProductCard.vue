@@ -90,6 +90,9 @@ export default {
           <p class="recipe-desc">
             {{ product.description }}
           </p>
+          <p class="recipe-price">
+           &euro; {{ product.price }}
+          </p>
 
           <button @click="addToCart(product)" class="recipe-save" type="button">
             <i class="fa-solid fa-plus mx-2"></i>
@@ -129,6 +132,13 @@ export default {
   border: 2px solid #f2f2f2;
   border-radius: 8px;
   overflow: hidden;
+
+  &-price {
+
+    font-weight: bold;
+    font-size: 20px;
+    color: $color-4;
+  }
 
   &-content {
     padding: 16px 32px;
