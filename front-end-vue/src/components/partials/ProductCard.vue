@@ -3,7 +3,8 @@ import { store } from "@/data/store";
 export default {
   data() {
     return {
-      isClicked: false
+      isClicked: false,
+      cartSwitch: false
     };
   },
 
@@ -24,6 +25,7 @@ export default {
       store.total = totalPrice.toFixed(2);
     },
     addToCart(product) {
+
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       if (
         cart.length === 0 ||
@@ -44,9 +46,21 @@ export default {
         this.showCart();
         this.updatePrice();
       } else {
-        alert("Non puoi aggiungere un prodotto da un altro ristorante");
-      }
+        this.cartSwitch = confirm('Non puoi ordinare da più ristoranti! Vuoi svuotare il carrello e fare un nuovo ordine?');
+        if(this.cartSwitch){
+          store.cart = [];
+          cart = [];
+          localStorage.setItem("cart", JSON.stringify(cart));
+          this.cartSwitch = false;
+          
+          product.quantity = 1;
+          cart.push(product);
 
+          localStorage.setItem("cart", JSON.stringify(cart));
+          this.showCart();
+          this.updatePrice();
+        }
+      }
       store.cart = JSON.parse(localStorage.getItem("cart"));
     },
 
