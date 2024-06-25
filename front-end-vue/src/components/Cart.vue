@@ -115,7 +115,7 @@ export default {
         ></button>
       </div>
       <div class="offcanvas-body">
-        <!-- inizio vero carrello -->
+        <!-- carrello -->
         <div class="container-fluid">
           <div class="row">
             <div class="col-12 col-xl-8">
@@ -203,6 +203,7 @@ export default {
 
             <!-- Riepilogo Ordine -->
             <div class="col-12 col-xl-4">
+              <!-- square -->
               <div class="square mb-3 p-4">
                 <div class="bg-white rounded-1 p-2">
                   <h5>Riepilogo ordine</h5>
@@ -216,20 +217,32 @@ export default {
                   </div>
                 </div>
               </div>
+              <!-- square -->
             </div>
 
             <!-- Dati di consegna -->
             <div class="col-12">
+              <!-- square -->
               <div class="square mb-3 p-4">
-                <h4>Dettagli per la consegna</h4>
                 <form class="row g-3">
+                  <h4>Dettagli per la consegna</h4>
                   <div class="col-md-6">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      placeholder="Inserisci il tuo nome"
+                    />
                   </div>
                   <div class="col-md-6">
                     <label for="lastName" class="form-label">Cognome</label>
-                    <input type="text" class="form-control" id="lastName" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      placeholder="Inserisci il tuo cognome"
+                    />
                   </div>
                   <div class="col-12">
                     <label for="inputAddress" class="form-label"
@@ -243,30 +256,13 @@ export default {
                     />
                   </div>
                   <div class="col-md-6">
-                    <label for="inputAddress2" class="form-label"
-                      >Indirizzo aggiuntivo</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputAddress2"
-                      placeholder="Citofono e altri dettagli utili"
-                    />
-                  </div>
-                  <div class="col-md-6">
-                    <label for="inputTelephone" class="form-label"
-                      >Numero di telefono</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputTelephone"
-                      placeholder="+39..."
-                    />
-                  </div>
-                  <div class="col-md-6">
                     <label for="inputCity" class="form-label">Città</label>
-                    <input type="text" class="form-control" id="inputCity" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputCity"
+                      placeholder="Inserisci la città"
+                    />
                   </div>
                   <div class="col-md-4">
                     <label for="inputState" class="form-label">Provincia</label>
@@ -386,7 +382,72 @@ export default {
                   </div>
                   <div class="col-md-2">
                     <label for="inputCap" class="form-label">CAP</label>
-                    <input type="text" class="form-control" id="inputCap" />
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputCap"
+                      placeholder="Inserisci il CAP"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputTelephone" class="form-label"
+                      >Numero di telefono</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputTelephone"
+                      placeholder="Inserisci il telefono"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="note" class="form-label"
+                      >Note sull'ordine</label
+                    >
+                    <textarea name="note" class="form-control"></textarea>
+                  </div>
+                </form>
+              </div>
+              <!-- square -->
+            </div>
+            <!-- /dati consegna -->
+
+            <!-- pagamento -->
+            <div class="col-12">
+              <!-- square -->
+              <div class="square mb-3 p-4">
+                <form class="row g-3">
+                  <h4>Dettagli per il pagamento</h4>
+                  <div class="col-12">
+                    <label for="card" class="form-label"
+                      >Numero della carta</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="card"
+                      placeholder="Inserisci il numero della tua carta"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="expireDate" class="form-label">Scadenza</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="expireDate"
+                      placeholder="Inserisci la data di scadenza della tua carta"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="cvv"
+                      placeholder="Inserisci il codice segreto della tua carta"
+                    />
                   </div>
 
                   <div class="col-12">
@@ -396,10 +457,12 @@ export default {
                   </div>
                 </form>
               </div>
+              <!-- /square -->
             </div>
+            <!-- /pagamento -->
           </div>
         </div>
-        <!-- fine vero carrello  -->
+        <!-- /carrello  -->
       </div>
     </div>
   </div>
