@@ -71,15 +71,15 @@ export default {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       return cart.length > 0;
     },
-    itemQuantity() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let quantity = 0;
-      cart.forEach((item) => {
-        quantity = quantity + parseInt(item.quantity);
-        console.log(quantity);
-      });
-      return quantity;
-    },
+    // itemQuantity() {
+    //   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    //   let quantity = 0;
+    //   cart.forEach((item) => {
+    //     quantity = quantity + parseInt(item.quantity);
+    //     console.log(quantity);
+    //   });
+    //   return quantity;
+    // },
   },
   mounted() {
     this.updatePrice();
@@ -99,7 +99,7 @@ export default {
     >
       <i class="fa-solid fa-cart-shopping"></i>
       <span v-if="hasItemsInCart" class="cart-badge">{{
-        store.cart.length * itemQuantity
+        store.cart.length
       }}</span>
     </button>
 
