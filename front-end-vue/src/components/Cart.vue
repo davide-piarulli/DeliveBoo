@@ -67,10 +67,6 @@ export default {
     },
   },
   computed: {
-    hasItemsInCart() {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      return cart.length > 0;
-    },
     // itemQuantity() {
     //   let cart = JSON.parse(localStorage.getItem("cart")) || [];
     //   let quantity = 0;
@@ -98,7 +94,7 @@ export default {
       aria-controls="offcanvasRight"
     >
       <i class="fa-solid fa-cart-shopping"></i>
-      <span v-if="hasItemsInCart" class="cart-badge">{{
+      <span v-if="store.cart.length > 0" class="cart-badge">{{
         store.cart.length
       }}</span>
     </button>
