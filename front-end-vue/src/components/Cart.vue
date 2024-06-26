@@ -195,7 +195,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="my-body">
     <button class="cart position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
       aria-controls="offcanvasRight">
       <i class="fa-solid fa-cart-shopping"></i>
@@ -236,6 +236,8 @@ export default {
                   </div>
 
                   <div class="col-8 mb-4 mb-lg-0">
+
+                    
                     <!-- Dati -->
                     <p>
                       <strong>{{ item.name }}</strong>
@@ -296,6 +298,8 @@ export default {
                   <input type="hidden" name="amount" v-model="formData.amount">
                   <input type="hidden" name="products[]" v-model="formData.products">
                   <div class="row">
+                    <h1>
+                <i class="fas fa-shipping-fast"></i> Dettagli Spedizione </h1>
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerName" class="form-label">Nome</label>
                       <input type="text" v-model="formData.name" class="form-control" id="customerName"
@@ -461,6 +465,8 @@ export default {
                   </div>
                   <hr />
                   <div class="form-group">
+                    <h1>
+                <i class="far fa-credit-card"></i> Informazioni di Pagamneto   </h1>
                     <label for="creditCardNumber">Numero carta di credito</label>
                     <div id="creditCardNumber" name="creditCardNumber" class="form-control"></div>
                   </div>
@@ -546,4 +552,11 @@ export default {
     width: 1200px !important;
   }
 }
+@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
+
+// Ora puoi utilizzare il font Arimo nelle tue regole CSS
+.my-body {
+  font-family: 'Arimo', sans-serif; /* Usa Arimo come font predefinito per il body */
+}
+
 </style>

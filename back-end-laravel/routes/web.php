@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\DashBoardController;
+use App\Http\Controllers\Admin\OrderController;
 
 
 
@@ -29,9 +30,10 @@ Route::middleware(['auth', 'verified'])
     Route::resource('products', ProductController::class);
     Route::resource('restaurants', RestaurantController::class);
 
+    Route::resource('/orders', OrderController::class);
+
     // Rotte CRUD custom
     Route::get('/order-by/{col}/{dir}', [ProductController::class, 'orderBy'])->name('order-by');
-
   });
 
 // Rotte per il profilo utente
