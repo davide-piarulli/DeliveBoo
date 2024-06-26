@@ -46,7 +46,14 @@ class OrderController extends Controller
   public function show($id)
   {
     $order = Order::findOrFail($id);
-    $products = $order->products; // Ottieni i prodotti associati all'ordine
+
+    // Verifica che l'ordine appartenga al ristorante dell'utente autenticato
+    if (!$order->products()->where('restaurant_id', Auth::user()->id)->exists()) {
+      abort(403, 'Non sei autorizzato a vedere questo ordine.');
+    }
+
+    // Ottieni i prodotti associati all'ordine
+    $products = $order->products;
     return view('admin.orders.show', compact('order', 'products'));
   }
 
