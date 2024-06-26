@@ -37,16 +37,13 @@ export default {
           <div>
             <a href="#"><img
                 src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png"
-                alt="Metodo di pagamento"></a>
+                alt="VISA"></a>
             <a href="#"><img
                 src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png"
-                alt="Metodo di pagamento"></a>
-            <a href="#"><img
-                src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-29-6264.png"
-                alt="Metodo di pagamento"></a>
+                alt="American Express"></a>
             <a href="#"><img
                 src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png"
-                alt="Metodo di pagamento"></a>
+                alt="Mastercard"></a>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "braintree/braintree_php": "^6.18",
         "fakerphp/faker": "^1.23",
         "guzzlehttp/guzzle": "^7.2",
         "jzonta/faker-restaurant": "^2.0",

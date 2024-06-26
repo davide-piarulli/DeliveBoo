@@ -1,13 +1,110 @@
 <script>
-import { store } from "@/data/store";
+import { store } from "../data/store";
+import axios from "axios";
+import braintree from "braintree-web";
 export default {
   data() {
     return {
       store,
+
+      hostedFieldInstance: false,
+      nonce: "",
+      error: "",
+      clientToken: "",
+      orderPassed: false,
+
+      formData: {
+        name: "",
+        lastname: "",
+        amount: store.total,
+        shipment_address: "",
+        city: "",
+        state: "",
+        cap: "",
+        phone: "",
+        notes: "",
+        products: store.cart
+      },
     };
   },
 
   methods: {
+    /////////////////////////////// Braintree ///////////////////////////////
+    getClientToken() {
+      axios.get(store.apiUrl + "orders/generate").then((res) => {
+        this.clientToken = res.data.token;
+      });
+    },
+
+    payWithCreditCard() {
+      if (this.hostedFieldInstance) {
+        this.hostedFieldInstance
+          .tokenize()
+          .then((payload) => {
+            this.nonce = payload.nonce;
+          })
+          .catch((err) => {
+            this.error = err.message;
+          });
+      }
+      if (this.nonce) {
+        this.status = true;
+      }
+    },
+
+    braintreeSystem() {
+      braintree.client
+        .create({
+          authorization: this.clientToken,
+        })
+        .then((clientInstance) => {
+          let options = {
+            client: clientInstance,
+            styles: {
+              input: {
+                "font-size": "16px",
+                "font-family": "sans-serif",
+              },
+            },
+            fields: {
+              number: {
+                selector: "#creditCardNumber",
+                placeholder: "Inserisci la carta di credito",
+              },
+              cvv: {
+                selector: "#cvv",
+                placeholder: "Inserisci il CVV",
+              },
+              expirationDate: {
+                selector: "#expireDate",
+                placeholder: "00 / 0000",
+              },
+            },
+          };
+          return braintree.hostedFields.create(options);
+        })
+        .then((hostedFieldInstance) => {
+          this.hostedFieldInstance = hostedFieldInstance;
+        });
+    },
+
+    sendOrder() {
+      axios
+        .post(store.apiUrl + "orders/get", this.formData)
+        .then((res) => {
+          this.orderPassed = res.data;
+          console.log(res.data);
+          if (res.data) {
+            localStorage.setItem("cart", JSON.stringify([]));
+            store.cart = [];
+          }
+        })
+        .catch(err => {
+          console.log(err.message);
+        })
+    },
+
+    /////////////////////////////// Carrello ///////////////////////////////
     updatePrice() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       let subtotalPrice = 0;
@@ -66,53 +163,58 @@ export default {
       this.updatePrice();
     },
   },
-  computed: {
-    // itemQuantity() {
-    //   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    //   let quantity = 0;
-    //   cart.forEach((item) => {
-    //     quantity = quantity + parseInt(item.quantity);
-    //     console.log(quantity);
-    //   });
-    //   return quantity;
-    // },
+
+  created() {
+    this.getClientToken();
   },
+
+  beforeUpdate() {
+    // if (this.nonce != "" || this.error != "") {
+    //   this.getOrderInfo();
+    // }
+
+    // if (this.nonce != "") {
+    //   this.$emit("orderPassed", true);
+    // }
+
+    // if (this.formData.name) {
+    //   this.sendOrder();
+    // }
+    if (this.clientToken != "") {
+      this.braintreeSystem();
+    }
+
+    this.formData.amount = store.total;
+    this.formData.products = store.cart;
+  },
+
+  updated() {
+    if (this.orderPassed) {
+      localStorage.setItem("cart", JSON.stringify([]));
+      store.cart = [];
+    }
+  },
+
   mounted() {
     this.updatePrice();
-    // localStorage.removeItem('cart')
   },
 };
 </script>
 
 <template>
   <div>
-    <button
-      class="cart position-relative"
-      type="button"
-      data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasRight"
-      aria-controls="offcanvasRight"
-    >
+    <button class="cart position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+      aria-controls="offcanvasRight">
       <i class="fa-solid fa-cart-shopping"></i>
       <span v-if="store.cart.length > 0" class="cart-badge">{{
         store.cart.length
       }}</span>
     </button>
 
-    <div
-      class="offcanvas w-100 offcanvas-end"
-      tabindex="-1"
-      id="offcanvasRight"
-      aria-labelledby="offcanvasRightLabel"
-    >
+    <div class="offcanvas w-100 offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrello</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <!-- carrello -->
@@ -123,31 +225,18 @@ export default {
                 <div v-if="store.cart.length === 0">
                   Non ci sono prodotti nel carrello
                 </div>
-                <div
-                  v-for="item in store.cart"
-                  :key="item.id"
-                  class="row d-flex justify-content-center position-relative mb-2 bg-white rounded-2 p-2"
-                >
+                <div v-for="item in store.cart" :key="item.id"
+                  class="row d-flex justify-content-center position-relative mb-2 bg-white rounded-2 p-2">
                   <div class="col-4 mb-4 mb-lg-0">
                     <!-- immagine -->
-                    <div
-                      class="bg-image w-75 text-center item-image hover-overlay hover-zoom ripple rounded"
-                      data-mdb-ripple-color="light"
-                    >
-                      <img
-                        :src="
-                          item.image == null
-                            ? '/no-food.jpg'
-                            : 'http://127.0.0.1:8000/storage/' + item.image
-                        "
-                        class="w-100 mx-auto"
-                        :alt="item.name"
-                      />
+                    <div class="bg-image w-75 text-center item-image hover-overlay hover-zoom ripple rounded"
+                      data-mdb-ripple-color="light">
+                      <img :src="item.image == null
+                        ? '/no-food.jpg'
+                        : 'http://127.0.0.1:8000/storage/' + item.image
+                        " class="w-100 mx-auto" :alt="item.name" />
                       <a href="#!">
-                        <div
-                          class="mask"
-                          style="background-color: rgba(251, 251, 251, 0.2)"
-                        ></div>
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                       </a>
                     </div>
                     <!-- immagine -->
@@ -161,36 +250,22 @@ export default {
                     <p class="text-start">
                       <strong>${{ item.price }}</strong>
                     </p>
-                    <button
-                      type="button"
-                      data-mdb-button-init
-                      data-mdb-ripple-init
-                      class="btn btn-danger me-1 mt-1 mb-2 position-absolute top-0 end-0"
-                      data-mdb-tooltip-init
-                      title="Remove item"
-                      @click="deleteItem(item.id)"
-                    >
+                    <button type="button" data-mdb-button-init data-mdb-ripple-init
+                      class="btn btn-danger me-1 mt-1 mb-2 position-absolute top-0 end-0" data-mdb-tooltip-init
+                      title="Remove item" @click="deleteItem(item.id)">
                       <i class="fas fa-trash"></i>
                     </button>
 
                     <div class="d-flex mb-4" style="max-width: 300px">
-                      <button
-                        data-mdb-button-init
-                        data-mdb-ripple-init
-                        class="btn btn-primary px-3 me-2"
-                        @click="decreaseQuantity(item.id)"
-                      >
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 me-2"
+                        @click="decreaseQuantity(item.id)">
                         <i class="fas fa-minus"></i>
                       </button>
 
                       <span>{{ item.quantity }}</span>
 
-                      <button
-                        data-mdb-button-init
-                        data-mdb-ripple-init
-                        class="btn btn-primary px-3 ms-2"
-                        @click="increaseQuantity(item.id)"
-                      >
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 ms-2"
+                        @click="increaseQuantity(item.id)">
                         <i class="fas fa-plus"></i>
                       </button>
                     </div>
@@ -223,50 +298,48 @@ export default {
             <!-- Dati di consegna -->
             <div class="col-12">
               <!-- square -->
-              <div class="square mb-3 p-4">
-                <form class="row g-3">
-                  <h4>Dettagli per la consegna</h4>
-                  <div class="col-md-6">
-                    <label for="name" class="form-label">Nome</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      placeholder="Inserisci il tuo nome"
-                    />
+              <div class="square mb-3 p-4" v-if="clientToken">
+                <form @submit.prevent="payWithCreditCard(); sendOrder()">
+                  <input type="hidden" name="amount" v-model="formData.amount">
+                  <input type="hidden" name="products[]" v-model="formData.products">
+                  <div class="row">
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="customerName" class="form-label">Nome</label>
+                      <input type="text" v-model="formData.name" class="form-control" id="customerName"
+                        required="required" maxlength="20" />
+                    </div>
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="customerSurname" class="form-label">Cognome</label>
+                      <input type="text" v-model="formData.lastname" class="form-control" id="customerSurname"
+                        required="required" maxlength="20" />
+                    </div>
                   </div>
-                  <div class="col-md-6">
-                    <label for="lastName" class="form-label">Cognome</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="lastName"
-                      placeholder="Inserisci il tuo cognome"
-                    />
+
+                  <div class="row">
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="customerMail" class="form-label">Email</label>
+                      <input type="email" v-model="formData.email" class="form-control" id="customerMail"
+                        required="required" />
+                    </div>
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="customerPhone" class="form-label">Telefono</label>
+                      <input type="tel" v-model="formData.phone" class="form-control" id="customerPhone"
+                        required="required" />
+                    </div>
+
+                  <div class="mb-3 col-md-6 col-sm-12">
+                    <label for="customerAddress" class="form-label">Indirizzo</label>
+                    <input type="text" v-model="formData.shipment_address" class="form-control" id="customerAddress"
+                      minlength="5" maxlength="255" required="required" />
                   </div>
-                  <div class="col-12">
-                    <label for="inputAddress" class="form-label"
-                      >Indirizzo</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputAddress"
-                      placeholder="Via Roma 14..."
-                    />
+                  <div class="mb-3 col-md-6 col-sm-12">
+                    <label for="customerCity" class="form-label">Città</label>
+                    <input type="text" v-model="formData.city" class="form-control" id="customerCity"
+                      required="required" />
                   </div>
-                  <div class="col-md-6">
-                    <label for="inputCity" class="form-label">Città</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputCity"
-                      placeholder="Inserisci la città"
-                    />
-                  </div>
-                  <div class="col-md-4">
+                  <div class="mb-3 col-md-6 col-sm-12">
                     <label for="inputState" class="form-label">Provincia</label>
-                    <select id="inputState" class="form-select">
+                    <select id="inputState" class="form-select" name="state" v-model="formData.state">
                       <option selected>Scegli...</option>
                       <option value="AG">Agrigento</option>
                       <option value="AL">Alessandria</option>
@@ -304,7 +377,7 @@ export default {
                       <option value="FE">Ferrara</option>
                       <option value="FI">Firenze</option>
                       <option value="FG">Foggia</option>
-                      <option value="FC">Forlì-Cesena</option>
+                      <option value="FC">ForlÃ¬-Cesena</option>
                       <option value="FR">Frosinone</option>
                       <option value="GE">Genova</option>
                       <option value="GO">Gorizia</option>
@@ -378,88 +451,60 @@ export default {
                       <option value="VV">Vibo Valentia</option>
                       <option value="VI">Vicenza</option>
                       <option value="VT">Viterbo</option>
-                    </select>
+                    </select> 
                   </div>
-                  <div class="col-md-2">
-                    <label for="inputCap" class="form-label">CAP</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputCap"
-                      placeholder="Inserisci il CAP"
-                    />
+                  <div class="mb-3 col-md-6 col-sm-12">
+                    <label for="customerZipCode" class="form-label">CAP</label>
+                    <input type="text" v-model="formData.cap" class="form-control" id="customerZipCode" minlength="5"
+                      maxlength="5" required="required" />
                   </div>
-                  <div class="col-md-6">
-                    <label for="inputTelephone" class="form-label"
-                      >Numero di telefono</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="inputTelephone"
-                      placeholder="Inserisci il telefono"
-                    />
+                  <div class="mb-3">
+                    <label for="note" class="form-label">Note sull'ordine</label>
+                    <textarea rows="5" class="form-control" name="notes" v-model="formData.notes"></textarea>
                   </div>
-                  <div class="col-12">
-                    <label for="note" class="form-label"
-                      >Note sull'ordine</label
-                    >
-                    <textarea name="note" class="form-control"></textarea>
+                </div>
+                  <div class="form-group" v-if="store.subtotal != 0">
+                    <h3>Totale: € {{ store.total }}</h3>
                   </div>
+                  <hr />
+                  <div class="form-group">
+                    <label for="creditCardNumber">Numero carta di credito</label>
+                    <div id="creditCardNumber" name="creditCardNumber" class="form-control"></div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-6">
+                        <label>Data di scadenza</label>
+                        <div id="expireDate" class="form-control"></div>
+                      </div>
+                      <div class="col-6">
+                        <label>CVV</label>
+                        <div id="cvv" class="form-control"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cards mt-3">
+                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png" alt="VISA" />
+                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png" alt="American Express" />
+                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png" alt="Mastercard" />
+                  </div>
+
+                  <div v-if="nonce || error" class="advises mb-2 mt-2">
+                    <div class="alert alert-success" v-if="nonce">
+                      Il pagamento è andato a buon fine.
+                    </div>
+                    <div class="alert alert-danger" v-if="error" v-show="!nonce">
+                      Il pagamento è stato respinto. Riprova.
+                    </div>
+                  </div>
+                  <button v-if="nonce == ''" class="btn btn-primary mt-3" type="submit">
+                    Paga
+                  </button>
                 </form>
               </div>
               <!-- square -->
             </div>
             <!-- /dati consegna -->
-
-            <!-- pagamento -->
-            <div class="col-12">
-              <!-- square -->
-              <div class="square mb-3 p-4">
-                <form class="row g-3">
-                  <h4>Dettagli per il pagamento</h4>
-                  <div class="col-12">
-                    <label for="card" class="form-label"
-                      >Numero della carta</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="card"
-                      placeholder="Inserisci il numero della tua carta"
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="expireDate" class="form-label">Scadenza</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="expireDate"
-                      placeholder="Inserisci la data di scadenza della tua carta"
-                    />
-                  </div>
-
-                  <div class="col-md-6">
-                    <label for="cvv" class="form-label">CVV</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="cvv"
-                      placeholder="Inserisci il codice segreto della tua carta"
-                    />
-                  </div>
-
-                  <div class="col-12">
-                    <button type="submit" class="btn btn-primary">
-                      Procedi all'ordine
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <!-- /square -->
-            </div>
-            <!-- /pagamento -->
           </div>
         </div>
         <!-- /carrello  -->
@@ -482,6 +527,7 @@ export default {
   background-color: transparent;
   border: none;
   color: $color-10;
+
   .cart-badge {
     position: absolute;
     top: -10px;
@@ -499,6 +545,7 @@ export default {
     width: 100%;
   }
 }
+
 @media screen and (min-width: 1200px) {
   .offcanvas {
     width: 1200px !important;
