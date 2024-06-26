@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->string('name', 50)->after('id');
             $table->string('lastname', 50)->after('name');
+            $table->string('email')->after('lastname');
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('name');
             $table->dropColumn('lastname');
+            $table->dropColumn('email');
         });
     }
 };
