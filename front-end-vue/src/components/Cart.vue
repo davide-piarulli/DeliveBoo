@@ -8,22 +8,22 @@ export default {
       store,
 
       hostedFieldInstance: false,
-      nonce: "",
+      blockUpdate: false,
       error: "",
-      clientToken: "",
-      orderPassed: false,
+      clientToken: '',
 
       formData: {
         name: "",
         lastname: "",
-        amount: store.total,
+        amount: 0,
         shipment_address: "",
         city: "",
         state: "",
         cap: "",
         phone: "",
         notes: "",
-        products: store.cart
+        products: [],
+        transaction: '',
       },
     };
   },
@@ -41,23 +41,28 @@ export default {
         this.hostedFieldInstance
           .tokenize()
           .then((payload) => {
-            this.nonce = payload.nonce;
+            this.formData.transaction = payload.nonce;
+            this.formData.amount = store.total;
+            this.formData.products = store.cart;
+            this.sendOrder();
           })
           .catch((err) => {
             this.error = err.message;
           });
       }
-      if (this.nonce) {
-        this.status = true;
-      }
     },
 
     braintreeSystem() {
+      if (this.initializing) return;
+
+      this.initializing = true;
+
       braintree.client
         .create({
           authorization: this.clientToken,
         })
         .then((clientInstance) => {
+
           let options = {
             client: clientInstance,
             styles: {
@@ -81,22 +86,31 @@ export default {
               },
             },
           };
+
           return braintree.hostedFields.create(options);
         })
         .then((hostedFieldInstance) => {
           this.hostedFieldInstance = hostedFieldInstance;
+          this.blockUpdate = true;
+          this.initializing = false;
+        })
+        .catch((error) => {
+          console.error('Error initializing Braintree Hosted Fields:', error);
+          this.initializing = false;
         });
     },
 
+
     sendOrder() {
       axios
-        .post(store.apiUrl + "orders/get", this.formData)
+        .get(store.apiUrl + "orders/get", {
+          params: this.formData
+        })
         .then((res) => {
-          this.orderPassed = res.data;
-          console.log(res.data);
+          store.cart = [];
           if (res.data) {
-            localStorage.setItem("cart", JSON.stringify([]));
             store.cart = [];
+            localStorage.setItem("cart", JSON.stringify(store.cart));
           }
         })
         .catch(err => {
@@ -169,29 +183,8 @@ export default {
   },
 
   beforeUpdate() {
-    // if (this.nonce != "" || this.error != "") {
-    //   this.getOrderInfo();
-    // }
-
-    // if (this.nonce != "") {
-    //   this.$emit("orderPassed", true);
-    // }
-
-    // if (this.formData.name) {
-    //   this.sendOrder();
-    // }
-    if (this.clientToken != "") {
+    if (this.clientToken != '' && !this.blockUpdate) {
       this.braintreeSystem();
-    }
-
-    this.formData.amount = store.total;
-    this.formData.products = store.cart;
-  },
-
-  updated() {
-    if (this.orderPassed) {
-      localStorage.setItem("cart", JSON.stringify([]));
-      store.cart = [];
     }
   },
 
@@ -299,7 +292,7 @@ export default {
             <div class="col-12">
               <!-- square -->
               <div class="square mb-3 p-4" v-if="clientToken">
-                <form @submit.prevent="payWithCreditCard(); sendOrder()">
+                <form @submit.prevent="payWithCreditCard()">
                   <input type="hidden" name="amount" v-model="formData.amount">
                   <input type="hidden" name="products[]" v-model="formData.products">
                   <div class="row">
@@ -327,142 +320,142 @@ export default {
                         required="required" />
                     </div>
 
-                  <div class="mb-3 col-md-6 col-sm-12">
-                    <label for="customerAddress" class="form-label">Indirizzo</label>
-                    <input type="text" v-model="formData.shipment_address" class="form-control" id="customerAddress"
-                      minlength="5" maxlength="255" required="required" />
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="customerAddress" class="form-label">Indirizzo</label>
+                      <input type="text" v-model="formData.shipment_address" class="form-control" id="customerAddress"
+                        minlength="5" maxlength="255" required="required" name="shipment_address" />
+                    </div>
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="customerCity" class="form-label">Città</label>
+                      <input type="text" v-model="formData.city" name="city" class="form-control" id="customerCity"
+                        required="required" />
+                    </div>
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="inputState" class="form-label">Provincia</label>
+                      <select id="inputState" class="form-select" name="state" v-model="formData.state">
+                        <option selected>Scegli...</option>
+                        <option value="AG">Agrigento</option>
+                        <option value="AL">Alessandria</option>
+                        <option value="AN">Ancona</option>
+                        <option value="AO">Aosta</option>
+                        <option value="AR">Arezzo</option>
+                        <option value="AP">Ascoli Piceno</option>
+                        <option value="AT">Asti</option>
+                        <option value="AV">Avellino</option>
+                        <option value="BA">Bari</option>
+                        <option value="BT">Barletta-Andria-Trani</option>
+                        <option value="BL">Belluno</option>
+                        <option value="BN">Benevento</option>
+                        <option value="BG">Bergamo</option>
+                        <option value="BI">Biella</option>
+                        <option value="BO">Bologna</option>
+                        <option value="BZ">Bolzano</option>
+                        <option value="BS">Brescia</option>
+                        <option value="BR">Brindisi</option>
+                        <option value="CA">Cagliari</option>
+                        <option value="CL">Caltanissetta</option>
+                        <option value="CB">Campobasso</option>
+                        <option value="CI">Carbonia-Iglesias</option>
+                        <option value="CE">Caserta</option>
+                        <option value="CT">Catania</option>
+                        <option value="CZ">Catanzaro</option>
+                        <option value="CH">Chieti</option>
+                        <option value="CO">Como</option>
+                        <option value="CS">Cosenza</option>
+                        <option value="CR">Cremona</option>
+                        <option value="KR">Crotone</option>
+                        <option value="CN">Cuneo</option>
+                        <option value="EN">Enna</option>
+                        <option value="FM">Fermo</option>
+                        <option value="FE">Ferrara</option>
+                        <option value="FI">Firenze</option>
+                        <option value="FG">Foggia</option>
+                        <option value="FC">ForlÃ¬-Cesena</option>
+                        <option value="FR">Frosinone</option>
+                        <option value="GE">Genova</option>
+                        <option value="GO">Gorizia</option>
+                        <option value="GR">Grosseto</option>
+                        <option value="IM">Imperia</option>
+                        <option value="IS">Isernia</option>
+                        <option value="SP">La Spezia</option>
+                        <option value="AQ">L'Aquila</option>
+                        <option value="LT">Latina</option>
+                        <option value="LE">Lecce</option>
+                        <option value="LC">Lecco</option>
+                        <option value="LI">Livorno</option>
+                        <option value="LO">Lodi</option>
+                        <option value="LU">Lucca</option>
+                        <option value="MC">Macerata</option>
+                        <option value="MN">Mantova</option>
+                        <option value="MS">Massa-Carrara</option>
+                        <option value="MT">Matera</option>
+                        <option value="VS">Medio Campidano</option>
+                        <option value="ME">Messina</option>
+                        <option value="MI">Milano</option>
+                        <option value="MO">Modena</option>
+                        <option value="MB">Monza e Brianza</option>
+                        <option value="NA">Napoli</option>
+                        <option value="NO">Novara</option>
+                        <option value="NU">Nuoro</option>
+                        <option value="OG">Ogliastra</option>
+                        <option value="OT">Olbia-Tempio</option>
+                        <option value="OR">Oristano</option>
+                        <option value="PD">Padova</option>
+                        <option value="PA">Palermo</option>
+                        <option value="PR">Parma</option>
+                        <option value="PV">Pavia</option>
+                        <option value="PG">Perugia</option>
+                        <option value="PU">Pesaro e Urbino</option>
+                        <option value="PE">Pescara</option>
+                        <option value="PC">Piacenza</option>
+                        <option value="PI">Pisa</option>
+                        <option value="PT">Pistoia</option>
+                        <option value="PN">Pordenone</option>
+                        <option value="PZ">Potenza</option>
+                        <option value="PO">Prato</option>
+                        <option value="RG">Ragusa</option>
+                        <option value="RA">Ravenna</option>
+                        <option value="RC">Reggio Calabria</option>
+                        <option value="RE">Reggio Emilia</option>
+                        <option value="RI">Rieti</option>
+                        <option value="RN">Rimini</option>
+                        <option value="RM">Roma</option>
+                        <option value="RO">Rovigo</option>
+                        <option value="SA">Salerno</option>
+                        <option value="SS">Sassari</option>
+                        <option value="SV">Savona</option>
+                        <option value="SI">Siena</option>
+                        <option value="SR">Siracusa</option>
+                        <option value="SO">Sondrio</option>
+                        <option value="TA">Taranto</option>
+                        <option value="TE">Teramo</option>
+                        <option value="TR">Terni</option>
+                        <option value="TO">Torino</option>
+                        <option value="TP">Trapani</option>
+                        <option value="TN">Trento</option>
+                        <option value="TV">Treviso</option>
+                        <option value="TS">Trieste</option>
+                        <option value="UD">Udine</option>
+                        <option value="VA">Varese</option>
+                        <option value="VE">Venezia</option>
+                        <option value="VB">Verbania</option>
+                        <option value="VC">Vercelli</option>
+                        <option value="VR">Verona</option>
+                        <option value="VV">Vibo Valentia</option>
+                        <option value="VI">Vicenza</option>
+                        <option value="VT">Viterbo</option>
+                      </select>
+                    </div>
+                    <div class="mb-3 col-md-6 col-sm-12">
+                      <label for="customerZipCode" class="form-label">CAP</label>
+                      <input type="text" v-model="formData.cap" class="form-control" id="customerZipCode" minlength="5"
+                        maxlength="5" required="required" name="cap" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="note" class="form-label">Note sull'ordine</label>
+                      <textarea rows="5" class="form-control" name="notes" v-model="formData.notes"></textarea>
+                    </div>
                   </div>
-                  <div class="mb-3 col-md-6 col-sm-12">
-                    <label for="customerCity" class="form-label">Città</label>
-                    <input type="text" v-model="formData.city" class="form-control" id="customerCity"
-                      required="required" />
-                  </div>
-                  <div class="mb-3 col-md-6 col-sm-12">
-                    <label for="inputState" class="form-label">Provincia</label>
-                    <select id="inputState" class="form-select" name="state" v-model="formData.state">
-                      <option selected>Scegli...</option>
-                      <option value="AG">Agrigento</option>
-                      <option value="AL">Alessandria</option>
-                      <option value="AN">Ancona</option>
-                      <option value="AO">Aosta</option>
-                      <option value="AR">Arezzo</option>
-                      <option value="AP">Ascoli Piceno</option>
-                      <option value="AT">Asti</option>
-                      <option value="AV">Avellino</option>
-                      <option value="BA">Bari</option>
-                      <option value="BT">Barletta-Andria-Trani</option>
-                      <option value="BL">Belluno</option>
-                      <option value="BN">Benevento</option>
-                      <option value="BG">Bergamo</option>
-                      <option value="BI">Biella</option>
-                      <option value="BO">Bologna</option>
-                      <option value="BZ">Bolzano</option>
-                      <option value="BS">Brescia</option>
-                      <option value="BR">Brindisi</option>
-                      <option value="CA">Cagliari</option>
-                      <option value="CL">Caltanissetta</option>
-                      <option value="CB">Campobasso</option>
-                      <option value="CI">Carbonia-Iglesias</option>
-                      <option value="CE">Caserta</option>
-                      <option value="CT">Catania</option>
-                      <option value="CZ">Catanzaro</option>
-                      <option value="CH">Chieti</option>
-                      <option value="CO">Como</option>
-                      <option value="CS">Cosenza</option>
-                      <option value="CR">Cremona</option>
-                      <option value="KR">Crotone</option>
-                      <option value="CN">Cuneo</option>
-                      <option value="EN">Enna</option>
-                      <option value="FM">Fermo</option>
-                      <option value="FE">Ferrara</option>
-                      <option value="FI">Firenze</option>
-                      <option value="FG">Foggia</option>
-                      <option value="FC">ForlÃ¬-Cesena</option>
-                      <option value="FR">Frosinone</option>
-                      <option value="GE">Genova</option>
-                      <option value="GO">Gorizia</option>
-                      <option value="GR">Grosseto</option>
-                      <option value="IM">Imperia</option>
-                      <option value="IS">Isernia</option>
-                      <option value="SP">La Spezia</option>
-                      <option value="AQ">L'Aquila</option>
-                      <option value="LT">Latina</option>
-                      <option value="LE">Lecce</option>
-                      <option value="LC">Lecco</option>
-                      <option value="LI">Livorno</option>
-                      <option value="LO">Lodi</option>
-                      <option value="LU">Lucca</option>
-                      <option value="MC">Macerata</option>
-                      <option value="MN">Mantova</option>
-                      <option value="MS">Massa-Carrara</option>
-                      <option value="MT">Matera</option>
-                      <option value="VS">Medio Campidano</option>
-                      <option value="ME">Messina</option>
-                      <option value="MI">Milano</option>
-                      <option value="MO">Modena</option>
-                      <option value="MB">Monza e Brianza</option>
-                      <option value="NA">Napoli</option>
-                      <option value="NO">Novara</option>
-                      <option value="NU">Nuoro</option>
-                      <option value="OG">Ogliastra</option>
-                      <option value="OT">Olbia-Tempio</option>
-                      <option value="OR">Oristano</option>
-                      <option value="PD">Padova</option>
-                      <option value="PA">Palermo</option>
-                      <option value="PR">Parma</option>
-                      <option value="PV">Pavia</option>
-                      <option value="PG">Perugia</option>
-                      <option value="PU">Pesaro e Urbino</option>
-                      <option value="PE">Pescara</option>
-                      <option value="PC">Piacenza</option>
-                      <option value="PI">Pisa</option>
-                      <option value="PT">Pistoia</option>
-                      <option value="PN">Pordenone</option>
-                      <option value="PZ">Potenza</option>
-                      <option value="PO">Prato</option>
-                      <option value="RG">Ragusa</option>
-                      <option value="RA">Ravenna</option>
-                      <option value="RC">Reggio Calabria</option>
-                      <option value="RE">Reggio Emilia</option>
-                      <option value="RI">Rieti</option>
-                      <option value="RN">Rimini</option>
-                      <option value="RM">Roma</option>
-                      <option value="RO">Rovigo</option>
-                      <option value="SA">Salerno</option>
-                      <option value="SS">Sassari</option>
-                      <option value="SV">Savona</option>
-                      <option value="SI">Siena</option>
-                      <option value="SR">Siracusa</option>
-                      <option value="SO">Sondrio</option>
-                      <option value="TA">Taranto</option>
-                      <option value="TE">Teramo</option>
-                      <option value="TR">Terni</option>
-                      <option value="TO">Torino</option>
-                      <option value="TP">Trapani</option>
-                      <option value="TN">Trento</option>
-                      <option value="TV">Treviso</option>
-                      <option value="TS">Trieste</option>
-                      <option value="UD">Udine</option>
-                      <option value="VA">Varese</option>
-                      <option value="VE">Venezia</option>
-                      <option value="VB">Verbania</option>
-                      <option value="VC">Vercelli</option>
-                      <option value="VR">Verona</option>
-                      <option value="VV">Vibo Valentia</option>
-                      <option value="VI">Vicenza</option>
-                      <option value="VT">Viterbo</option>
-                    </select> 
-                  </div>
-                  <div class="mb-3 col-md-6 col-sm-12">
-                    <label for="customerZipCode" class="form-label">CAP</label>
-                    <input type="text" v-model="formData.cap" class="form-control" id="customerZipCode" minlength="5"
-                      maxlength="5" required="required" />
-                  </div>
-                  <div class="mb-3">
-                    <label for="note" class="form-label">Note sull'ordine</label>
-                    <textarea rows="5" class="form-control" name="notes" v-model="formData.notes"></textarea>
-                  </div>
-                </div>
                   <div class="form-group" v-if="store.subtotal != 0">
                     <h3>Totale: € {{ store.total }}</h3>
                   </div>
@@ -484,20 +477,23 @@ export default {
                     </div>
                   </div>
                   <div class="cards mt-3">
-                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png" alt="VISA" />
-                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png" alt="American Express" />
-                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png" alt="Mastercard" />
+                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png"
+                      alt="VISA" />
+                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png"
+                      alt="American Express" />
+                    <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png"
+                      alt="Mastercard" />
                   </div>
 
-                  <div v-if="nonce || error" class="advises mb-2 mt-2">
-                    <div class="alert alert-success" v-if="nonce">
+                  <div v-if="formData.transaction || error" class="advises mb-2 mt-2">
+                    <div class="alert alert-success" v-if="formData.transaction">
                       Il pagamento è andato a buon fine.
                     </div>
-                    <div class="alert alert-danger" v-if="error" v-show="!nonce">
+                    <div class="alert alert-danger" v-if="error" v-show="!formData.transaction">
                       Il pagamento è stato respinto. Riprova.
                     </div>
                   </div>
-                  <button v-if="nonce == ''" class="btn btn-primary mt-3" type="submit">
+                  <button v-if="formData.transaction == ''" class="btn btn-primary mt-3" type="submit">
                     Paga
                   </button>
                 </form>
@@ -518,7 +514,6 @@ export default {
 
 .square {
   min-height: 300px;
-  // border: 1px solid black;
   background-color: $color-7;
   border-radius: 2%;
 }

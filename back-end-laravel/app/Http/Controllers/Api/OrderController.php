@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Braintree\Gateway;
 use App\Mail\NewOrder;
 use App\Models\Order;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -24,6 +25,7 @@ class OrderController extends Controller
   }
 
   public function store_order(Request $request, Gateway $gateway) {
+
 
     $form_data = $request->all();
 
@@ -83,30 +85,28 @@ class OrderController extends Controller
         $result = $gateway->transaction()->sale([
             'customerId' => $customer_id,
             'amount' => $order->amount,
-            'paymentMethodNonce' => $order->transation_id,
+            'paymentMethodNonce' => $form_data['transaction'],
             'options' => [
                 'submitForSettlement' => true,
             ],
         ]);
 
+        // dd($result);
+
         if($result->success) {
           $data = [
               'success' => true,
-              'message' => 'Transaction was successful',
-              'formData' => $form_data,
-              'gateway' => $gateway,
+              'message' => 'Transaction was successful'
           ];
 
-          Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewOrder($new_order));
+          Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewOrder($order));
 
           return response()->json($data, 200);
 
       } else{
           $data = [
               'success' => false,
-              'message' => 'Transaction failed',
-              'formData' => $form_data,
-              'gateway' => $gateway,
+              'message' => 'Transaction failed'
           ];
           return response()->json($data, 401);
       }

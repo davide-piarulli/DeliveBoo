@@ -23,4 +23,4 @@ Route::get('/restaurant-detail/{slug}', [ApiController::class, 'getReustarantDet
 
 // Rotte ordini
 Route::get('orders/generate', [OrderController::class, 'generate']);
-Route::post('orders/get', [OrderController::class, 'store_order']);
+Route::get('orders/get', [OrderController::class, 'store_order']);
