@@ -80,6 +80,8 @@ class OrderController extends Controller
             'phone' => $order->phone,
         ]);
 
+        $email = $order->email;
+
         $customer_id = $result->customer->id;
 
         $result = $gateway->transaction()->sale([
@@ -91,15 +93,13 @@ class OrderController extends Controller
             ],
         ]);
 
-        // dd($result);
-
         if($result->success) {
           $data = [
               'success' => true,
               'message' => 'Transaction was successful'
           ];
 
-          Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewOrder($order));
+          Mail::to($email)->send(new NewOrder($order));
 
           return response()->json($data, 200);
 
