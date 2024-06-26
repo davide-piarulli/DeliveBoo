@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <table class="table table-striped table-bordered" id="products-table">
+    <table class="table table-striped table-bordered" id="orders-table">
       <thead>
         <tr>
 
@@ -29,10 +29,10 @@
       <tbody>
         @foreach ($orders as $order)
           <tr>
-            <td>#{{ $order->id }}</td>
-            <td>{{ $order->created_at }}</td>
-            <td>{{ $order->name }}</td>
-            <td>{{ $order->lastname }}</td>
+            <td class="order-id">#{{ $order->id }}</td>
+            <td class="order-date">{{ $order->created_at }}</td>
+            <td class="order-name">{{ $order->name }}</td>
+            <td class="order-lastname">{{ $order->lastname }}</td>
             <td>{{ $order->amount }}</td>
             <td>
               <div class="d-flex">
@@ -50,5 +50,26 @@
 
   </div>
 
-  <script></script>
+  <script>
+    document.getElementById('search-input').addEventListener('keyup', filterOrders);
+    document.getElementById('search-button').addEventListener('click', filterOrders);
+
+    function filterOrders() {
+      const searchValue = document.getElementById('search-input').value.toLowerCase();
+      const ordersTable = document.getElementById('orders-table');
+      const rows = ordersTable.getElementsByTagName('tr');
+
+      for (let i = 1; i < rows.length; i++) {
+        const name = rows[i].getElementsByClassName('order-name')[0].innerText.toLowerCase();
+        const lastname = rows[i].getElementsByClassName('order-lastname')[0].innerText.toLowerCase();
+        const id = rows[i].getElementsByClassName('order-id')[0].innerText.toLowerCase();
+
+        if (name.includes(searchValue) || lastname.includes(searchValue) || id.includes(searchValue)) {
+          rows[i].style.display = '';
+        } else {
+          rows[i].style.display = 'none';
+        }
+      }
+    }
+  </script>
 @endsection
