@@ -29,6 +29,8 @@ class OrderController extends Controller
 
     $form_data = $request->all();
 
+
+
     $validator = Validator::make($form_data,
         [
           'amount' => 'required|numeric|min:1|max:999',
@@ -99,7 +101,7 @@ class OrderController extends Controller
               'message' => 'Transaction was successful'
           ];
 
-          Mail::to(env('MAIL_FROM_ADDRESS'))->send(new NewOrder($order));
+          // Mail::to('suca@gmail.com')->send(new NewOrder($order));
 
           return response()->json($data, 200);
 
