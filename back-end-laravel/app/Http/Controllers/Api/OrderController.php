@@ -29,6 +29,8 @@ class OrderController extends Controller
 
     $form_data = $request->all();
 
+
+
     $validator = Validator::make($form_data,
         [
           'amount' => 'required|numeric|min:1|max:999',

@@ -3,22 +3,24 @@
 @section('content')
     <h2 class="text-center">Nell'archivio ci sono: {{ $n_products }} prodotti</h2>
 
-    <h1>{{ $chart1->options['chart_title'] }}</h1>
     <div class="container d-flex">
-      <div class="w-50">
-         {!! $chart1->renderHtml() !!}
-      </div>
-      <div class="w-50">
-         {!! $chart2->renderHtml() !!}
-      </div>
+        <div style="width: 75%; margin: auto;">
+            {!! $charts->container() !!}
+          </div>
+
+          <div style="width: 75%; margin: auto;">
+          </div>
+          {!! $amounts->container() !!}
+
+        {{-- @php
+          dd($charts->script());
+      @endphp --}}
 
     </div>
-
-
 @endsection
 
 @section('scripts')
-    {!! $chart1->renderJs() !!}
-    {!! $chart2->renderJs() !!}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    {!! $charts->script() !!}
+    {!! $amounts->script() !!}
 @endsection
-
