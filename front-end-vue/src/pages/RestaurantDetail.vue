@@ -22,6 +22,7 @@ export default {
         .then(res => {
           this.isLoading = false;
           this.restaurant = res.data;
+          console.log(this.restaurant);
         })
         .catch(err => {
           console.log(err.message);
@@ -30,6 +31,7 @@ export default {
   },
   mounted(){
     this.getApi(store.apiUrl, this.$route.params.slug);
+    console.log(this.getApi);
   }
 };
 </script>

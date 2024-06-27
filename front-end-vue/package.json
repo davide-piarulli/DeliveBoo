@@ -12,6 +12,7 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "braintree-web": "^3.102.0",
+    "swiper": "^11.1.4",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
