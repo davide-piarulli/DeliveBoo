@@ -44,7 +44,6 @@ export default {
       axios
         .get(apiUrl + endpoint, {
           params: { 
-            // searched: store.restaurantToSearch === '' ? null : store.restaurantToSearch,
             filters: this.filters
           },
         })

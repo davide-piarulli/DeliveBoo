@@ -32,25 +32,25 @@ class OrderController extends Controller
 
 
     $validator = Validator::make($form_data,
-        [
-          'amount' => 'required|numeric|min:1|max:999',
-          'address' => 'required|min:5|max:255',
-          'phone' => 'required|numeric|digits:10',
-          'notes' => 'max:1000'
-        ],
-        [
-          'amount.required' => 'Selezionare almeno un prodotto',
-          'amount.max' => 'L\'importo non può essere superiore a :max euro.',
+        // [
+        //   'amount' => 'required|numeric|min:1|max:999',
+        //   'address' => 'required|min:5|max:255',
+        //   'phone' => 'required|numeric|digits:10',
+        //   'notes' => 'max:1000'
+        // ],
+        // [
+        //   'amount.required' => 'Selezionare almeno un prodotto',
+        //   'amount.max' => 'L\'importo non può essere superiore a :max euro.',
 
-          'address.required' => 'L\'indirizzo di spedizione è obbligatorio.',
-          'address.min' => 'L\'indirizzo di spedizione deve avere almeno :min caratteri.',
-          'address.max' => 'L\'indirizzo di spedizione non può superare i :max caratteri.',
+        //   'address.required' => 'L\'indirizzo di spedizione è obbligatorio.',
+        //   'address.min' => 'L\'indirizzo di spedizione deve avere almeno :min caratteri.',
+        //   'address.max' => 'L\'indirizzo di spedizione non può superare i :max caratteri.',
 
-          'phone.required' => 'Il numero di telefono è obbligatorio.',
-          'phone.digits' => 'Il numero di telefono deve essere composto da :digits cifre.',
+        //   'phone.required' => 'Il numero di telefono è obbligatorio.',
+        //   'phone.digits' => 'Il numero di telefono deve essere composto da :digits cifre.',
 
-          'notes.max' => 'Le note non possono superare i :max caratteri.',
-        ]
+        //   'notes.max' => 'Le note non possono superare i :max caratteri.',
+        // ]
       );
 
       if($validator->fails()){
