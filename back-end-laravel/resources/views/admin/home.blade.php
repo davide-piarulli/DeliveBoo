@@ -3,14 +3,15 @@
 @section('content')
     <h2 class="text-center">Nell'archivio ci sono: {{ $n_products }} prodotti</h2>
 
-    <div class="container d-flex">
+    <div class="container">
         <div style="width: 75%; margin: auto;">
             {!! $charts->container() !!}
           </div>
 
           <div style="width: 75%; margin: auto;">
+            {!! $amounts->container() !!}
           </div>
-          {!! $amounts->container() !!}
+
 
         {{-- @php
           dd($charts->script());

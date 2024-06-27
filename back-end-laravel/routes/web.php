@@ -21,9 +21,8 @@ Route::middleware(['auth', 'verified'])
   ->group(function () {
 
     // Dashboard e profilo
-    // Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');         // commentata per mostrare direttamente i prodotti
-    Route::get('/dashboard', [DashBoardController::class, 'index'])->name('dashboard');   // rimuovere e decommentare la prima rotta per mostrare la dashboard come homepage
-    Route::get('/', [ProductController::class, 'index']);
+    Route::get('/', [DashBoardController::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
     // Rotte CRUD prodotti

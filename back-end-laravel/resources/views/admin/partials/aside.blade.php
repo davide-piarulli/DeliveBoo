@@ -1,4 +1,4 @@
-<aside class="bg-dark">
+<aside class="bg-dark d-none d-lg-block">
   <nav>
     <ul>
       <li class="nav-item my-4">
