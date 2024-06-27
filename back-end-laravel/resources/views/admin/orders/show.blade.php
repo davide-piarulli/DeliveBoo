@@ -2,18 +2,31 @@
 
 @section('content')
   <div class="container">
-    <h1 class="my-3">Ordine n: {{ $order->id }}</h1>
+    <h1 class="my-3">Ordine n: #{{ $order->id }}</h1>
     <div class="customer-details">
       <h3>Anagrafica cliente</h3>
-      <h5>Cliente: {{ $order->name }} {{ $order->lastname }}</h5>
-      <h5>Email: {{ $order->email }}</h5>
-      <h5>Telefono: {{ $order->phone }}</h5>
-      <h5>Indirizzo di consegna: {{ $order->shipment_address }}</h5>
-      <h5>Note: {{ $order->notes }}</h5>
+      <ul>
+        <li>
+          <h5>Cliente: {{ $order->name }} {{ $order->lastname }}</h5>
+        </li>
+        <li>
+          <h5>Email: {{ $order->email }}</h5>
+        </li>
+        <li>
+          <h5>Telefono: {{ $order->phone }}</h5>
+        </li>
+        <li>
+          <h5>Indirizzo di consegna: {{ $order->address }}, {{ $order->postal_code }}, {{ $order->city }},
+            {{ $order->state }}</h5>
+        </li>
+        <li>
+          <h5>Note: {{ $order->notes }}</h5>
+        </li>
+      </ul>
     </div>
 
     {{-- tabella prodotti ordinati --}}
-    <div class="order-products m-3">
+    <div class="order-products my-3">
       <h2>Dettaglio prodotti ordinati</h2>
       <table class="table table-striped table-bordered" id="products-table">
         <thead>
@@ -34,7 +47,7 @@
               <td class="text-center">{{ $product->pivot->quantity }}</td>
               <td>{{ $product->name }}</td>
               <td>{{ $product->description }}</td>
-              <td>€ {{ number_format($product->pivot->quantity * $product->price, 2, ',', "") }}</td>
+              <td>€ {{ number_format($product->pivot->quantity * $product->price, 2, ',', '') }}</td>
             </tr>
           @endforeach
           <tr>
@@ -43,7 +56,7 @@
           </tr>
           <tr>
             <td colspan="4">Totale</td>
-            <td>€ {{ number_format($order->amount, 2, ',', "") }}</td>
+            <td>€ {{ number_format($order->amount, 2, ',', '') }}</td>
           </tr>
         </tbody>
       </table>
