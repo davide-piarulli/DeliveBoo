@@ -16,10 +16,10 @@ export default {
         name: "",
         lastname: "",
         amount: 0,
-        shipment_address: "",
+        address: "",
         city: "",
         state: "",
-        cap: "",
+        postal_code: "",
         phone: "",
         notes: "",
         products: [],
@@ -326,8 +326,8 @@ export default {
 
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerAddress" class="form-label">Indirizzo</label>
-                      <input type="text" v-model="formData.shipment_address" class="form-control" id="customerAddress"
-                        minlength="5" maxlength="255" required="required" name="shipment_address" />
+                      <input type="text" v-model="formData.address" class="form-control" id="customerAddress"
+                        minlength="5" maxlength="255" required="required" name="address" />
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerCity" class="form-label">Città</label>
@@ -452,8 +452,8 @@ export default {
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerZipCode" class="form-label">CAP</label>
-                      <input type="text" v-model="formData.cap" class="form-control" id="customerZipCode" minlength="5"
-                        maxlength="5" required="required" name="cap" />
+                      <input type="text" v-model="formData.postal_code" class="form-control" id="customerZipCode" minlength="5"
+                        maxlength="5" required="required" name="postal_code" />
                     </div>
                     <div class="mb-3">
                       <label for="note" class="form-label">Note sull'ordine</label>
