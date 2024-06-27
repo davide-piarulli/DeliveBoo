@@ -34,7 +34,7 @@ class OrderController extends Controller
     $validator = Validator::make($form_data,
         [
           'amount' => 'required|numeric|min:1|max:999',
-          'shipment_address' => 'required|min:5|max:255',
+          'address' => 'required|min:5|max:255',
           'phone' => 'required|numeric|digits:10',
           'notes' => 'max:1000'
         ],
@@ -42,9 +42,9 @@ class OrderController extends Controller
           'amount.required' => 'Selezionare almeno un prodotto',
           'amount.max' => 'L\'importo non può essere superiore a :max euro.',
 
-          'shipment_address.required' => 'L\'indirizzo di spedizione è obbligatorio.',
-          'shipment_address.min' => 'L\'indirizzo di spedizione deve avere almeno :min caratteri.',
-          'shipment_address.max' => 'L\'indirizzo di spedizione non può superare i :max caratteri.',
+          'address.required' => 'L\'indirizzo di spedizione è obbligatorio.',
+          'address.min' => 'L\'indirizzo di spedizione deve avere almeno :min caratteri.',
+          'address.max' => 'L\'indirizzo di spedizione non può superare i :max caratteri.',
 
           'phone.required' => 'Il numero di telefono è obbligatorio.',
           'phone.digits' => 'Il numero di telefono deve essere composto da :digits cifre.',
@@ -58,8 +58,6 @@ class OrderController extends Controller
         $errors = $validator->errors();
         return response()->json(compact('success', 'errors'));
       }
-
-      $form_data['shipment_address'] = $form_data['shipment_address'] . ', ' . $form_data['city'] . ', ' . $form_data['state'] . ', ' . $form_data['cap'];
 
       $new_order = new Order();
       $new_order->fill($form_data);
