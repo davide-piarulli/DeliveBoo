@@ -1,105 +1,107 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Accedi') }}</div>
 
-                <div class="card-body">
-                    <form onsubmit="submitForm(event)" id="form" method="POST" action="{{ route('login') }}">
-                        @csrf
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <form onsubmit="submitForm(event)" id="form" method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div class="mb-md-5 mt-md-4 pb-5">
 
-                        <div class="mb-4 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail *') }}</label>
+                                    <h2 class="fw-bold mb-2 text-uppercase">{{ __('Accedi') }}</h2>
+                                    <p class="text-white-50 mb-5">Inserisci i tui dati !</p>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                <span id="emailError" class="error" class="invalid-feedback" role="alert"></span><br>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                        <label class="form-label" for="email">{{ __('E-Mail *') }}</label>
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                        <span id="emailError" class="error" class="invalid-feedback"
+                                            role="alert"></span><br>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
 
-                        <div class="mb-4 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
+                                    <div data-mdb-input-init class="form-outline form-white mb-4">
+                                      <label class="form-label" for="email">{{ __('Password *') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            required autocomplete="current-password">
 
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+                                        @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
 
-                        <div class="mb-4 row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Ricordami') }}
-                                    </label>
+                                    @if (Route::has('password.request'))
+                                        <p class="small mb-5 pb-lg-2"><a class="btn text-decoration-none text-white btn-link"
+                                                href="{{ route('password.request') }}">
+                                                {{ __('Password dimenticata?') }}
+                                            </a></p>
+                                    @endif
+                                    <button data-mdb-button-init data-mdb-ripple-init
+                                        class="btn btn-outline-light btn-lg px-5" type="submit">{{ __('Accedi') }}</button>
+
+                                    <div class="d-flex justify-content-center text-center mt-4 pt-1">
+                                        <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                                        <a href="#!" class="text-white"><i
+                                                class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+                                        <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+                                    </div>
+
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="mb-4 row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Accedi') }}
-                                </button>
+                                <div>
+                                    <p class="mb-0">Non hai un Account? <a href="{{route('register')}}"
+                                            class="text-white-50 fw-bold">Registrati</a>
+                                    </p>
+                                </div>
 
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Password dimenticata?') }}
-                                </a>
-                                @endif
-                            </div>
+                            </form>
+
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
-<script>
+    <script>
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(String(email).toLowerCase());
+        }
 
-  function validateEmail(email) {
-      const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      return re.test(String(email).toLowerCase());
-  }
+        function submitForm(event) {
 
-  function submitForm(event) {
+            event.preventDefault();
+            document.getElementById('emailError').textContent = '';
 
-    event.preventDefault();
-    document.getElementById('emailError').textContent = '';
+            const form = document.getElementById('form');
+            const email = document.getElementById('email').value.trim();
 
-    const form = document.getElementById('form');
-    const email = document.getElementById('email').value.trim();
+            isFormValid = true;
 
-    isFormValid = true;
+            if (!validateEmail(email)) {
+                document.getElementById('emailError').textContent = 'Email non valida!';
+                isFormValid = false;
+            }
 
-    if (!validateEmail(email)){
-      document.getElementById('emailError').textContent = 'Email non valida!';
-      isFormValid = false;
-    }
+            if (isFormValid) {
+                form.submit();
+            }
 
-    if (isFormValid) {
-        form.submit();
-    }
-
-  }
-
-</script>
-
-
+        }
+    </script>
 @endsection

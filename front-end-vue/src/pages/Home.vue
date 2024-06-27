@@ -5,6 +5,7 @@ import Jumbotron from "../components/Jumbotron.vue";
 import Button from "../components/partials/Button.vue";
 import RestaurantCard from "../components/partials/RestaurantCard.vue";
 import Loader from '../components/partials/Loader.vue';
+import Carousel from '../components/partials/Carousel.vue';
 
 export default {
   name: "Home",
@@ -23,7 +24,8 @@ export default {
     Button,
     RestaurantCard,
     Jumbotron,
-    Loader
+    Loader,
+    Carousel
   },
 
   methods: {
@@ -84,6 +86,15 @@ export default {
       id="restaurants"
       class="container d-flex flex-column justify-content-center py-5"
     >
+
+      <!-- CAROUSEL -->
+      <div>
+        <Carousel
+          :restaurants="restaurants"
+        />
+      </div>
+      <!-- END CAROUSEL  -->
+
       <div class="title d-flex justify-content-center">
         <h1 class="mb-4">Tipi di ristorante:</h1>
       </div>
