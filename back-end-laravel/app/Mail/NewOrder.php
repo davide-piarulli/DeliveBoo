@@ -11,46 +11,46 @@ use Illuminate\Queue\SerializesModels;
 
 class NewOrder extends Mailable
 {
-    use Queueable, SerializesModels;
+  use Queueable, SerializesModels;
 
-    public $order;
+  public $order;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct($_order)
-    {
-        $this->order = $_order;
-    }
+  /**
+   * Create a new message instance.
+   */
+  public function __construct($_order)
+  {
+    $this->order = $_order;
+  }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-          subject: 'Ordine avvenuto con successo',
-          replyTo: $this->order->email
-        );
-    }
+  /**
+   * Get the message envelope.
+   */
+  public function envelope(): Envelope
+  {
+    return new Envelope(
+      subject: 'Ordine avvenuto con successo',
+      replyTo: $this->order->email
+    );
+  }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'emails.new_order',
-        );
-    }
+  /**
+   * Get the message content definition.
+   */
+  public function content(): Content
+  {
+    return new Content(
+      view: 'emails.new_order',
+    );
+  }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
+  /**
+   * Get the attachments for the message.
+   *
+   * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+   */
+  public function attachments(): array
+  {
+    return [];
+  }
 }
