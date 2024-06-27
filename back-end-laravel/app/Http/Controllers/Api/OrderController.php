@@ -88,41 +88,38 @@ class OrderController extends Controller
 
     } else {
 
-      $new_order = new Order();
-      $new_order->fill($form_data);
-      $new_order->save();
-
-      $order_id = $new_order->id;
-
-      $order = Order::find($order_id);
-
-      $pivotData = [];
-      foreach ($form_data['products'] as $product) {
-        $pivotData[$product['id']] = ['quantity' => $product['quantity']];
-      }
-      $order->products()->attach($pivotData);
-
       $result = $gateway->customer()->create([
-        'firstName' => $order->name,
-        'lastName' => $order->lastname,
-        'email' => $order->email,
-        'phone' => $order->phone,
+        'firstName' => $form_data['name'],
+        'lastName' => $form_data['lastname'],
+        'email' => $form_data['email'],
+        'phone' => $form_data['phone'],
       ]);
-
-      $email = $order->email;
 
       $customer_id = $result->customer->id;
 
       $result = $gateway->transaction()->sale([
         'customerId' => $customer_id,
-        'amount' => $order->amount,
+        'amount' => $form_data['amount'],
         'paymentMethodNonce' => $form_data['transaction'],
         'options' => [
           'submitForSettlement' => true,
         ],
       ]);
 
-      if ($result->success) {
+      if ($result->success && !empty($form_data['products'])) {
+
+        $new_order = new Order();
+        $new_order->fill($form_data);
+        $new_order->save();
+
+        $order = Order::find($new_order->id);
+
+        $pivotData = [];
+        foreach ($form_data['products'] as $product) {
+          $pivotData[$product['id']] = ['quantity' => $product['quantity']];
+        }
+        $order->products()->attach($pivotData);
+
         $data = [
           'success' => true,
           'message' => 'Transaction was successful',
@@ -130,10 +127,11 @@ class OrderController extends Controller
           'data' => $form_data
         ];
 
-        Mail::to($email)->send(new NewOrder($order));
-
+        Mail::to($order->email)->send(new NewOrder($order));
         return response()->json($data, 200);
+
       } else {
+
         $data = [
           'success' => false,
           'message' => 'Transaction failed',
@@ -141,6 +139,7 @@ class OrderController extends Controller
           'data' => $form_data
         ];
         return response()->json($data, 401);
+
       }
 
     }

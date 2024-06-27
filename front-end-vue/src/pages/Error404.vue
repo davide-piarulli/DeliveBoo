@@ -2,6 +2,12 @@
 <script>
   export default {
     name: 'error404',
+    mounted(){
+      document.body.classList.add('overflow-hidden')
+    },
+    beforeUnmount() {
+      document.body.classList.remove('overflow-hidden');
+    }
   }
 </script>
 

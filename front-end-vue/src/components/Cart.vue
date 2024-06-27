@@ -8,13 +8,15 @@ export default {
       store,
 
       hostedFieldInstance: false,
-      blockUpdate: false,
       clientToken: '',
+      success: "",
       error: "",
-
+      order: {},
+      
       formData: {
         name: "",
         lastname: "",
+        email: "",
         amount: 0,
         address: "",
         city: "",
@@ -22,8 +24,8 @@ export default {
         postal_code: "",
         phone: "",
         notes: "",
+        transaction: "",
         products: [],
-        transaction: '',
       },
     };
   },
@@ -38,7 +40,6 @@ export default {
     },
 
     payWithCreditCard() {
-      console.log('pago 2');
       if (this.hostedFieldInstance) {
         this.hostedFieldInstance
           .tokenize()
@@ -49,13 +50,12 @@ export default {
             this.sendOrder();
           })
           .catch((err) => {
-            this.error = err.message;
+            console.log(err.message);
           });
       }
     },
 
     braintreeSystem() {
-      console.log('inizializzo 1');
       if (this.initializing) return;
 
       this.initializing = true;
@@ -95,7 +95,6 @@ export default {
         })
         .then((hostedFieldInstance) => {
           this.hostedFieldInstance = hostedFieldInstance;
-          this.blockUpdate = true;
           this.initializing = false;
         })
         .catch((error) => {
@@ -106,20 +105,25 @@ export default {
 
 
     sendOrder() {
-      console.log('salvo 3');
       axios
         .get(store.apiUrl + "orders/get", {
           params: this.formData
         })
         .then(res => {
-          console.log(res.data);
-          if (res.data) {
-            store.cart = [];
-            localStorage.setItem("cart", JSON.stringify(store.cart));
+          this.success = res.data.success;
+          this.order = res.data.data;
+          console.log(this.success, this.order);
+          if (this.success) {
+          store.cart = [];
+          store.subtotal = 0;
+          store.total = 0;
+          localStorage.setItem("cart", JSON.stringify(store.cart));
+          this.$router.push({ name: 'orderSuccess' });
           }
         })
         .catch(err => {
-          console.log(err.message);
+          this.error = err.message;
+          console.log(this.error);
         })
     },
 
@@ -181,7 +185,12 @@ export default {
       store.cart = cart;
       this.updatePrice();
     },
+
+    locationReload(){
+      location.reload();
+    }
   },
+  
 
   created() {
     this.getClientToken();
@@ -206,7 +215,7 @@ export default {
 
     <div class="offcanvas w-100 offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">Carrello</h5>
+        <h5 class="offcanvas-title ps-3" id="offcanvasRightLabel">Carrello</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -293,7 +302,7 @@ export default {
             <!-- Dati di consegna -->
             <div class="col-12">
               <!-- square -->
-              <div class="square mb-3 p-4" v-if="clientToken">
+              <div class="square mb-3 p-4" v-if="clientToken" :class="{'d-none' : store.cart.length === 0}">
                 <form @submit.prevent="payWithCreditCard()">
                   <input type="hidden" name="amount" v-model="formData.amount">
                   <input type="hidden" name="products[]" v-model="formData.products">
@@ -496,15 +505,15 @@ export default {
                   </div>
 
                   <div v-if="formData.transaction || error" class="advises mt-3">
-                    <div class="alert alert-success m-0" v-if="formData.transaction">
+                    <div class="alert alert-success m-0" v-if="formData.transaction != '' && success">
                       Il pagamento è andato a buon fine.
                     </div>
-                    <div class="alert alert-danger m-0" v-if="error" v-show="!formData.transaction">
-                      Il pagamento è stato respinto. Riprova.
+                    <div class="alert alert-danger m-0" v-if="formData.transaction != '' && error != ''">
+                      Il pagamento è stato respinto. <span class="cp hov-underline" @click="locationReload()">Riprova.</span>
                     </div>
                   </div>
-                  <button v-if="formData.transaction == ''" class="btn btn-primary mt-3" type="submit">
-                    Paga
+                  <button v-if="formData.transaction == ''" class="btn btn-warning mt-3" type="submit">
+                    Acquista
                   </button>
                 </form>
               </div>
