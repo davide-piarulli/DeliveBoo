@@ -79,21 +79,20 @@ export default {
 
 <template>
   <div>
-    <Jumbotron />
+    <Jumbotron v-if="!isLoading" />
+
+    <div class="container mt-5 w-50" v-if="!isLoading">
+      <Carousel
+        :restaurants="restaurants"
+      />
+    </div>
+
     <Loader v-if="isLoading"/>
     <section
-      v-else
+      v-if="!isLoading"
       id="restaurants"
       class="container d-flex flex-column justify-content-center py-5"
     >
-
-      <!-- CAROUSEL -->
-      <div>
-        <Carousel
-          :restaurants="restaurants"
-        />
-      </div>
-      <!-- END CAROUSEL  -->
 
       <div class="title d-flex justify-content-center">
         <h1 class="mb-4">Tipi di ristorante:</h1>

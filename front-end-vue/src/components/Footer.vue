@@ -1,6 +1,10 @@
 <script>
 export default {
-
+  data(){
+    return{
+      newsletter: ''
+    }
+  }
 }
 </script>
 
@@ -27,23 +31,17 @@ export default {
         </div>
         <div class="col-lg-4">
           <h3 class="text-white mb-3">Iscriviti alla nostra Newsletter</h3>
-          <form @submit.prevent="" action="#" method="POST">
+          <form @submit.prevent="newsletter = ''" action="#" method="POST">
             <div>
-              <input type="email" name="email" class="form-control mb-3" placeholder="Email">
+              <input type="email" name="email" class="form-control mb-3" placeholder="Email" v-model="newsletter">
               <button class="btn btn-primary" type="submit">Iscriviti</button>
             </div>
           </form>
-          <h6 class="text-white mt-3">Accettiamo questi metodi di pagamento</h6>
+          <h6 class="text-white mt-3">Metodi di pagamento:</h6>
           <div>
-            <a href="#"><img
-                src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png"
-                alt="VISA"></a>
-            <a href="#"><img
-                src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png"
-                alt="American Express"></a>
-            <a href="#"><img
-                src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png"
-                alt="Mastercard"></a>
+            <a href="#" class="me-2"><img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png" alt="VISA"></a>
+            <a href="#" class="me-2"><img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png" alt="American Express"></a>
+            <a href="#"><img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png" alt="Mastercard"></a>
           </div>
         </div>
       </div>

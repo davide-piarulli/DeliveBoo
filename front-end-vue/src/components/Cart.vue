@@ -283,7 +283,7 @@ export default {
             <!-- Riepilogo Ordine -->
             <div class="col-12 col-xl-4">
               <!-- square -->
-              <div class="square mb-3 p-4">
+              <div class="square mb-3 p-4" :class="{'d-none' : store.cart.length === 0}">
                 <div class="bg-white rounded-1 p-2">
                   <h5>Riepilogo ordine</h5>
                   <div v-if="store.subtotal != 0">

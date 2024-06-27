@@ -23,7 +23,7 @@ export default {
     },
   },
 
-  components:{
+  components: {
 
     Cart
 
@@ -35,71 +35,45 @@ export default {
   <header>
     <nav class="navbar h-100">
       <div class="container">
-        <router-link :to="{ name: 'home' }" class="navbar-brand">
-          <img
-            src="/logo-text.png"
-            alt="Logo"
-            width="200px"
-            height="80px"
-            class="d-inline-block align-text-top"
-          />
+
+        <router-link :to="{ name: 'home' }" class="navbar-brand m-0">
+          <img src="/logo-text.png" alt="Logo" width="200px" height="80px" class="d-inline-block align-text-top" />
         </router-link>
 
         <ul class="m-0 p-0 d-flex align-items-center">
-          <li
-            class="mx-4 link-info link-offset-2 d-none d-lg-inline-block fs-5"
-          >
-            <router-link
-              class="text-white text-decoration-none"
-              :to="{ name: 'home' }"
-              ><i class="fa-solid fa-house"></i> Home</router-link
-            >
-          </li>
-          <li
-            class="mx-4 link-info link-offset-2 d-none d-lg-inline-block fs-5"
-          >
-            <router-link class="text-white text-decoration-none" to="#"
-              ><i class="fa-solid fa-utensils"></i> Ristoranti</router-link
-            >
+          <li class="me-3 link-info link-offset-2 fs-5">
+            <router-link class="text-white text-decoration-none" :to="{ name: 'home' }">
+              <i class="fa-solid fa-house"></i><span class="d-none d-md-inline"> Home</span>
+            </router-link>
           </li>
 
-          <li :class="{ 'd-none': isMenuClicked, 'me-4 fs-2 d-lg-none': true }">
-            <a
-              @click="handleMenuClick"
-              class="d-flex text-white text-decoration-none cp"
-            >
+          <!-- <li :class="{ 'd-none': isMenuClicked, 'me-4 fs-2 d-lg-none': true }">
+            <a @click="handleMenuClick" class="d-flex text-white text-decoration-none cp">
               <span class="fs-5">
                 <i class="fa-solid fa-bars"></i>
               </span>
             </a>
-          </li>
+          </li> -->
 
-          <li class=" fs-4">
+          <li class="fs-4">
             <Cart />
           </li>
 
-          <div
-            class="b_menu d-flex flex-column d-lg-none text-end"
-            :class="{ b_menu_active: isOpen }"
-          >
+          <!-- <div class="b_menu d-flex flex-column d-lg-none text-end" :class="{ b_menu_active: isOpen }">
             <div>
               <span @click="toggleMenu" class="text-white d-inline-block p-2">
                 <i class="fa-solid fa-xmark"></i>
               </span>
             </div>
             <div
-              class="searchbar my-3 d-flex flex-column px-3 justify-content-around justify-content-center align-items-center"
-            >
-              <router-link
-                class="text-white text-decoration-none"
-                :to="{ name: 'home' }"
-                ><i class="fa-solid fa-house"></i> Home</router-link
-              >
-              <router-link class="text-white text-decoration-none" to="#"
-                ><i class="fa-solid fa-utensils"></i> Ristoranti</router-link
-              >
+              class="searchbar my-3 d-flex flex-column px-3 justify-content-around justify-content-center align-items-center">
+              <router-link class="text-white text-decoration-none" :to="{ name: 'home' }"><i
+                  class="fa-solid fa-house"></i> Home</router-link>
+              <router-link class="text-white text-decoration-none" to="#"><i class="fa-solid fa-utensils"></i>
+                Ristoranti</router-link>
             </div>
-          </div>
+          </div> -->
+
         </ul>
       </div>
     </nav>
@@ -114,11 +88,14 @@ header {
   width: 100%;
   z-index: 997;
   top: 0;
+
   nav {
     background-color: $color-1;
+
     li {
       color: $color-10 !important;
     }
+
     .b_menu {
       width: 100%;
       height: 100vh;
@@ -130,6 +107,7 @@ header {
       color: $color-10 !important;
       overflow: hidden;
     }
+
     .b_menu_active {
       right: 0 !important;
       font-size: 2.5rem;
