@@ -9,8 +9,8 @@ export default {
 
       hostedFieldInstance: false,
       blockUpdate: false,
-      error: "",
       clientToken: '',
+      error: "",
 
       formData: {
         name: "",
@@ -33,10 +33,12 @@ export default {
     getClientToken() {
       axios.get(store.apiUrl + "orders/generate").then((res) => {
         this.clientToken = res.data.token;
+        this.braintreeSystem();
       });
     },
 
     payWithCreditCard() {
+      console.log('pago 2');
       if (this.hostedFieldInstance) {
         this.hostedFieldInstance
           .tokenize()
@@ -53,6 +55,7 @@ export default {
     },
 
     braintreeSystem() {
+      console.log('inizializzo 1');
       if (this.initializing) return;
 
       this.initializing = true;
@@ -103,12 +106,13 @@ export default {
 
 
     sendOrder() {
+      console.log('salvo 3');
       axios
         .get(store.apiUrl + "orders/get", {
           params: this.formData
         })
-        .then((res) => {
-          store.cart = [];
+        .then(res => {
+          console.log(res.data);
           if (res.data) {
             store.cart = [];
             localStorage.setItem("cart", JSON.stringify(store.cart));
@@ -183,12 +187,6 @@ export default {
     this.getClientToken();
   },
 
-  beforeUpdate() {
-    if (this.clientToken != '' && !this.blockUpdate) {
-      this.braintreeSystem();
-    }
-  },
-
   mounted() {
     this.showCart();
     this.updatePrice();
@@ -245,7 +243,7 @@ export default {
                       <strong>{{ item.name }}</strong>
                     </p>
                     <p class="text-start">
-                      <strong>${{ item.price }}</strong>
+                      <strong>&euro; {{ item.price }}</strong>
                     </p>
                     <button type="button" data-mdb-button-init data-mdb-ripple-init
                       class="btn btn-danger me-1 mt-1 mb-2 position-absolute top-0 end-0" data-mdb-tooltip-init
@@ -280,10 +278,10 @@ export default {
                 <div class="bg-white rounded-1 p-2">
                   <h5>Riepilogo ordine</h5>
                   <div v-if="store.subtotal != 0">
-                    <h6>Prodotti: € {{ store.subtotal }}</h6>
-                    <h6>Consegna: € {{ store.shipping }}</h6>
+                    <h6>Prodotti: &euro; {{ store.subtotal }}</h6>
+                    <h6>Consegna: &euro; {{ store.shipping }}</h6>
                     <h6>
-                      Totale ordine: €
+                      Totale ordine: &euro;
                       {{ store.total }}
                     </h6>
                   </div>
@@ -465,7 +463,7 @@ export default {
                     </div>
                   </div>
                   <div class="form-group" v-if="store.subtotal != 0">
-                    <h3>Totale: € {{ store.total }}</h3>
+                    <h3>Totale: &euro; {{ store.total }}</h3>
                   </div>
                   <hr />
                   <div class="form-group">
