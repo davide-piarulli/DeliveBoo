@@ -73,6 +73,7 @@ export default {
             },
             fields: {
               number: {
+                maxCardLength: 16,
                 selector: "#creditCardNumber",
                 placeholder: "Inserisci la carta di credito",
               },
@@ -189,6 +190,7 @@ export default {
   },
 
   mounted() {
+    this.showCart();
     this.updatePrice();
   },
 };
@@ -237,7 +239,7 @@ export default {
 
                   <div class="col-8 mb-4 mb-lg-0">
 
-                    
+
                     <!-- Dati -->
                     <p>
                       <strong>{{ item.name }}</strong>
@@ -299,7 +301,8 @@ export default {
                   <input type="hidden" name="products[]" v-model="formData.products">
                   <div class="row">
                     <h1>
-                <i class="fas fa-shipping-fast"></i> Dettagli Spedizione </h1>
+                      <i class="fas fa-shipping-fast"></i> Dettagli Spedizione
+                    </h1>
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerName" class="form-label">Nome</label>
                       <input type="text" v-model="formData.name" class="form-control" id="customerName"
@@ -320,10 +323,10 @@ export default {
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerPhone" class="form-label">Telefono</label>
-                      <input type="tel" v-model="formData.phone" class="form-control" id="customerPhone"
+                      <input type="text" v-model="formData.phone" class="form-control" id="customerPhone" minlength="10"
+                        maxlength="10" pattern="\d{10}" title="Inserire un numero di telefono di 10 cifre"
                         required="required" />
                     </div>
-
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerAddress" class="form-label">Indirizzo</label>
                       <input type="text" v-model="formData.address" class="form-control" id="customerAddress"
@@ -336,8 +339,8 @@ export default {
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="inputState" class="form-label">Provincia</label>
-                      <select id="inputState" class="form-select" name="state" v-model="formData.state">
-                        <option selected>Scegli...</option>
+                      <select required id="inputState" class="form-select" name="state" v-model="formData.state">
+                        <option selected value="">Scegli...</option>
                         <option value="AG">Agrigento</option>
                         <option value="AL">Alessandria</option>
                         <option value="AN">Ancona</option>
@@ -452,8 +455,9 @@ export default {
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
                       <label for="customerZipCode" class="form-label">CAP</label>
-                      <input type="text" v-model="formData.postal_code" class="form-control" id="customerZipCode" minlength="5"
-                        maxlength="5" required="required" name="postal_code" />
+                      <input type="text" v-model="formData.postal_code" class="form-control" id="customerZipCode"
+                        minlength="5" maxlength="5" pattern="\d{5}" title="Inserire un CAP valido (5 cifre)"
+                        required="required" name="postal_code" />
                     </div>
                     <div class="mb-3">
                       <label for="note" class="form-label">Note sull'ordine</label>
@@ -466,7 +470,8 @@ export default {
                   <hr />
                   <div class="form-group">
                     <h1>
-                <i class="far fa-credit-card"></i> Informazioni di Pagamneto   </h1>
+                      <i class="far fa-credit-card"></i> Informazioni di Pagamento
+                    </h1>
                     <label for="creditCardNumber">Numero carta di credito</label>
                     <div id="creditCardNumber" name="creditCardNumber" class="form-control"></div>
                   </div>
@@ -482,20 +487,21 @@ export default {
                       </div>
                     </div>
                   </div>
-                  <div class="cards mt-3">
+
+                  <div class="cards mt-2">
                     <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png"
-                      alt="VISA" />
+                      alt="VISA" class="me-2" />
                     <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png"
-                      alt="American Express" />
+                      alt="American Express" class="me-2" />
                     <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png"
-                      alt="Mastercard" />
+                      alt="Mastercard" class="me-2" />
                   </div>
 
-                  <div v-if="formData.transaction || error" class="advises mb-2 mt-2">
-                    <div class="alert alert-success" v-if="formData.transaction">
+                  <div v-if="formData.transaction || error" class="advises mt-3">
+                    <div class="alert alert-success m-0" v-if="formData.transaction">
                       Il pagamento è andato a buon fine.
                     </div>
-                    <div class="alert alert-danger" v-if="error" v-show="!formData.transaction">
+                    <div class="alert alert-danger m-0" v-if="error" v-show="!formData.transaction">
                       Il pagamento è stato respinto. Riprova.
                     </div>
                   </div>
@@ -541,6 +547,13 @@ export default {
   }
 }
 
+#creditCardNumber,
+#expireDate,
+#cvv {
+  height: 38px;
+  margin: 10px 0 20px;
+}
+
 @media screen and (min-width: 992px) {
   .item-image {
     width: 100%;
@@ -552,11 +565,4 @@ export default {
     width: 1200px !important;
   }
 }
-@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
-
-// Ora puoi utilizzare il font Arimo nelle tue regole CSS
-.my-body {
-  font-family: 'Arimo', sans-serif; /* Usa Arimo come font predefinito per il body */
-}
-
 </style>
