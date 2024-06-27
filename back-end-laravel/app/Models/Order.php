@@ -20,7 +20,10 @@ class Order extends Model
       'lastname',
       'email',
       'amount',
-      'shipment_address',
+      'address',
+      'city',
+      'state',
+      'postal_code',
       'phone',
       'notes'
     ];

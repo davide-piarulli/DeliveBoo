@@ -24,14 +24,15 @@ class OrdersTableSeeder extends Seeder
       $new_order->lastname = $faker->lastName();
       $new_order->email = $faker->email();
       $new_order->amount = floatval(rand(3, 20) . '.' . rand(10, 99));
-      $new_order->shipment_address =  $faker->address;
-      $new_order->phone =  $faker->randomNumber(9, true);
+      $new_order->address =  $faker->streetAddress();
+      $new_order->city =  $faker->city();
+      $new_order->state =  $faker->stateAbbr();
+      $new_order->postal_code =  $faker->randomNumber(5, true);
+      $new_order->phone =  3 . rand(2,4) . $faker->randomNumber(8, true);
       $new_order->notes =  $faker->text;
 
-      // Generate a random date within the past 6 months
       $random_created_at = Carbon::now()->subMonths(rand(1, 6))->subDays(rand(0, 30));
 
-      // Set the created_at attribute
       $new_order->created_at = $random_created_at;
 
       $new_order->save();
