@@ -33,7 +33,7 @@
             <td class="order-date">{{ $order->created_at }}</td>
             <td class="order-name">{{ $order->name }}</td>
             <td class="order-lastname">{{ $order->lastname }}</td>
-            <td>€ {{ $order->amount }}</td>
+            <td>€ {{ number_format($order->amount, 2, ',', "") }}</td>
             <td>
               <div class="d-flex">
                 <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-success btn-sm me-1">

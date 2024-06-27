@@ -22,7 +22,7 @@
             <th scope="col">Quantità</th>
             <th scope="col" class="w-25">Nome prodotto</th>
             <th scope="col" class="w-25">Descrizione</th>
-            <th scope="col">Totale</th>
+            <th scope="col">Prezzo</th>
           </tr>
         </thead>
         <tbody>
@@ -34,15 +34,16 @@
               <td class="text-center">{{ $product->pivot->quantity }}</td>
               <td>{{ $product->name }}</td>
               <td>{{ $product->description }}</td>
-              <td>€ {{ $product->pivot->quantity * $product->price }}</td>
+              <td>€ {{ number_format($product->pivot->quantity * $product->price, 2, ',', "") }}</td>
             </tr>
           @endforeach
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>€ {{ $order->amount }}</td>
+            <td colspan="4">Spedizione</td>
+            <td>€ 4,99</td>
+          </tr>
+          <tr>
+            <td colspan="4">Totale</td>
+            <td>€ {{ number_format($order->amount, 2, ',', "") }}</td>
           </tr>
         </tbody>
       </table>
