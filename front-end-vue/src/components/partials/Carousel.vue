@@ -2,10 +2,7 @@
   export default {
     name: 'Carousel',
     props: {
-      restaurants: {
-        type: Array,
-        required: true
-      }
+        restaurants: Array
     }
   }
 </script>

@@ -15,6 +15,7 @@ export default {
       types: [],
       restaurants: [],
       filters: [],
+      carouselRestaurants: [],
       activeButton: false,
       isLoading: true
     };
@@ -60,6 +61,7 @@ export default {
             });
           } else if (endpoint == 'restaurants') {
             this.restaurants = result.data;
+            this.carouselRestaurants = result.data;
           } else if (endpoint == 'filter') {
             this.restaurants = result.data;
           }
@@ -83,7 +85,7 @@ export default {
 
     <div class="container mt-5 w-50" v-if="!isLoading">
       <Carousel
-        :restaurants="restaurants"
+        :restaurants="carouselRestaurants"
       />
     </div>
 

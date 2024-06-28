@@ -543,14 +543,17 @@ export default {
   color: $color-10;
 
   .cart-badge {
+    width: 20px;
+    height: 20px;
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -8px;
+    right: -8px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
     background-color: red;
     color: white;
-    border-radius: 50%;
-    padding: 5px 10px;
-    font-size: 10px;
   }
 }
 
