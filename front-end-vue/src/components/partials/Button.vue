@@ -1,36 +1,23 @@
 <script>
 export default {
-
-  data(){
-
-    return{
-
-
-
-    }
-
+  data() {
+    return {};
   },
 
   props: {
-
-    text : String,
-
-  }
-
+    text: String,
+  },
 };
 </script>
 
 <template>
-  <!-- HTML !-->
   <button class="button-48" role="button">
-    <span class="text">{{text}}</span>
+    <span class="text">{{ text }}</span>
   </button>
-</template> 
+</template>
 
 <style lang="scss" scoped>
-
-@use '../../assets/scss/main.scss' as *;
-/* CSS */
+@use "../../assets/scss/main.scss" as *;
 .button-48 {
   appearance: none;
   background-color: white;
@@ -63,8 +50,6 @@ export default {
   touch-action: manipulation;
   vertical-align: baseline;
   white-space: nowrap;
-  
- 
 }
 
 .button-48:before {
@@ -82,18 +67,16 @@ export default {
     -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   width: 100%;
   border-radius: 10px;
-  
 }
 
 .button-48:hover:before {
   animation: opacityFallbackIn 0s step-start forwards;
   clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
-  
 }
 
-.button-48:hover span{
-    color: white;
-  }
+.button-48:hover span {
+  color: white;
+}
 
 .button-48:after {
   background-color: white;
@@ -103,6 +86,5 @@ export default {
   z-index: 1;
   position: relative;
   font-weight: bold;
-  
 }
 </style>
