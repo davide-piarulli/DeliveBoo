@@ -4,8 +4,8 @@ import axios from "axios";
 import Jumbotron from "../components/Jumbotron.vue";
 import Button from "../components/partials/Button.vue";
 import RestaurantCard from "../components/partials/RestaurantCard.vue";
-import Loader from '../components/partials/Loader.vue';
-import Carousel from '../components/partials/Carousel.vue';
+import Loader from "../components/partials/Loader.vue";
+import Carousel from "../components/partials/Carousel.vue";
 
 export default {
   name: "Home",
@@ -17,7 +17,7 @@ export default {
       filters: [],
       carouselRestaurants: [],
       activeButton: false,
-      isLoading: true
+      isLoading: true,
     };
   },
 
@@ -26,46 +26,43 @@ export default {
     RestaurantCard,
     Jumbotron,
     Loader,
-    Carousel
+    Carousel,
   },
 
   methods: {
-    
     filterRestaurants(type) {
+      !this.filters.includes(type)
+        ? this.filters.push(type)
+        : this.filters.splice(this.filters.indexOf(type), 1);
 
-      !this.filters.includes(type) 
-      ? this.filters.push(type)
-      : this.filters.splice(this.filters.indexOf(type), 1);
-
-      if(this.filters.length > 0){
-        this.getApi(store.apiUrl, 'filter');
+      if (this.filters.length > 0) {
+        this.getApi(store.apiUrl, "filter");
       } else {
-        this.getApi(store.apiUrl, 'restaurants');
+        this.getApi(store.apiUrl, "restaurants");
       }
     },
-    getApi(apiUrl, endpoint = '') {
+    getApi(apiUrl, endpoint = "") {
       axios
         .get(apiUrl + endpoint, {
-          params: { 
-            filters: this.filters
+          params: {
+            filters: this.filters,
           },
         })
         .then((result) => {
           this.isLoading = false;
-          if (endpoint == 'types' || endpoint == '') {
+          if (endpoint == "types" || endpoint == "") {
             this.types = result.data.map((item) => {
               return {
                 ...item,
                 active: false,
               };
             });
-          } else if (endpoint == 'restaurants') {
+          } else if (endpoint == "restaurants") {
             this.restaurants = result.data;
             this.carouselRestaurants = result.data;
-          } else if (endpoint == 'filter') {
+          } else if (endpoint == "filter") {
             this.restaurants = result.data;
           }
- 
         })
         .catch((error) => {
           console.log(error.message);
@@ -73,8 +70,8 @@ export default {
     },
   },
   mounted() {
-    this.getApi(store.apiUrl, 'types');
-    this.getApi(store.apiUrl, 'restaurants');
+    this.getApi(store.apiUrl, "types");
+    this.getApi(store.apiUrl, "restaurants");
   },
 };
 </script>
@@ -84,18 +81,15 @@ export default {
     <Jumbotron v-if="!isLoading" />
 
     <div class="container mt-5 w-50" v-if="!isLoading">
-      <Carousel
-        :restaurants="carouselRestaurants"
-      />
+      <Carousel :restaurants="carouselRestaurants" />
     </div>
 
-    <Loader v-if="isLoading"/>
+    <Loader v-if="isLoading" />
     <section
       v-if="!isLoading"
       id="restaurants"
       class="container d-flex flex-column justify-content-center py-5"
     >
-
       <div class="title d-flex justify-content-center">
         <h1 class="mb-4">Tipi di ristorante:</h1>
       </div>
@@ -124,14 +118,11 @@ export default {
           :key="index"
           class="col mb-4 d-flex justify-content-center"
         >
-          <RestaurantCard
-            :restaurant="restaurant"
-          />
+          <RestaurantCard :restaurant="restaurant" />
         </div>
       </div>
     </section>
     <!-- <BottomMenu /> -->
-
   </div>
 </template>
 
