@@ -36,26 +36,34 @@ return [
         'address' => 'Viale Monza, 20127 Milano MI',
         'type_ids' => [7, 10]
     ],
+
+
+
     [
-        'name' => 'American Diner',
+        'name' => 'Le Bistro Français',
         'address' => 'Via Torino, 20123 Milano MI',
-        'type_ids' => [8, 13]
+        'type_ids' => [16]
     ],
     [
-        'name' => 'Café España',
+        'name' => 'Cantina Mexicana',
         'address' => 'Corso di Porta Ticinese, 20123 Milano MI',
-        'type_ids' => [9, 16]
+        'type_ids' => [4]
     ],
     [
-        'name' => 'Saigon Pho',
+        'name' => 'Pizzeria Napoli',
         'address' => 'Corso di Porta Ticinese, 20123 Milano MI',
-        'type_ids' => [7, 10]
+        'type_ids' => [1]
     ],
     [
-        'name' => 'Greek Taverna',
+        'name' => 'Gelateria Dolce Vita',
         'address' => 'Via Tortona, 20144 Milano MI',
-        'type_ids' => [6, 16]
+        'type_ids' => [1]
     ],
+
+
+
+    // si parte da qua
+
     [
         'name' => 'Smokehouse BBQ',
         'address' => 'Via Savona, 20144 Milano MI',
