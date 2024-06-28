@@ -70,6 +70,7 @@ export default {
     },
   },
   mounted() {
+    window.scrollTo(0, 0);
     this.getApi(store.apiUrl, "types");
     this.getApi(store.apiUrl, "restaurants");
   },

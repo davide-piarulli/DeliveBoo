@@ -117,7 +117,9 @@ export default {
           store.cart = [];
           store.subtotal = 0;
           store.total = 0;
+          store.cartCounter = 0;
           localStorage.setItem("cart", JSON.stringify(store.cart));
+          this.$refs.CloseCart.click();
           this.$router.push({ name: 'orderSuccess' });
           }
         })
@@ -191,7 +193,7 @@ export default {
 
     locationReload(){
       location.reload();
-    }
+    },
   },
   
 
@@ -219,7 +221,7 @@ export default {
     <div class="offcanvas w-100 offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title ps-3" id="offcanvasRightLabel">Carrello</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button ref="CloseCart" type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
         <!-- carrello -->
@@ -537,7 +539,7 @@ export default {
 .square {
   min-height: 300px;
   background-color: $color-7;
-  border-radius: 2%;
+  border-radius: 10px;
 }
 
 .cart {

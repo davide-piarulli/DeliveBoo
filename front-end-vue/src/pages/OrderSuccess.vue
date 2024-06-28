@@ -2,9 +2,18 @@
   export default {
     name: "orderSuccess",
     mounted(){
-      document.body.classList.add('overflow-hidden')
+      window.scrollTo(0, 0);
+      const reloadExecuted = localStorage.getItem('reloadExecuted');
+      if (!reloadExecuted) {
+        localStorage.setItem('reloadExecuted', 'true');
+        location.reload();
+      } else {
+        localStorage.removeItem('reloadExecuted');
+      }
+      document.body.classList.add('overflow-hidden');
     },
     beforeUnmount() {
+      localStorage.removeItem('reloadExecuted');
       document.body.classList.remove('overflow-hidden');
     }
   }

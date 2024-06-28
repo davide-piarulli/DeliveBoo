@@ -3,6 +3,7 @@
   export default {
     name: 'error404',
     mounted(){
+      window.scrollTo(0, 0);
       document.body.classList.add('overflow-hidden')
     },
     beforeUnmount() {
