@@ -10,12 +10,8 @@ return [
     'Dolce',
     "Antipasto",
     "Contorno",
-    "Formaggio",
     "Pesce",
     "Zuppa",
-    "Pane",
-    "Salse e condimenti",
+    "Salse",
     "Frutta",
-    "Gelato",
-    "Snack"
 ];
