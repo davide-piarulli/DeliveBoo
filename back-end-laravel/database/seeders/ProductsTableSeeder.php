@@ -14,32 +14,23 @@ class ProductsTableSeeder extends Seeder
   /**
    * Run the database seeds.
    */
-  public function run(Faker $faker): void
+  public function run(): void
   {
 
-    $faker = \Faker\Factory::create();
-    $faker->addProvider(new \FakerRestaurant\Provider\it_IT\Restaurant($faker));
 
-    $restaurants = Restaurant::all();
-    $product_types = ProductType::count();
+    $products = config('products');
 
-    foreach ($restaurants as $index => $restaurant){
+    foreach ($products as $product) {
 
-      for ($i = 0; $i < 20; $i++) {
-
-        $new_product = new Product();
-        $new_product->restaurant_id = $index + 1;
-        $new_product->product_type_id = rand(1, $product_types);
-        $new_product->name = $faker->foodName();
-        $new_product->slug = Helper::generateSlug($new_product->name, Product::class);
-        $new_product->image = null;
-        $new_product->description = $new_product->name . ' fa parte della categoria ' . $new_product->productType->name . ' ed è uno dei nostri migliori prodotti';
-        $new_product->price = floatval(rand(3, 20) . '.' . rand(10, 99));
-        $new_product->save();
-
-      }
-
+      $new_product = new Product();
+      $new_product->restaurant_id = $product['restaurant_id'];
+      $new_product->product_type_id = $product['product_type_id'];
+      $new_product->name = $product['name'];
+      $new_product->slug = Helper::generateSlug($new_product->name, Product::class);
+      $new_product->image = null;
+      $new_product->description =$product['description'];
+      $new_product->price = floatval(rand(3, 20) . '.' . rand(10, 99));
+      $new_product->save();
     }
-
   }
 }
