@@ -23,6 +23,9 @@ class OrdersAmountsChart extends Chart
         // Ottieni i dati per il grafico
         $orders = Order::withoutGlobalScopes()
             ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count, SUM(amount) as total_amount')
+            ->whereHas('products', function ($query) {
+              $query->where('restaurant_id', Auth::user()->id);
+            })
             ->groupBy('year', 'month')
             ->orderBy('year')
             ->orderBy('month')
