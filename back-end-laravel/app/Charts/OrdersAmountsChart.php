@@ -44,7 +44,7 @@ class OrdersAmountsChart extends Chart
 
 
         // Aggiungi un secondo dataset per l'importo totale (opzionale)
-        $this->dataset('Importo totale', 'line', $totalAmounts)
+        $this->dataset('€ Importo totale', 'line', $totalAmounts)
             ->backgroundColor('rgba(255, 99, 132, 0.2)')
             ->color('rgba(255, 99, 132, 1)'); // Configura il colore per la linea
 
