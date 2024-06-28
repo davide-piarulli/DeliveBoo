@@ -130,15 +130,18 @@ export default {
     /////////////////////////////// Carrello ///////////////////////////////
     updatePrice() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
       let subtotalPrice = 0;
+      let totalQuantity = 0;
       cart.forEach((product) => {
-        subtotalPrice =
-          subtotalPrice + parseFloat(product.price) * product.quantity;
+        subtotalPrice = subtotalPrice + parseFloat(product.price) * product.quantity;
+        totalQuantity = totalQuantity + product.quantity;
       });
       store.subtotal = subtotalPrice.toFixed(2);
+      store.cartCounter = totalQuantity;
+
       let totalPrice = parseFloat(store.subtotal) + parseFloat(store.shipping);
       store.total = totalPrice.toFixed(2);
-      store.counter = cart.length;
     },
 
     showCart() {
@@ -208,9 +211,9 @@ export default {
     <button class="cart position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
       aria-controls="offcanvasRight">
       <i class="fa-solid fa-cart-shopping"></i>
-      <span v-if="store.cart.length > 0" class="cart-badge">{{
-        store.cart.length
-      }}</span>
+      <span v-if="store.cartCounter > 0" class="cart-badge">
+        {{ store.cartCounter }}
+      </span>
     </button>
 
     <div class="offcanvas w-100 offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

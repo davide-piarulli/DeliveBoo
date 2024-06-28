@@ -15,12 +15,16 @@ export default {
   methods: {
     updatePrice() {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
       let subtotalPrice = 0;
+      let totalQuantity = 0;
       cart.forEach((product) => {
-        subtotalPrice =
-          subtotalPrice + parseFloat(product.price) * product.quantity;
+        subtotalPrice = subtotalPrice + parseFloat(product.price) * product.quantity;
+        totalQuantity = totalQuantity + product.quantity;
       });
       store.subtotal = subtotalPrice.toFixed(2);
+      store.cartCounter = totalQuantity;
+
       let totalPrice = parseFloat(store.subtotal) + parseFloat(store.shipping);
       store.total = totalPrice.toFixed(2);
     },
