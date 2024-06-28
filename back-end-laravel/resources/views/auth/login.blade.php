@@ -13,7 +13,7 @@
                                 <div class="mb-md-5 mt-md-4 pb-5">
 
                                     <h2 class="fw-bold mb-2 text-uppercase">{{ __('Accedi') }}</h2>
-                                    <p class="text-white-50 mb-5">Inserisci i tui dati !</p>
+                                    <p class="text-white-50 mb-5">Inserisci i tuoi dati !</p>
 
                                     <div data-mdb-input-init class="form-outline form-white mb-4">
                                         <label class="form-label" for="email">{{ __('E-Mail *') }}</label>
