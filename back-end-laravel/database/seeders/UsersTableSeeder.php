@@ -15,28 +15,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-      $users = [
-        'Alessandro',
-        'Davide',
-        'Matteo',
-        'Sara',
-        'Oltion',
-        'Giulia',
-        'Francesca',
-        'Marco',
-        'Luca',
-        'Giovanni',
-        'Martina',
-        'Giorgia',
-        'Simone',
-        'Federico',
-        'Chiara',
-        'Valentina',
-        'Riccardo',
-        'Elena',
-        'Nicola',
-        'Roberto'
-    ];
+      $users = config('users');
 
       foreach($users as $user){
 
@@ -44,9 +23,7 @@ class UsersTableSeeder extends Seeder
         $new_user->name = $user;
         $new_user->email = $user . '@gmail.com';
         $new_user->password = Hash::make('12341234');
-
         $new_user->save();
-
 
         }
 

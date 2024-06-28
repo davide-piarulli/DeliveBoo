@@ -15,7 +15,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $types = config('restaurantTypes');
+        $types = config('types');
 
         foreach($types as $type){
 

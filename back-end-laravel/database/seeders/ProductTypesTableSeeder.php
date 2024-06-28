@@ -14,7 +14,7 @@ class ProductTypesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $product_types = config('productTypes');
+        $product_types = config('product_types');
 
         foreach($product_types as $product_type){
           $new = new ProductType();
