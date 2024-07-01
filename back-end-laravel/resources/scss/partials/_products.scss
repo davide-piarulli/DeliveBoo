@@ -4,18 +4,18 @@
   align-items: center;
   justify-content: center;
   // color: white;
-  border: 1px solid #2B3D4F;
-  color: white;
+  border: 1px solid #2B3D4F !important;
+  color: black !important;
   &:hover, :active{
-    color: white;
-    background-color: #2B3D4F;
+    color: white !important;
+    background-color: #2B3D4F !important;
   }
 }
 
 /* Quando selezionato */
 .btn-check:checked + .btn {
-  color: white;
-  background-color: #2B3D4F;
-  border-color: #2B3D4F;
+  color: white !important;
+  background-color: #2B3D4F !important;
+  border-color: #2B3D4F !important;
 }
 

@@ -44,7 +44,7 @@
             id="file-remover" onclick="event.preventDefault(); resetFile()">Rimuovi file</button>
         </div>
         <div class="mb-4">
-          <button class="btn btn-primary" type="submit">Modifica Logo</button>
+          <button class="btn btn-primary" type="submit">Aggiungi Logo</button>
         </div>
       </form>
     </div>
