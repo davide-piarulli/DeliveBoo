@@ -32,7 +32,7 @@
             :to="{ name: 'restaurantDetail', params: { slug: restaurant.slug } }"
             class="my_slider text-decoration-none"
           >
-            <img :src="`/img/hamburger.png`" class="d-block w-100" :alt="restaurant.name">
+            <img :src="`restaurant.logo === null ? '/default-logo.png' :'http://127.0.0.1:8000/storage/' +  restaurant.logo`" class="d-block w-100" :alt="restaurant.name">
             <div class="carousel-caption d-none d-md-block">
               <h5>{{ restaurant.name }}</h5>
             </div>
