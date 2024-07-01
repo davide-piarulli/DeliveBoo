@@ -7,4 +7,5 @@ export const store = reactive({
   total: 0,
   subtotal: 0,
   shipping: 4.99,
+  cartSwitch: false
 });
