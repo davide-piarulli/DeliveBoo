@@ -74,6 +74,6 @@ class RegisteredUserController extends Controller
     // Associa i tipi al ristorante
     $new_restaurant->types()->attach($request->types);
 
-    return redirect(RouteServiceProvider::HOME);
+    return redirect(route('admin.restaurants.edit', Auth::user()->id));
   }
 }
