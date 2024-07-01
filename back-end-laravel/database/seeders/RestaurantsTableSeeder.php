@@ -26,7 +26,7 @@ class RestaurantsTableSeeder extends Seeder
       $new_restaurant->address = $restaurant['address'];
       $new_restaurant->phone = $faker->numerify('34########');;
       $new_restaurant->vat_number = $faker->numerify('###########');
-      $new_restaurant->logo = null;
+      $new_restaurant->logo =  $restaurant['logo'];
       $new_restaurant->save();
 
     }
