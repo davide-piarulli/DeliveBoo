@@ -269,7 +269,7 @@ export default {
                       <strong>{{ item.name }}</strong>
                     </p>
                     <p class="text-start">
-                      <strong>&euro; {{ item.price }}</strong>
+                      <strong>&euro; {{ item.price.replace('.', ',') }}</strong>
                     </p>
                     <button type="button" data-mdb-button-init data-mdb-ripple-init
                       class="btn btn-danger me-1 mt-1 mb-2 position-absolute top-0 end-0" data-mdb-tooltip-init
@@ -304,11 +304,11 @@ export default {
                 <div class="bg-white rounded-1 p-2">
                   <h5>Riepilogo ordine</h5>
                   <div v-if="store.subtotal != 0">
-                    <h6>Prodotti: &euro; {{ store.subtotal }}</h6>
-                    <h6>Consegna: &euro; {{ store.shipping }}</h6>
+                    <h6>Prodotti: &euro; {{ store.subtotal.replace('.', ',') }}</h6>
+                    <h6>Consegna: &euro; 4,99 </h6>
                     <h6>
                       Totale ordine: &euro;
-                      {{ store.total }}
+                      {{ store.total.replace('.', ',') }}
                     </h6>
                   </div>
                 </div>
@@ -489,7 +489,7 @@ export default {
                     </div>
                   </div>
                   <div class="form-group" v-if="store.subtotal != 0">
-                    <h3>Totale: &euro; {{ store.total }}</h3>
+                    <h3>Totale: &euro; {{ store.total.replace('.', ',') }}</h3>
                   </div>
                   <hr />
                   <div class="form-group">

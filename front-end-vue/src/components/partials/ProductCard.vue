@@ -113,7 +113,7 @@ export default {
               {{ product.description }}
             </p>
             <p class="recipe-price">
-              &euro; {{ product.price }}
+              &euro; {{ product.price.replace('.', ',') }}
             </p>
 
           </div>
