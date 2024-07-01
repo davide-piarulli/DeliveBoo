@@ -9,7 +9,7 @@
 
 <template>
   <div>
-    <div id="carouselExampleCaptions" class="carousel slide my_slider">
+    <div id="carouselExampleCaptions" class="carousel slide my_slider d-none d-lg-block">
       <div class="carousel-indicators">
         <button
           v-for="(restaurant, index) in restaurants"
