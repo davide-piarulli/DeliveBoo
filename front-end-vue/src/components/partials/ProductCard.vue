@@ -95,11 +95,9 @@ export default {
         <div class="d-flex justify-content-between flex-column">
           <div class="overflow-hidden">
            <img
-              class="w-100 h-100 object-fit-cover"
+              class="card-image img-fluid"
               :src="product.image ? 'http://127.0.0.1:8000/storage/' + product.image : '/no-food.jpg'"
               onerror="this.src = '/no-food.jpg'"
-              width="1500"
-              height="1368"
               :alt="product.name" />
           </div>
           <div class="recipe-content h-100">
@@ -145,6 +143,12 @@ export default {
   border: 2px solid #f2f2f2;
   border-radius: 8px;
   overflow: hidden;
+
+  .card-image{
+    width: 268px;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
 
   &-price {
 
