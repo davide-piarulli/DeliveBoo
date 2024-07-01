@@ -9,7 +9,7 @@
 
 <template>
   <div>
-    <div id="carouselExampleCaptions" class="carousel slide">
+    <div id="carouselExampleCaptions" class="carousel slide my_slider">
       <div class="carousel-indicators">
         <button
           v-for="(restaurant, index) in restaurants"
@@ -32,9 +32,9 @@
             :to="{ name: 'restaurantDetail', params: { slug: restaurant.slug } }"
             class="my_slider text-decoration-none"
           >
-            <img :src="`restaurant.logo === null ? '/default-logo.png' :'http://127.0.0.1:8000/storage/' +  restaurant.logo`" class="d-block w-100" :alt="restaurant.name">
+            <img :src="restaurant.logo === null ? '/default-logo.png' : 'http://127.0.0.1:8000/storage/' +  restaurant.logo" class="d-block w-100" :alt="restaurant.name">
             <div class="carousel-caption d-none d-md-block">
-              <h5>{{ restaurant.name }}</h5>
+              <h5 class="name_resto">{{ restaurant.name }}</h5>
             </div>
           </router-link>
         </div>
@@ -57,5 +57,13 @@
 @use '../../assets/scss/main.scss' as*;
 .my_slider{
   cursor: pointer;
+  border-radius: 15px;
+  overflow: hidden;
+  .name_resto{
+    font-size: 3rem;
+    text-shadow: 2px 2px $color-8;
+    background: rgba($color-10, $alpha: 0.2);
+    border-radius: 15px;
+  }
 }
 </style>
