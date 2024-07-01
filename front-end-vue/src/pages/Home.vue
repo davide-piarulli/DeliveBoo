@@ -81,7 +81,7 @@ export default {
   <div>
     <Jumbotron v-if="!isLoading" />
 
-    <div class="container mt-5 w-50" v-if="!isLoading">
+    <div class="container mt-5 w-25" v-if="!isLoading">
       <Carousel :restaurants="carouselRestaurants" />
     </div>
 

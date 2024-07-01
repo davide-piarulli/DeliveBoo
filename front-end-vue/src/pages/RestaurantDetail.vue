@@ -84,7 +84,7 @@ export default {
     <div v-else class="container">
       <h1 class="text-center">{{ restaurant.name }}</h1>
       <div class=" d-flex row">
-        <ProductCard @click="window.scrollTo(0, 0)" @openModal="openModal()" v-for="product in restaurant.products" :key="product.id"
+        <ProductCard @openModal="openModal()" v-for="product in restaurant.products" :key="product.id"
           :product=product />
       </div>
     </div>
