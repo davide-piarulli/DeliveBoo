@@ -124,7 +124,7 @@
                                                                         type="checkbox" class="btn-check w-100"
                                                                         id="btncheck{{ $type->id }}"
                                                                         autocomplete="off">
-                                                                    <label class="btn btn-outline-dark w-100 mb-2"
+                                                                    <label class="btn register-btn btn-outline-dark w-100 mb-2"
                                                                         for="btncheck{{ $type->id }}">{{ $type->name }}</label>
                                                                 </div>
                                                             @endforeach

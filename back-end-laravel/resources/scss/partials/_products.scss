@@ -5,11 +5,15 @@
   justify-content: center;
   // color: white;
   border: 1px solid #2B3D4F !important;
-  color: black !important;
+  color: black ;
   &:hover, :active{
     color: white !important;
     background-color: #2B3D4F !important;
   }
+}
+ .register-btn{
+
+  color: white !important;
 }
 
 /* Quando selezionato */
