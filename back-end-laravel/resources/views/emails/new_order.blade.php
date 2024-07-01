@@ -853,9 +853,9 @@
 </head>
 
 <body class="body pc-font-alt"
-  style="width: 100% !important; min-height: 100% !important; margin: 0 !important; padding: 0 !important; line-height: 1.5; color: #2D3A41; mso-line-height-rule: exactly; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-variant-ligatures: normal; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; background-color: #e2e4da;"
+  style="width: 100% !important; min-height: 100% !important; margin: 0 !important; padding: 0 !important; line-height: 1.5; color: #2D3A41; mso-line-height-rule: exactly; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-variant-ligatures: normal; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; background-color: #7288A3"
   bgcolor="#e2e4da">
-  <table class="pc-project-body" style="table-layout: fixed; min-width: 600px; background-color: #e2e4da;"
+  <table class="pc-project-body" style="table-layout: fixed; min-width: 600px; background-color: #7288A3"
     bgcolor="#e2e4da" width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
     <tr>
       <td align="center" valign="top">
@@ -863,8 +863,7 @@
           border="0" cellpadding="0" cellspacing="0" role="presentation">
           <tr>
             <td class="pc-w620-padding-20-0-20-0" style="padding: 20px 0px 20px 0px;" align="left" valign="top">
-              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
-                style="width: 100%;">
+              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="width: 100%;">
 
                 <tr>
                   <td valign="top">
@@ -877,8 +876,7 @@
                               <td valign="top" class="pc-w620-padding-20-0-0-0"
                                 style="padding: 0px 0px 0px 0px; border-radius: 0px; background-color: transparent;"
                                 bgcolor="transparent">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                                  role="presentation">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                   <tr>
                                     <td class="pc-w620-spacing-0-0-0-0" style="padding: 0px 0px 0px 0px;">
                                       <table class="pc-width-fill pc-w620-gridCollapsed-1" width="100%" border="0"
@@ -887,53 +885,52 @@
                                           <td class="pc-grid-td-first pc-grid-td-last pc-w620-itemsSpacings-0-30"
                                             align="left" valign="top"
                                             style="width: 50%; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;">
-                                            <table class="pc-w620-width-fill" width="100%" border="0"
-                                              cellpadding="0" cellspacing="0" role="presentation"
+                                            <table class="pc-w620-width-fill" width="100%" border="0" cellpadding="0"
+                                              cellspacing="0" role="presentation"
                                               style="border-collapse: separate; border-spacing: 0; width: 100%;">
                                               <tr>
                                                 <td class="pc-w620-padding-32-0-32-0" align="center" valign="middle"
-                                                  style="padding: 40px 40px 40px 40px; background-color: #0e231c; border-radius: 10px 10px 10px 10px;">
+                                                  style="padding: 40px 40px 40px 40px; background-color: #2D3A41; border-radius: 10px 10px 10px 10px;">
                                                   <table class="pc-w620-width-fill" align="center" width="100%"
-                                                    border="0" cellpadding="0" cellspacing="0"
-                                                    role="presentation" style="width: 100%;">
+                                                    border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                                    style="width: 100%;">
                                                     <tr>
                                                       <td align="center" valign="top">
-                                                        <table width="100%" border="0" cellpadding="0"
-                                                          cellspacing="0" role="presentation">
+                                                        <table width="100%" border="0" cellpadding="0" cellspacing="0"
+                                                          role="presentation">
                                                           <tr>
                                                             <td class="pc-w620-spacing-0-0-16-0"
                                                               style="padding: 0px 0px 32px 0px;">
                                                               <table class="pc-width-fill pc-w620-gridCollapsed-1"
-                                                                width="100%" border="0" cellpadding="0"
-                                                                cellspacing="0" role="presentation">
+                                                                width="100%" border="0" cellpadding="0" cellspacing="0"
+                                                                role="presentation">
                                                                 <tr class="pc-grid-tr-first pc-grid-tr-last">
                                                                   <td
                                                                     class="pc-grid-td-first pc-grid-td-last pc-w620-itemsSpacings-0-30"
                                                                     align="center" valign="top"
                                                                     style="padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px;">
-                                                                    <table width="100%" border="0"
-                                                                      cellpadding="0" cellspacing="0"
-                                                                      role="presentation"
+                                                                    <table width="100%" border="0" cellpadding="0"
+                                                                      cellspacing="0" role="presentation"
                                                                       style="border-collapse: separate; border-spacing: 0; width: 100%;">
                                                                       <tr>
                                                                         <td align="center" valign="top">
-                                                                          <table align="center" width="100%"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" role="presentation"
-                                                                            style="width: 100%;">
+                                                                          <table align="center" width="100%" border="0"
+                                                                            cellpadding="0" cellspacing="0"
+                                                                            role="presentation" style="width: 100%;">
                                                                             <tr>
                                                                               <td align="center" valign="top">
                                                                                 <table width="100%" border="0"
                                                                                   cellpadding="0" cellspacing="0"
                                                                                   role="presentation">
                                                                                   <tr>
-                                                                                    <td align="center" valign="top">
-                                                                                      <img
-                                                                                        src="../../../public/img/logo.png"
+                                                                                    <td align="center" valign="top" style="overflow:hidden;">
+                                                                                      <img @php
+                                                                                        $logo=URL::to('/img/logo.png');
+                                                                                        @endphp src="{{ $logo }}"
                                                                                         class="pc-w620-width-120 pc-w620-height-auto"
                                                                                         width="120" height="40"
-                                                                                        alt=""
-                                                                                        style="display: block; border: 0; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width:120px; height: auto; max-width: 100%;" />
+                                                                                        alt="DeliveBoo"
+                                                                                        style="display: block; border: 0; border-radius: 50%; overflow:hidden; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width:120px; height: auto; max-width: 100%;" />
                                                                                     </td>
                                                                                   </tr>
                                                                                 </table>
@@ -953,8 +950,8 @@
                                                     </tr>
                                                     <tr>
                                                       <td align="center" valign="top">
-                                                        <table align="center" border="0" cellpadding="0"
-                                                          cellspacing="0" role="presentation">
+                                                        <table align="center" border="0" cellpadding="0" cellspacing="0"
+                                                          role="presentation">
                                                           <tr>
                                                             <td class="pc-w620-spacing-0-24-12-24" valign="top"
                                                               style="padding: 0px 0px 12px 0px;">
@@ -969,7 +966,7 @@
                                                                       style="line-height: 108%; letter-spacing: -1px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; font-size: 50px; font-weight: 600; font-variant-ligatures: normal; color: #ffffff; text-align: center; text-align-last: center;">
                                                                       <div><span>Grazie per il tuo ordine e per
                                                                         </span><span
-                                                                          style="color: rgb(222, 250, 202);">la tua
+                                                                          style="color: #7288A3">la tua
                                                                           fiducia!</span>
                                                                       </div>
                                                                     </div>
@@ -1011,11 +1008,10 @@
                               <td valign="top" class="pc-w620-padding-32-24-0-24"
                                 style="padding: 48px 32px 32px 32px; border-radius: 10px 10px 0px 0px; background-color: #ffffff;"
                                 bgcolor="#ffffff">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                                  role="presentation">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                   <tr>
-                                    <td class="pc-w620-spacing-0-0-4-0 pc-w620-align-left" align="center"
-                                      valign="top" style="padding: 0px 0px 8px 0px;">
+                                    <td class="pc-w620-spacing-0-0-4-0 pc-w620-align-left" align="center" valign="top"
+                                      style="padding: 0px 0px 8px 0px;">
                                       <table border="0" cellpadding="0" cellspacing="0" role="presentation"
                                         class="pc-w620-align-left" width="100%"
                                         style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
@@ -1034,8 +1030,7 @@
                                     </td>
                                   </tr>
                                 </table>
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                                  role="presentation">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                   <tr>
                                     <td class="pc-w620-align-left" align="center" valign="top"
                                       style="padding: 0px 0px 24px 0px;">
@@ -1047,12 +1042,12 @@
                                             style="padding: 0px 0px 0px 0px;">
                                             <div
                                               class="pc-font-alt pc-w620-align-left pc-w620-fontSize-16px pc-w620-lineHeight-120pc"
-                                              style="line-height: 150%; letter-spacing: -0px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 600; font-variant-ligatures: normal; color: #000000; text-align: center; text-align-last: center;">
-                                              <div><span style="color: rgb(13, 35, 28);">Numero ordine:</span><span
-                                                  style="color: rgb(35, 174, 96);">#{{ $order->id }}</span>
+                                              style="line-height: 150%; letter-spacing: -0px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 600; font-variant-ligatures: normal; color: #2B3D4F; text-align: center; text-align-last: center;">
+                                              <div><span style="color: #2B3D4F;">Numero ordine: </span><span
+                                                  style="color: rgb(99, 99, 233)">#{{ $order->id }}</span>
                                               </div>
-                                              <div><span style="color: rgb(13, 35, 28);">Data ordine:</span><span
-                                                  style="color: rgb(35, 174, 96);">{{ $order->created_at }}</span>
+                                              <div><span style="color: #2B3D4F;">Data ordine: </span><span
+                                                  style="color: rgb(99, 99, 233)">{{ $order->created_at }}</span>
                                               </div>
                                             </div>
                                           </td>
@@ -1061,18 +1056,17 @@
                                     </td>
                                   </tr>
                                 </table>
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                                  role="presentation">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                   <tr>
                                     <td style="padding: 0px 0px 0px 0px; ">
-                                      <table class="pc-w620-tableCollapsed-0" border="0" cellpadding="0"
-                                        cellspacing="0" role="presentation" width="100%"
+                                      <table class="pc-w620-tableCollapsed-0" border="0" cellpadding="0" cellspacing="0"
+                                        role="presentation" width="100%"
                                         style="border-collapse: separate; border-spacing: 0; width: 100%; border-radius: 12px 12px 12px 12px;">
                                         <tbody>
                                           <tr>
                                             <td class="pc-w620-halign-left pc-w620-valign-middle pc-w620-width-100pc"
                                               align="left" valign="top"
-                                              style="padding: 10px 10px 10px 0px; border-bottom: 1px solid #e7e7d2;">
+                                              style="padding: 10px 10px 10px 0px; border-bottom: 1px solid #7288A3">
                                               <table width="100%" border="0" cellpadding="0" cellspacing="0"
                                                 role="presentation">
                                                 <tr>
@@ -1097,72 +1091,67 @@
                                             </td>
                                             <td class="pc-w620-halign-left pc-w620-valign-middle" align="left"
                                               valign="middle"
-                                              style="padding: 20px 0px 20px 20px; border-bottom: 1px solid #e7e7d2;">
+                                              style="padding: 20px 0px 20px 20px; border-bottom: 1px solid #7288A3">
                                             </td>
                                           </tr>
 
                                           @foreach ($order->products as $product)
-                                            <tr>
-                                              <td class="pc-w620-halign-left pc-w620-valign-middle pc-w620-width-100pc"
-                                                align="left" valign="middle"
-                                                style="padding: 20px 0px 20px 0px; border-bottom: 1px solid #e7e7d2b3;">
-                                            <tr>
-                                              <td class="pc-w620-halign-left pc-w620-valign-middle pc-w620-width-100pc"
-                                                align="left" valign="middle"
-                                                style="padding: 20px 0; border-bottom: 1px solid #e7e7d2b3;">
-                                                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                                                  role="presentation">
-                                                  <tr>
-                                                    <td class="pc-w620-align-left" align="left" valign="top"
-                                                      style="padding: 0;">
-                                                      <table border="0" cellpadding="0" cellspacing="0"
-                                                        role="presentation" width="100%"
-                                                        style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
-                                                        <tr>
-                                                          <td valign="top" align="left" style="padding: 0;">
-                                                            <img
-                                                              src="{{ isset($product->image) ? asset('storage/' . $product->image) : asset('img/no-image.jpg') }}"
-                                                              alt="Product Image" width="102" height="132"
-                                                              style="display: block; border: 0; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width:102px; height: auto; max-width: 100%; border-radius: 8px;">
-                                                          </td>
-                                                          <td valign="top" align="left"
-                                                            style="padding: 0 0 0 20px; vertical-align: top;">
-                                                            <div
-                                                              style="font-size: 16px; font-weight: 600; color: #121212cc; line-height: 26px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: left;">
-                                                              <span>{{ $product->name }}</span>
-                                                            </div>
-                                                            <div
-                                                              style="font-size: 14px; font-weight: 600; color: #1d3425cc; line-height: 24px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: left;">
-                                                              <span>Quantità: {{ $product->pivot->quantity }}</span>
-                                                            </div>
-                                                          </td>
-                                                        </tr>
-                                                      </table>
-                                                    </td>
-                                                  </tr>
-                                                </table>
-                                              </td>
-                                              <td class="pc-w620-halign-right pc-w620-valign-middle" align="right"
-                                                valign="middle"
-                                                style="padding: 20px 0 20px 0; border-bottom: 1px solid #e7e7d2b3;">
-                                                <div
-                                                  style="font-size: 16px; font-weight: 800; color: #1d3425; line-height: 20px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: right;">
-                                                  <span>{{ $product->price }}</span>
-                                                </div>
-                                              </td>
-                                            </tr>
+
+                                          <tr>
+                                            <td class="pc-w620-halign-left pc-w620-valign-middle pc-w620-width-100pc"
+                                              align="left" valign="middle" style="padding: 20px 0;  height: 132px;">
+                                              <table width="100%" border="0" cellpadding="0" cellspacing="0"
+                                                role="presentation">
+                                                <tr>
+                                                  <td class="pc-w620-align-left" align="left" valign="top"
+                                                    style="padding: 0;">
+                                                    <table border="0" cellpadding="0" cellspacing="0"
+                                                      role="presentation" width="100%"
+                                                      style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
+                                                      <tr>
+                                                        <td valign="top" align="left" style="padding: 0;" width="102">
+                                                          <img @php $no_image = URL::to('/img/no-image.jpg'); $image = URL::to('storage/' . $product->image); @endphp
+                                                            src="{{ isset($product->image) ? $image : $no_image }}"
+                                                            alt="Product Image" width="102" height="132"
+                                                            style="display: block; border: 0; outline: 0; line-height: 100%; -ms-interpolation-mode: bicubic; width:102px; height: auto; max-width: 100%; border-radius: 8px;">
+                                                        </td>
+                                                        <td valign="top" align="left"
+                                                          style="padding: 0 0 0 20px; vertical-align: top;">
+                                                          <div
+                                                            style="font-size: 16px; font-weight: 600; color: #121212cc; line-height: 26px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: left;">
+                                                            <span>{{ $product->name }}</span>
+                                                          </div>
+                                                          <div
+                                                            style="font-size: 14px; font-weight: 600; color: #1d3425cc; line-height: 24px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: left;">
+                                                            <span>Quantità: {{ $product->pivot->quantity }}</span>
+                                                          </div>
+                                                        </td>
+                                                      </tr>
+                                                    </table>
+                                                  </td>
+                                                </tr>
+                                              </table>
+                                            </td>
+                                            <td class="pc-w620-halign-right pc-w620-valign-middle" align="right"
+                                              valign="middle" style="padding: 20px 0 20px 0; ">
+                                              <div style=" font-size: 16px; font-weight: 800; color: #1d3425; line-height:
+                                              20px; font-family: 'Urbanist' , Arial, Helvetica, sans-serif; text-align:
+                                              right;"></div>
+                                              <span>€ {{ number_format($product->price, 2, ',', ".") }}</span>
+                                              </div>
+                                            </td>
+                                          </tr>
 
                                     </td>
-                                    <td class="pc-w620-halign-right pc-w620-valign-middle" align="right"
-                                      valign="middle"
-                                      style="padding: 0px 0px 0px 0px; border-bottom: 1px solid #e7e7d2b3;">
+                                    <td class="pc-w620-halign-right pc-w620-valign-middle" align="right" valign="middle"
+                                      style="padding: 0px 0px 0px 0px;">
                                       <table width="100%" border="0" cellpadding="0" cellspacing="0"
                                         role="presentation">
                                         <tr>
                                           <td class="pc-w620-spacing-0-0-0-0 pc-w620-align-right" align="right"
                                             valign="top">
-                                            <table border="0" cellpadding="0" cellspacing="0"
-                                              role="presentation" class="pc-w620-align-right" width="100%"
+                                            <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                              class="pc-w620-align-right" width="100%"
                                               style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
 
                                             </table>
@@ -1175,12 +1164,11 @@
                                   <tr>
                                     <td class="pc-w620-halign-left pc-w620-valign-middle pc-w620-width-100pc"
                                       align="left" valign="middle"
-                                      style="padding: 20px 0; border-bottom: 1px solid #e7e7d2cc;">
+                                      style="padding: 20px 0; border-bottom: 1px solid #7288A3">
                                       <table width="100%" border="0" cellpadding="0" cellspacing="0"
                                         role="presentation">
                                         <tr>
-                                          <td class="pc-w620-align-left" align="left" valign="top"
-                                            style="padding: 0;">
+                                          <td class="pc-w620-align-left" align="left" valign="top" style="padding: 0;">
                                             <div
                                               style="font-size: 14px; font-weight: 600; color: #121212cc; line-height: 24px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: left;">
                                               <span>Subtotale</span>
@@ -1188,8 +1176,7 @@
                                           </td>
                                         </tr>
                                         <tr>
-                                          <td class="pc-w620-align-left" align="left" valign="top"
-                                            style="padding: 0;">
+                                          <td class="pc-w620-align-left" align="left" valign="top" style="padding: 0;">
                                             <div
                                               style="font-size: 14px; font-weight: 600; color: #1d3425; line-height: 24px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: left;">
                                               <span>Spese di consegna</span>
@@ -1198,9 +1185,8 @@
                                         </tr>
                                       </table>
                                     </td>
-                                    <td class="pc-w620-halign-right pc-w620-valign-middle" align="right"
-                                      valign="bottom"
-                                      style="padding: 0px 0 20px 0; border-bottom: 1px solid #e7e7d2cc;">
+                                    <td class="pc-w620-halign-right pc-w620-valign-middle" align="right" valign="bottom"
+                                      style="padding: 0px 0 20px 0; border-bottom: 1px solid #7288A3">
                                       <table width="100%" border="0" cellpadding="0" cellspacing="0"
                                         role="presentation">
                                         <tr>
@@ -1212,7 +1198,7 @@
                                                   style="padding: 0;">
                                                   <div
                                                     style="font-size: 16px; font-weight: 800; color: #1c3425; font-family: 'Urbanist', Arial, Helvetica, sans-serif; text-align: right;">
-                                                    <span>€ {{ $order->amount - 4.99 }}</span>
+                                                    <span>€ {{ number_format($order->amount - 4.99, 2, ',', ".") }}</span>
                                                   </div>
                                                 </td>
                                               </tr>
@@ -1240,8 +1226,8 @@
                                         <tr>
                                           <td class="pc-w620-spacing-20-0-0-0 pc-w620-align-left" align="left"
                                             valign="top">
-                                            <table border="0" cellpadding="0" cellspacing="0"
-                                              role="presentation" class="pc-w620-align-left" width="100%"
+                                            <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                              class="pc-w620-align-left" width="100%"
                                               style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
                                               <tr>
                                                 <td valign="top" class="pc-w620-padding-0-0-0-0 pc-w620-align-left"
@@ -1266,16 +1252,16 @@
                                         <tr>
                                           <td class="pc-w620-spacing-0-0-0-0 pc-w620-align-right" align="right"
                                             valign="top">
-                                            <table border="0" cellpadding="0" cellspacing="0"
-                                              role="presentation" class="pc-w620-align-right" width="100%"
+                                            <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                              class="pc-w620-align-right" width="100%"
                                               style="border-collapse: separate; border-spacing: 0; margin-right: auto; margin-left: auto;">
                                               <tr>
                                                 <td valign="top" class="pc-w620-padding-0-0-0-0 pc-w620-align-right"
                                                   align="right">
                                                   <div
                                                     class="pc-font-alt pc-w620-align-right pc-w620-fontSize-20px pc-w620-lineHeight-20"
-                                                    style="line-height: 22px; letter-spacing: -0px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 800; font-variant-ligatures: normal; color: #1d3425; text-align: right; text-align-last: right;">
-                                                    <div><span style="color: rgb(29, 52, 37);">€
+                                                    style="line-height: 22px; letter-spacing: -0px; font-family: 'Urbanist', Arial, Helvetica, sans-serif; font-size: 20px; font-weight: 800; font-variant-ligatures: normal; color: #2B3D4F; text-align: right; text-align-last: right;">
+                                                    <div><span style="color: #2B3D4F;">€
                                                         {{ number_format($order->amount, 2, ',', '') }}</span>
                                                     </div>
                                                   </div>
@@ -1314,8 +1300,8 @@
                           <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                             <tr>
                               <td style="padding: 0px;">
-                                <table width="100%" border="0" cellpadding="0" cellspacing="0"
-                                  role="presentation" style="border-collapse: separate; border-spacing: 0;">
+                                <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                  style="border-collapse: separate; border-spacing: 0;">
                                   <tr>
                                     <td align="left" valign="top" style="width: 50%; padding: 0px;">
                                       <table width="100%" border="0" cellpadding="0" cellspacing="0"
@@ -1360,7 +1346,7 @@
                                               <tr>
                                                 <td align="left" valign="top">
                                                   <div
-                                                    style="font-family: 'Urbanist', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: normal; color: #23ae60; line-height: 90%;">
+                                                    style="font-family: 'Urbanist', Arial, Helvetica, sans-serif; font-size: 16px; font-weight: normal; color: #979797; line-height: 90%;">
                                                     <span>Email: {{ $order->email }}</span>
                                                   </div>
                                                 </td>
@@ -1395,7 +1381,7 @@
                   <td style="padding: 0;">
                     <table width="100%" role="presentation" style="border: 0; border-spacing: 0;">
                       <tr>
-                        <td valign="top" style="padding: 40px; border-radius: 10px; background-color: #0d231c;">
+                        <td valign="top" style="padding: 40px; border-radius: 10px; background-color: #2B3D4F">
 
                           <table width="100%" role="presentation" style="border: 0; border-spacing: 0;">
                             <tr>
@@ -1408,8 +1394,7 @@
                                         <img
                                           src="https://cloudfilesdm.com/postcards/e414faf5d7c4bea6ab1040f02772418a.png"
                                           width="20" height="20"
-                                          style="display: block; border: 0; width: 20px; height: 20px;"
-                                          alt="" />
+                                          style="display: block; border: 0; width: 20px; height: 20px;" alt="" />
                                       </a>
                                     </td>
                                     <td align="center" style="padding: 0 15px;">
@@ -1418,8 +1403,7 @@
                                         <img
                                           src="https://cloudfilesdm.com/postcards/2249492905cbf066d1e2999ef53bc950.png"
                                           width="20" height="20"
-                                          style="display: block; border: 0; width: 20px; height: 20px;"
-                                          alt="" />
+                                          style="display: block; border: 0; width: 20px; height: 20px;" alt="" />
                                       </a>
                                     </td>
                                     <td align="center" style="padding: 0 15px;">
@@ -1428,8 +1412,7 @@
                                         <img
                                           src="https://cloudfilesdm.com/postcards/ee4af7579ffc3dce51513f4dbea9247e.png"
                                           width="20" height="20"
-                                          style="display: block; border: 0; width: 20px; height: 20px;"
-                                          alt="" />
+                                          style="display: block; border: 0; width: 20px; height: 20px;" alt="" />
                                       </a>
                                     </td>
                                   </tr>
@@ -1461,29 +1444,11 @@
                           </table>
                           <table width="100%" role="presentation" style="border: 0; border-spacing: 0;">
                             <tr>
-                              <td align="center" valign="top" style="padding: 0 0 32px;">
+                              <td align="center" valign="top">
                                 <div
                                   style="font-family: 'Urbanist', Arial, sans-serif; font-size: 14px; font-weight: 500; color: #d8d8d8; text-align: center;">
                                   @ DeliveBoo. Tutti i diritti riservati.
                                 </div>
-                              </td>
-                            </tr>
-                          </table>
-                          <table width="100%" role="presentation" style="border: 0; border-spacing: 0;">
-                            <tr>
-                              <td align="center">
-                                <table align="center" role="presentation" style="border: 0; border-spacing: 0;">
-                                  <tr>
-                                    <td valign="top" style="padding: 0;">
-                                      <div
-                                        style="font-family: 'Urbanist', Arial, sans-serif; font-size: 14px; font-weight: 500; color: #ffffff; text-align: left;">
-                                        Non vuoi più ricevere queste email? <a href="https://designmodo.com/postcards"
-                                          style="text-decoration: underline; color: #ffffff; font-weight: 600;">Disiscrivi
-                                          qui.</a>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </table>
                               </td>
                             </tr>
                           </table>
