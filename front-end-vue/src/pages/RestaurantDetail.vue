@@ -37,12 +37,13 @@ export default {
   mounted() {
     window.scrollTo(0, 0);
     this.getApi(store.apiUrl, this.$route.params.slug);
+    
   }
 };
 </script>
 
 <template>
-  <div class="p-5">
+  <div class="p-5" :class="restaurant.products?.length == 0 ? 'vh-100' : '' ">
 
     <!-- Modal -->
     <button ref="openModal" type="button" class="btn btn-primary d-none" data-bs-toggle="modal"
@@ -73,10 +74,17 @@ export default {
     <!-- /Modal -->
 
     <Loader v-if="isLoading" :height1="107" :height2="0" />
+    <div class="container h-100" v-else-if="restaurant.products?.length == 0 ">
+
+      <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+        <h1 class="text-center">Il ristorante <span class="text-danger">{{ restaurant.name }}</span> non ha ancora prodotti</h1>
+      </div>
+
+    </div>
     <div v-else class="container">
       <h1 class="text-center">{{ restaurant.name }}</h1>
       <div class=" d-flex row">
-        <ProductCard @openModal="openModal()" v-for="product in restaurant.products" :key="product.id"
+        <ProductCard @click="window.scrollTo(0, 0)" @openModal="openModal()" v-for="product in restaurant.products" :key="product.id"
           :product=product />
       </div>
     </div>
