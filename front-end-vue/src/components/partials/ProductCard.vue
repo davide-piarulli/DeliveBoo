@@ -94,10 +94,13 @@ export default {
       <article class="recipe h-100">
         <div class="d-flex justify-content-between flex-column">
           <div class="overflow-hidden">
-            <img class="w-100 h-100 object-fit-cover" :src="product.image == null
-              ? '/no-food.jpg'
-              : 'http://127.0.0.1:8000/storage/' + product.image
-              " width="1500" height="1368" :alt="product.name" />
+           <img
+              class="w-100 h-100 object-fit-cover"
+              :src="product.image ? 'http://127.0.0.1:8000/storage/' + product.image : '/no-food.jpg'"
+              onerror="this.src = '/no-food.jpg'"
+              width="1500"
+              height="1368"
+              :alt="product.name" />
           </div>
           <div class="recipe-content h-100">
             <p class="recipe-tags">

@@ -238,10 +238,11 @@ export default {
                     <!-- immagine -->
                     <div class="bg-image w-75 text-center item-image hover-overlay hover-zoom ripple rounded"
                       data-mdb-ripple-color="light">
-                      <img :src="item.image == null
-                        ? '/no-food.jpg'
-                        : 'http://127.0.0.1:8000/storage/' + item.image
-                        " class="w-100 mx-auto" :alt="item.name" />
+                     <img
+                        :src="item.image ? 'http://127.0.0.1:8000/storage/' + item.image : '/no-food.jpg'"
+                        onerror="this.src = '/no-food.jpg'"
+                        class="w-100 mx-auto"
+                        :alt="item.name" />
                       <a href="#!">
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                       </a>
