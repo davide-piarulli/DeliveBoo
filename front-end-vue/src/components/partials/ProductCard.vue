@@ -4,7 +4,6 @@ export default {
   data() {
     return {
       isClicked: false,
-      cartSwitch: false
     };
   },
 
@@ -28,7 +27,7 @@ export default {
       let totalPrice = parseFloat(store.subtotal) + parseFloat(store.shipping);
       store.total = totalPrice.toFixed(2);
     },
-    addToCart(product) {
+    async addToCart(product) {
 
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       if (
@@ -50,12 +49,15 @@ export default {
         this.showCart();
         this.updatePrice();
       } else {
-        this.cartSwitch = confirm('Non puoi ordinare da più ristoranti! Vuoi svuotare il carrello e fare un nuovo ordine?');
-        if (this.cartSwitch) {
+        this.$emit('openModal');
+        while (!store.cartSwitch) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+        if (store.cartSwitch) {
           store.cart = [];
           cart = [];
           localStorage.setItem("cart", JSON.stringify(cart));
-          this.cartSwitch = false;
+          store.cartSwitch = false;
 
           product.quantity = 1;
           cart.push(product);
@@ -93,8 +95,8 @@ export default {
         <div class="d-flex justify-content-between flex-column">
           <div class="overflow-hidden">
             <img class="w-100 h-100 object-fit-cover" :src="product.image == null
-                ? '/no-food.jpg'
-                : 'http://127.0.0.1:8000/storage/' + product.image
+              ? '/no-food.jpg'
+              : 'http://127.0.0.1:8000/storage/' + product.image
               " width="1500" height="1368" :alt="product.name" />
           </div>
           <div class="recipe-content h-100">
@@ -115,8 +117,8 @@ export default {
 
           </div>
         </div>
-        <button @click="addToCart(product); clickTimer()" class="recipe-save mx-auto mb-4" :class="{ 'active': isClicked }"
-          type="button" id="add-to-cart" :disabled="isClicked">
+        <button @click="addToCart(product); clickTimer()" class="recipe-save mx-auto mb-4"
+          :class="{ 'active': isClicked }" type="button" id="add-to-cart" :disabled="isClicked">
           <i class="fa-solid fa-cart-shopping d-sm-none"></i>
           <i class="fa-solid fa-plus mx-2 d-none d-sm-inline"></i>
           <span class="d-none d-sm-inline">Aggiungi al Carrello</span>
