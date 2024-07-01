@@ -25,7 +25,7 @@ export default {
         <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
           <h3 class="text-white mb-3">Termini & Privacy</h3>
           <ul class="m-0 p-0">
-            <li><a href="#">Privacy & Policy</a></li>
+            <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Termini e condizioni</a></li>
           </ul>
         </div>
