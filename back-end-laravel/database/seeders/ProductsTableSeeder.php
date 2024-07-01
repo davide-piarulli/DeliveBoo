@@ -27,8 +27,8 @@ class ProductsTableSeeder extends Seeder
       $new_product->product_type_id = $product['product_type_id'];
       $new_product->name = $product['name'];
       $new_product->slug = Helper::generateSlug($new_product->name, Product::class);
-      $new_product->image = null;
-      $new_product->description =$product['description'];
+      $new_product->image = $product['image'];
+      $new_product->description = $product['description'];
       $new_product->price = floatval(rand(3, 20) . '.' . rand(10, 99));
       $new_product->save();
     }
