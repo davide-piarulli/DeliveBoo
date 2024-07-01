@@ -50,6 +50,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 footer {
   padding: 50px;
 }
@@ -59,7 +60,7 @@ footer a {
   color: white;
 
   &:hover {
-    color: #3D5064;
+    color: #B9D3F7;
   }
 }
 </style>
