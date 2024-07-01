@@ -2,10 +2,15 @@
 import { store } from "../data/store";
 import axios from "axios";
 import braintree from "braintree-web";
+import Loader from "./partials/Loader.vue";
 export default {
+  components:{
+    Loader
+  },
   data() {
     return {
       store,
+      isLoading: false,
 
       hostedFieldInstance: false,
       clientToken: '',
@@ -40,16 +45,19 @@ export default {
     },
 
     payWithCreditCard() {
+      this.isLoading = false;
       if (this.hostedFieldInstance) {
         this.hostedFieldInstance
-          .tokenize()
-          .then((payload) => {
+        .tokenize()
+        .then((payload) => {
+            this.isLoading = true;
             this.formData.transaction = payload.nonce;
             this.formData.amount = store.total;
             this.formData.products = store.cart;
             this.sendOrder();
           })
           .catch((err) => {
+            this.isLoading = false;
             console.log(err.message);
           });
       }
@@ -112,18 +120,20 @@ export default {
         .then(res => {
           this.success = res.data.success;
           this.order = res.data.data;
-          console.log(this.success, this.order);
+          this.isLoading = false;
           if (this.success) {
           store.cart = [];
           store.subtotal = 0;
           store.total = 0;
           store.cartCounter = 0;
           localStorage.setItem("cart", JSON.stringify(store.cart));
+          localStorage.setItem('orderConfirmed', 'true');
           this.$refs.CloseCart.click();
           this.$router.push({ name: 'orderSuccess' });
           }
         })
         .catch(err => {
+          this.isLoading = false;
           this.error = err.message;
           console.log(this.error);
         })
@@ -224,8 +234,9 @@ export default {
         <button ref="CloseCart" type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
+        <Loader v-if="isLoading" />
         <!-- carrello -->
-        <div class="container-fluid">
+        <div v-else class="container-fluid">
           <div class="row">
             <div class="col-12 col-xl-8">
               <div class="square container-fluid p-4 mb-3">
@@ -233,15 +244,15 @@ export default {
                   Non ci sono prodotti nel carrello
                 </div>
                 <div v-for="item in store.cart" :key="item.id"
-                  class="row d-flex justify-content-center position-relative mb-2 bg-white rounded-2 p-2">
-                  <div class="col-4 mb-4 mb-lg-0">
+                  class="row position-relative p-2 mb-3 bg-white rounded-2">
+                  <div class="col-4 mb-4 mb-lg-0 d-flex align-items-center">
                     <!-- immagine -->
-                    <div class="bg-image w-75 text-center item-image hover-overlay hover-zoom ripple rounded"
+                    <div class="bg-image text-center item-image hover-overlay hover-zoom ripple rounded"
                       data-mdb-ripple-color="light">
                      <img
                         :src="item.image ? 'http://127.0.0.1:8000/storage/' + item.image : '/no-food.jpg'"
                         onerror="this.src = '/no-food.jpg'"
-                        class="w-100 mx-auto"
+                        class="product-image w-100 mx-auto"
                         :alt="item.name" />
                       <a href="#!">
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
@@ -267,14 +278,14 @@ export default {
                     </button>
 
                     <div class="d-flex mb-4" style="max-width: 300px">
-                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 me-2"
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 me-2 edit-quantity"
                         @click="decreaseQuantity(item.id)">
                         <i class="fas fa-minus"></i>
                       </button>
 
                       <span>{{ item.quantity }}</span>
 
-                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 ms-2"
+                      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 ms-2 edit-quantity"
                         @click="increaseQuantity(item.id)">
                         <i class="fas fa-plus"></i>
                       </button>
@@ -519,7 +530,7 @@ export default {
                     </div>
                   </div>
                   <button v-if="formData.transaction == ''" class="btn btn-warning mt-3" type="submit">
-                    Acquista
+                    Acquista ora
                   </button>
                 </form>
               </div>
@@ -560,6 +571,20 @@ export default {
     font-size: 12px;
     background-color: red;
     color: white;
+  }
+
+}
+
+.product-image{
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.edit-quantity{
+  background-color: $color-1 !important;
+  border: none;
+  &:hover{
+    background-color: rgba($color-1, .85) !important;
   }
 }
 

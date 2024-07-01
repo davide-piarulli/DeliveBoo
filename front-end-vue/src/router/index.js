@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-
 import Home from "../pages/Home.vue";
 import Error404 from "../pages/Error404.vue";
 import RestaurantDetail from "../pages/RestaurantDetail.vue";
@@ -22,6 +21,13 @@ const router = createRouter({
       path: "/order-success",
       name: "orderSuccess",
       component: OrderSuccess,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem('orderConfirmed')) {
+          next();
+        } else {
+          next({ name: 'home' });
+        }
+      },
     },
     // Questa rotta è sempre l'ultima
     {
