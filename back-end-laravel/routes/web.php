@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-  return view('home');
+  return view('auth.login');
 });
 
 // Rotte protette da autenticazione e verifica email
