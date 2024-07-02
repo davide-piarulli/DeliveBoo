@@ -328,12 +328,12 @@ export default {
                       <i class="fas fa-shipping-fast"></i> Dettagli Spedizione
                     </h1>
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="customerName" class="form-label">Nome</label>
+                      <label for="customerName" class="form-label">Nome *</label>
                       <input type="text" v-model="formData.name" class="form-control" id="customerName"
                         required="required" maxlength="20" />
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="customerSurname" class="form-label">Cognome</label>
+                      <label for="customerSurname" class="form-label">Cognome *</label>
                       <input type="text" v-model="formData.lastname" class="form-control" id="customerSurname"
                         required="required" maxlength="20" />
                     </div>
@@ -341,28 +341,28 @@ export default {
 
                   <div class="row">
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="customerMail" class="form-label">Email</label>
+                      <label for="customerMail" class="form-label">Email *</label>
                       <input type="email" v-model="formData.email" class="form-control" id="customerMail"
                         required="required" />
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="customerPhone" class="form-label">Telefono</label>
+                      <label for="customerPhone" class="form-label">Telefono *</label>
                       <input type="text" v-model="formData.phone" class="form-control" id="customerPhone" minlength="10"
                         maxlength="10" pattern="\d{10}" title="Inserire un numero di telefono di 10 cifre"
                         required="required" />
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="customerAddress" class="form-label">Indirizzo</label>
+                      <label for="customerAddress" class="form-label">Indirizzo *</label>
                       <input type="text" v-model="formData.address" class="form-control" id="customerAddress"
                         minlength="5" maxlength="255" required="required" name="address" />
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="customerCity" class="form-label">Città</label>
+                      <label for="customerCity" class="form-label">Città *</label>
                       <input type="text" v-model="formData.city" name="city" class="form-control" id="customerCity"
                         required="required" />
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="inputState" class="form-label">Provincia</label>
+                      <label for="inputState" class="form-label">Provincia *</label>
                       <select required id="inputState" class="form-select" name="state" v-model="formData.state">
                         <option selected value="">Scegli...</option>
                         <option value="AG">Agrigento</option>
@@ -478,7 +478,7 @@ export default {
                       </select>
                     </div>
                     <div class="mb-3 col-md-6 col-sm-12">
-                      <label for="customerZipCode" class="form-label">CAP</label>
+                      <label for="customerZipCode" class="form-label">CAP *</label>
                       <input type="text" v-model="formData.postal_code" class="form-control" id="customerZipCode"
                         minlength="5" maxlength="5" pattern="\d{5}" title="Inserire un CAP valido (5 cifre)"
                         required="required" name="postal_code" />
@@ -496,29 +496,30 @@ export default {
                     <h1>
                       <i class="far fa-credit-card"></i> Informazioni di Pagamento
                     </h1>
-                    <label for="creditCardNumber" class="fs_08">Numero carta di credito</label>
+                    <label for="creditCardNumber" class="fs_08">Numero carta di credito *</label>
                     <div id="creditCardNumber" name="creditCardNumber" class="form-control"></div>
                   </div>
                   <div class="form-group">
                     <div class="row">
                       <div class="col-6">
-                        <label class="fs_08">Data di scadenza</label>
+                        <label class="fs_08">Data di scadenza *</label>
                         <div id="expireDate" class="form-control"></div>
                       </div>
                       <div class="col-6">
-                        <label class="fs_08">CVV</label>
+                        <label class="fs_08">CVV *</label>
                         <div id="cvv" class="form-control"></div>
                       </div>
                     </div>
                   </div>
 
-                  <div class="cards mt-2">
+                  <div class="cards d-flex flex-wrap align-items-center">
                     <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-08-41-2782.png"
-                      alt="VISA" class="me-2" />
+                      alt="VISA" class="me-2 mt-2" />
                     <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-09-00-2179.png"
-                      alt="American Express" class="me-2" />
+                      alt="American Express" class="me-2 mt-2" />
                     <img src="https://reservq.minionionbd.com/uploads/custom-images/-2023-10-26-06-11-52-9757.png"
-                      alt="Mastercard" class="me-2" />
+                      alt="Mastercard" class="me-2 mt-2" />
+                    <span class="fs-6 mt-2">Campi obbligatori *</span>
                   </div>
 
                   <div v-if="formData.transaction || error" class="advises mt-3">
