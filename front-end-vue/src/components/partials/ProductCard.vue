@@ -106,7 +106,7 @@ export default {
             </p>
 
             <h1 class="recipe-title">
-              <a href="#">{{ product.name }}</a>
+              <span>{{ product.name }}</span>
             </h1>
 
             <p class="recipe-desc">
