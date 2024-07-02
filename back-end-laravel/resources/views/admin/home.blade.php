@@ -6,23 +6,18 @@
 
   <div class="container-fluid my-3">
     <div class="container mb-5">
-      <h3>Ordini mensili</h3>
+      <h3 class="text-center">Ordini mensili</h3>
       <div style="width: 75%; margin: auto;">
         {!! $charts->container() !!}
       </div>
     </div>
 
     <div class="container">
-      <h3>Fatturato mensile</h3>
+      <h3 class="text-center">Fatturato mensile</h3>
       <div style="width: 75%; margin: auto;">
         {!! $amounts->container() !!}
       </div>
     </div>
-
-
-    {{-- @php
-          dd($charts->script());
-      @endphp --}}
 
   </div>
 @endsection

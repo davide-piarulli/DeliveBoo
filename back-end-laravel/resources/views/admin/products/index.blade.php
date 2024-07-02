@@ -31,7 +31,7 @@
             </a>
           </th>
           <th scope="col">Categoria</th>
-          <th scope="col">Descrizione</th>
+          <th class="d-none d-sm-table-cell" scope="col">Descrizione</th>
           <th scope="col" class="w-10">
             <a class="text-black text-decoration-none hov-underline"
               href="{{ route('admin.order-by', ['col' => 'price', 'dir' => $dir]) }}">Prezzo
@@ -42,7 +42,7 @@
               @endif
             </a>
           </th>
-          <th scope="col">Immagine</th>
+          <th class="d-none d-md-table-cell" scope="col">Immagine</th>
           <th scope="col">Azioni</th>
         </tr>
       </thead>
@@ -57,9 +57,9 @@
                 <span>-</span>
               @endif
             </td>
-            <td class="product-description">{{ $product->description }}</td>
+            <td class="product-description d-none d-sm-table-cell">{{ $product->description }}</td>
             <td class="product-price">&euro; {{ str_replace('.', ',', $product->price) }}</td>
-            <td>
+            <td class="d-none d-md-table-cell">
               <img class="thumb mt-3"
                 src="{{ isset($product->image) ? asset('storage/' . $product->image) : asset('img/no-image.jpg') }}"
                 alt="Product Image" style="width: 150px; height: auto;">
@@ -90,7 +90,7 @@
     <div>{{ $products->links() }}</div>
 
   </div>
-
+{{--
   <script>
     document.getElementById('search-input').addEventListener('keyup', filterProducts);
     document.getElementById('search-button').addEventListener('click', filterProducts);
@@ -114,5 +114,5 @@
         }
       }
     }
-  </script>
+  </script> --}}
 @endsection

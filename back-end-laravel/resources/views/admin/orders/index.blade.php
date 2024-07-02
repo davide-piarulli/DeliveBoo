@@ -5,21 +5,20 @@
     <h1 class="text-center m-4">ORDINI RICEVUTI</h1>
 
     <!-- Barra di ricerca  -->
-    <div class="row mb-3">
+    {{-- <div class="row mb-3">
       <div class="col-md-12 d-flex justify-content-between align-items-center">
         <div class="d-flex">
           <input type="text" id="search-input" class="form-control" placeholder="Cerca ordine...">
           <button id="search-button" class="btn btn-primary ms-2">Cerca</button>
         </div>
       </div>
-    </div>
+    </div> --}}
 
     <table class="table table-striped table-bordered" id="orders-table">
       <thead>
         <tr>
-
           <th scope="col">N. Ordine</th>
-          <th scope="col">Data ordine</th>
+          <th class="d-none d-sm-table-cell" scope="col">Data ordine</th>
           <th scope="col">Nome</th>
           <th scope="col">Cognome</th>
           <th scope="col">Totale ordine</th>
@@ -30,7 +29,7 @@
         @foreach ($orders as $order)
           <tr>
             <td class="order-id">#{{ $order->id }}</td>
-            <td class="order-date">{{ $order->created_at }}</td>
+            <td class="order-date d-none d-sm-table-cell">{{ $order->created_at }}</td>
             <td class="order-name">{{ $order->name }}</td>
             <td class="order-lastname">{{ $order->lastname }}</td>
             <td>€ {{ number_format($order->amount, 2, ',', "") }}</td>
@@ -50,7 +49,7 @@
 
   </div>
 
-  <script>
+  {{-- <script>
     document.getElementById('search-input').addEventListener('keyup', filterOrders);
     document.getElementById('search-button').addEventListener('click', filterOrders);
 
@@ -71,5 +70,5 @@
         }
       }
     }
-  </script>
+  </script> --}}
 @endsection
