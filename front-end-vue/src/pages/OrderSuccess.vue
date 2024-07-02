@@ -7,12 +7,11 @@ export default {
     };
   },
   mounted() {
+    window.scrollTo(0, 0);
     if (!localStorage.getItem('orderConfirmed')) {
       this.$router.replace({ name: 'home' });
     } else {
-      window.scrollTo(0, 0);
-      document.body.classList.add("overflow-hidden");
-      localStorage.setItem('orderConfirmed', 'true');  // Imposta il flag quando la pagina è caricata
+      localStorage.setItem('orderConfirmed', 'true');
       if (!this.reloadExecuted) {
         localStorage.setItem("reloadExecuted", "true");
         location.reload();
@@ -22,9 +21,8 @@ export default {
     }
   },
   beforeUnmount() {
-    document.body.classList.remove("overflow-hidden");
     localStorage.removeItem("reloadExecuted");
-    localStorage.removeItem("orderConfirmed");  // Rimuove il flag quando l'utente lascia la pagina
+    localStorage.removeItem("orderConfirmed");
   },
 };
 </script>

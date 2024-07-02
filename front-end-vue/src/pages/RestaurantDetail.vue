@@ -82,19 +82,20 @@ export default {
 
     </div>
     <div v-else class="container">
-      <div class="restaurant-data d-flex justify-content-between rounded-5 p-5">
-        <div>
-          <h1>{{ restaurant.name }}</h1>
-          <h4>{{ restaurant.address }}</h4>
-          <h4>Tel: <a class="text-black text-decoration-none" :href="`tel:+39${restaurant.phone}`">{{ restaurant.phone }}</a></h4>
-        </div>
-        <div class="w-25">
+      <div class="restaurant-data d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap rounded-5 p-3 p-xl-5">
+        <div class="restaurant-logo mb-3 mb-md-0 rounded-5 overflow-hidden">
           <img
             :src="restaurant.logo ? 'http://127.0.0.1:8000/storage/' + restaurant.logo : '/default-logo.png'"
             onerror="this.src = '/default-logo.png'"
             :alt="restaurant.name + ' logo'"
-            class="img-fluid rounded-5"
+            class="img-fluid"
+            :class="{'six-fingers' : restaurant.name == 'Trattoria da Luigi'}"
           />
+        </div>
+        <div class="ps-3 ps-lg-5">
+          <h1>{{ restaurant.name }}</h1>
+          <h4>{{ restaurant.address }}</h4>
+          <h4>Tel: <a class="text-black text-decoration-none" :href="`tel:+39${restaurant.phone}`">{{ restaurant.phone }}</a></h4>
         </div>
       </div>
       <div class=" d-flex row">
@@ -129,6 +130,9 @@ export default {
 
 .restaurant-data{
   background-color: #B9D3F7;
+  .restaurant-logo{
+    width: 200px;
+  }
 }
 
 </style>
