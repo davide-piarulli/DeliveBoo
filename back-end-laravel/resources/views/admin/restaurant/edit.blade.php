@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <div class="d-flex align-items-center">
-    <h1>Modifica Logo</h1>
+    <h1>Aggiungi logo</h1>
   </div>
   @if ($errors->any())
     <div class="alert alert-danger" role="alert">
