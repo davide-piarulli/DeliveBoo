@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       restaurant: {},
-      isLoading: true
+      isLoading: true,
     }
   },
   methods: {
@@ -82,7 +82,21 @@ export default {
 
     </div>
     <div v-else class="container">
-      <h1 class="text-center">{{ restaurant.name }}</h1>
+      <div class="restaurant-data d-flex justify-content-between rounded-5 p-5">
+        <div>
+          <h1>{{ restaurant.name }}</h1>
+          <h4>{{ restaurant.address }}</h4>
+          <h4>Tel: <a class="text-black text-decoration-none" :href="`tel:+39${restaurant.phone}`">{{ restaurant.phone }}</a></h4>
+        </div>
+        <div class="w-25">
+          <img
+            :src="restaurant.logo ? 'http://127.0.0.1:8000/storage/' + restaurant.logo : '/default-logo.png'"
+            onerror="this.src = '/default-logo.png'"
+            :alt="restaurant.name + ' logo'"
+            class="img-fluid rounded-5"
+          />
+        </div>
+      </div>
       <div class=" d-flex row">
         <ProductCard @openModal="openModal()" v-for="product in restaurant.products" :key="product.id"
           :product=product />
@@ -93,6 +107,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 .modal-content {
   background-color: #2B3D4F;
   color: white;
@@ -111,4 +126,9 @@ export default {
     background-color: #60758E !important;
   }
 }
+
+.restaurant-data{
+  background-color: #B9D3F7;
+}
+
 </style>

@@ -3,6 +3,7 @@ import { store } from "@/data/store";
 export default {
   data() {
     return {
+      isHovered: false,
       isClicked: false,
     };
   },
@@ -93,13 +94,17 @@ export default {
     <div class="my-card small">
       <article class="recipe h-100">
         <div class="d-flex justify-content-between flex-column">
-          <div class="overflow-hidden">
+          <div class="overflow-hidden position-relative">
            <img
               class="card-image img-fluid"
-              :class="{'rotate' : product.name == 'Burger Ranchero'}"
+              :class="{'rotate' : product.name == 'Burger Ranchero', 'zoomed' : isHovered}"
               :src="product.image ? 'http://127.0.0.1:8000/storage/' + product.image : '/no-food.jpg'"
               onerror="this.src = '/no-food.jpg'"
-              :alt="product.name" />
+              :alt="product.name" 
+              @mouseover="isHovered = true"
+              @mouseleave="isHovered = false"
+            />
+            <div class="overlay" v-if="isHovered"></div>
           </div>
           <div class="recipe-content h-100">
             <p class="recipe-tags">

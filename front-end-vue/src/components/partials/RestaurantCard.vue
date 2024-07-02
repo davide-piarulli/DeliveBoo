@@ -59,21 +59,6 @@ export default {
   object-fit: cover;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: opacity 0.3s ease-out;
-  pointer-events: none;
-}
-
-.zoomed {
-  transform: scale(1.1);
-}
-
 .card-size{
   height: 450px;
   box-shadow: 0 0 10px 2px $color-9;
