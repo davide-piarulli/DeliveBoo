@@ -35,6 +35,7 @@
             <img
               :src="restaurant.logo ? 'http://127.0.0.1:8000/storage/' +  restaurant.logo : '/default-logo.png'"
               class="d-block w-100"
+              :class="{'six-fingers' : restaurant.name == 'Trattoria da Luigi'}"
               onerror="this.src = '/default-logo.png'"
               :alt="restaurant.name">
             <div class="carousel-caption d-none d-md-block">

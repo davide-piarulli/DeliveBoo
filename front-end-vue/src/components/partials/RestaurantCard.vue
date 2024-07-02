@@ -24,7 +24,7 @@ export default {
             onerror="this.src = '/default-logo.png'"
             :alt="restaurant.name + ' logo'"
             class="card-img-top my-img"
-            :class="{ zoomed: isHovered }"
+            :class="{ zoomed: isHovered, 'six-fingers' : restaurant.name == 'Trattoria da Luigi'}"
             @mouseover="isHovered = true"
             @mouseleave="isHovered = false"
           />

@@ -300,13 +300,13 @@ export default {
             <!-- Riepilogo Ordine -->
             <div class="col-12 col-xl-4">
               <!-- square -->
-              <div class="square mb-3 p-4" :class="{'d-none' : store.cart.length === 0}">
-                <div class="bg-white rounded-1 p-2">
-                  <h5>Riepilogo ordine</h5>
+              <div class="square checkout mb-3 p-4" :class="{'d-none' : store.cart.length === 0}">
+                <div class="bg-white rounded-1 p-2 h-100">
+                  <h5 class="fs-3">Riepilogo ordine</h5>
                   <div v-if="store.subtotal != 0">
-                    <h6>Prodotti: &euro; {{ store.subtotal.replace('.', ',') }}</h6>
-                    <h6>Consegna: &euro; 4,99 </h6>
-                    <h6>
+                    <h6 class="fs-5">Prodotti: &euro; {{ store.subtotal.replace('.', ',') }}</h6>
+                    <h6 class="fs-5">Consegna: &euro; 4,99 </h6>
+                    <h6 class="fs-5">
                       Totale ordine: &euro;
                       {{ store.total.replace('.', ',') }}
                     </h6>
@@ -496,17 +496,17 @@ export default {
                     <h1>
                       <i class="far fa-credit-card"></i> Informazioni di Pagamento
                     </h1>
-                    <label for="creditCardNumber">Numero carta di credito</label>
+                    <label for="creditCardNumber" class="fs_08">Numero carta di credito</label>
                     <div id="creditCardNumber" name="creditCardNumber" class="form-control"></div>
                   </div>
                   <div class="form-group">
                     <div class="row">
                       <div class="col-6">
-                        <label>Data di scadenza</label>
+                        <label class="fs_08">Data di scadenza</label>
                         <div id="expireDate" class="form-control"></div>
                       </div>
                       <div class="col-6">
-                        <label>CVV</label>
+                        <label class="fs_08">CVV</label>
                         <div id="cvv" class="form-control"></div>
                       </div>
                     </div>
@@ -552,6 +552,9 @@ export default {
   min-height: 300px;
   background-color: $color-7;
   border-radius: 10px;
+  &.checkout{
+    height: 300px;
+  }
 }
 
 .cart {
@@ -588,6 +591,10 @@ export default {
   }
 }
 
+.fs_08{
+  font-size: .8rem;
+}
+
 #creditCardNumber,
 #expireDate,
 #cvv {
@@ -598,6 +605,9 @@ export default {
 @media screen and (min-width: 992px) {
   .item-image {
     width: 100%;
+  }
+  .fs_08{
+    font-size: 1.5rem !important;
   }
 }
 

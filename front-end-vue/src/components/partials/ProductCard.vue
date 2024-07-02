@@ -96,6 +96,7 @@ export default {
           <div class="overflow-hidden">
            <img
               class="card-image img-fluid"
+              :class="{'rotate' : product.name == 'Burger Ranchero'}"
               :src="product.image ? 'http://127.0.0.1:8000/storage/' + product.image : '/no-food.jpg'"
               onerror="this.src = '/no-food.jpg'"
               :alt="product.name" />
@@ -243,4 +244,9 @@ export default {
   width: clamp(320px, 35%, 480px);
   padding: 24px;
 }
+
+.rotate{
+  rotate: -90deg;
+}
+
 </style>
