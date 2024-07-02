@@ -6,12 +6,13 @@
 
     <!-- Barra di ricerca e pulsante "Crea un nuovo prodotto" -->
     <div class="row mb-3">
-      <div class="col-md-12 d-flex justify-content-between align-items-center">
-        <div class="d-flex">
+      <div class="col-md-12 d-flex justify-content-end align-items-center">
+        {{-- <div class="d-flex">
           <input type="text" id="search-input" class="form-control" placeholder="Cerca prodotto...">
           <button id="search-button" class="btn btn-primary ms-2">Cerca</button>
-        </div>
-        <a href="{{ route('admin.products.create') }}" class="btn btn-primary"><i class="fa-solid fa-circle-plus"></i></a>
+        </div> --}}
+        <a href="{{ route('admin.products.create') }}" class="btn btn-primary"><i class="fa-solid fa-circle-plus"> Nuovo
+            prodotto</i></a>
       </div>
     </div>
 
