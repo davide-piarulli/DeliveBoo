@@ -14,4 +14,5 @@ return [
     "Zuppa",
     "Salse",
     "Frutta",
+    "Riso",
 ];

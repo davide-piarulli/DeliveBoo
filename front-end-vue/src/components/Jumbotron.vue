@@ -7,7 +7,7 @@ export default {};
     <div class="jumbotron-content">
       <img src="/logo.png" alt="logo-deliveboo" class="logo" />
       <h1>Benvenuti su DeliveBoo</h1>
-      <p>Il miglior servizio di food delivery della tua città!</p>
+      <p>Il miglior servizio di food delivery di Milano!</p>
       <!-- tasto Ordina Ora che scorre alla sezione sotto di scelta del ristorante -->
       <a href="#restaurants" class="btn btn-primary">Ordina ora</a>
       <div class="arrow">
@@ -18,7 +18,9 @@ export default {};
 </template>
 
 <style lang="scss" scoped>
+
 @use "../assets/scss/main.scss" as *;
+
 .jumbotron {
   background-image: url("/img/jumbotron-image.png");
   background-size: cover;

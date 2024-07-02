@@ -16,7 +16,7 @@ return [
     [
         'name' => 'Sakura Sushi',
         'address' => 'Via Giapponese 15, Milano, Italia',
-        'type_ids' => [3],
+        'type_ids' => [2, 3],
         'logo' => 'uploads/cinese-1.png'
     ],
     [
@@ -65,15 +65,12 @@ return [
         'logo' => 'uploads/pizza-1.png'
     ],
     [
-        'name' => 'Steak Dolce Bis',
+        'name' => 'Gelateria da Mimmo',
         'address' => 'Via Tortona, 20144 Milano MI',
         'type_ids' => [1],
-        'logo' => 'uploads/steakhouse-1.png'
+        'logo' => 'uploads/gelateria-1.jpg'
     ],
 
-
-
-    // si parte da qua
 
     [
         'name' => 'Smokehouse BBQ',
@@ -126,7 +123,7 @@ return [
     [
         'name' => 'Mediterranean Sunset',
         'address' => 'Via Solari, 20144 Milano MI',
-        'type_ids' => [16],
+        'type_ids' => [9, 16],
         'logo' => 'uploads/greco-2.png'
     ]
 ];

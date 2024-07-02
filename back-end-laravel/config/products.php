@@ -89,7 +89,7 @@ return [
   [
     'name' => 'Risotto alla Milanese',
     'description' => 'Risotto preparato con zafferano e brodo di carne.',
-    'product_type_id' => 3,
+    'product_type_id' => 14,
     'restaurant_id' => 2,
     'image' => 'uploads/risotto-alla-milanese.png',
   ],
@@ -365,7 +365,7 @@ return [
   [
     'name' => 'Biryani',
     'description' => 'Riso basmati con carne e spezie.',
-    'product_type_id' => 3,
+    'product_type_id' => 14,
     'restaurant_id' => 5,
     'image' => 'uploads/Biryani.png',
   ],
@@ -527,7 +527,7 @@ return [
   ],
   [
     'name' => 'Mango Sticky Rice',
-    'description' => 'Riso appiccicoso con mango fresco e latte di cocco.',
+    'description' => 'Riso con mango fresco e latte di cocco.',
     'product_type_id' => 7,
     'restaurant_id' => 7,
     'image' => 'uploads/Mango-Sticky-Rice.png',
@@ -996,7 +996,7 @@ return [
 
   [
     'name' => 'Kebab di Agnello',
-    'description' => 'Agnello marinato e arrosto verticalmente, servito con riso pilaf e insalata.',
+    'description' => 'Agnello marinato e arrostito verticalmente, servito con riso pilaf e insalata.',
     'product_type_id' => 4,
     'restaurant_id' => 14,
     'image' => null,
@@ -1464,7 +1464,7 @@ return [
   [
     'name' => 'Risotto ai Frutti di Mare',
     'description' => 'Risotto cremoso con frutti di mare freschi, prezzemolo e scaglie di parmigiano.',
-    'product_type_id' => 10,
+    'product_type_id' => 14,
     'restaurant_id' => 20,
     'image' => null,
   ],
