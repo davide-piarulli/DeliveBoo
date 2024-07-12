@@ -1,4 +1,5 @@
 DeliveBoo
+![deliveboo project](https://github.com/user-attachments/assets/cace7858-9695-4166-a73a-ee55ff603d43)
 ===
 Il progetto DeliveBoo, una replica del sito Deliveroo, si suddivide in due parti principali: Front Office e Back Office.   
 Ogni sezione ha delle funzionalità specifiche che permettono sia agli utenti finali sia ai ristoratori di interagire con la piattaforma in maniera efficiente e intuitiva.  
@@ -18,6 +19,7 @@ La parte del Back Office è riservata ai ristoratori, ossia ai proprietari dei r
 Le principali funzionalità del Back Office includono:
 
 - Gestione del ristorante: I ristoratori possono creare e personalizzare la pagina del loro ristorante. Questo include l'inserimento delle informazioni di base la gestione dei dettagli del profilo.
+
 
 - Gestione del menù: I ristoratori hanno la possibilità di aggiungere, modificare o eliminare prodotti dal loro menù. Ogni prodotto può essere dettagliato con una descrizione, un prezzo e una foto.
 
