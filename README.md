@@ -26,3 +26,5 @@ Le principali funzionalità del Back Office includono:
 - Visualizzazione degli ordini: Una pagina dedicata consente ai ristoratori di visualizzare tutti gli ordini ricevuti. Qui possono vedere i dettagli di ciascun ordine.
 
 - Statistiche e Analisi: Una sezione delle statistiche permette ai ristoratori di monitorare le performance del loro ristorante. Possono visualizzare metriche mensili come il numero di ordini oppure il fatturato generato.
+![deliveboo-backend-orders](https://github.com/user-attachments/assets/2a7aa635-270f-40c7-b5f5-0afbec7b0e8e)
+![deliveboo-backend-products](https://github.com/user-attachments/assets/8e75f8f9-6305-4679-9a1a-0e55dc328c0a)
